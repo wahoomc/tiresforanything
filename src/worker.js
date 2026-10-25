@@ -1,5 +1,5 @@
-// Tires for Anything: serves the static site and saves "Can't find your tire?" requests.
-// Requests are stored in the REQUESTS KV namespace once it is bound in wrangler.jsonc.
+// Tires for Anything: serves the static site and saves tire requests and quote requests.
+// Records are stored in the REQUESTS KV namespace (bound in wrangler.jsonc).
 
 export default {
   async fetch(request, env) {
@@ -23,7 +23,9 @@ async function handleRequest(request, env) {
   if (body.website) return json({ saved: true });
 
   const clean = (v, n) => String(v ?? "").slice(0, n).trim();
+  const type = body.type === "quote" ? "quote" : "request";
   const record = {
+    type,
     page: clean(body.page, 40),
     equipment: clean(body.equipment, 200),
     size: clean(body.size, 60),
@@ -31,12 +33,24 @@ async function handleRequest(request, env) {
     email: clean(body.email, 200),
     at: new Date().toISOString(),
   };
-  if (!record.equipment && !record.size) {
+  if (type === "quote") {
+    Object.assign(record, {
+      qty: clean(body.qty, 6),
+      timeline: clean(body.timeline, 60),
+      zip: clean(body.zip, 10),
+      name: clean(body.name, 120),
+      company: clean(body.company, 160),
+      phone: clean(body.phone, 40),
+    });
+    if (!record.name || !record.email || !/^\d{5}$/.test(record.zip)) {
+      return json({ error: "Name, email and ZIP code are required." }, 400);
+    }
+  } else if (!record.equipment && !record.size) {
     return json({ error: "Tell us the equipment or the tire size." }, 400);
   }
   if (!env.REQUESTS) return json({ saved: false });
 
-  const key = `request:${record.at}:${crypto.randomUUID().slice(0, 8)}`;
+  const key = `${type}:${record.at}:${crypto.randomUUID().slice(0, 8)}`;
   await env.REQUESTS.put(key, JSON.stringify(record));
   return json({ saved: true });
 }

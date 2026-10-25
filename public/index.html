@@ -279,7 +279,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   </div>
 </header>
 <nav class="catbar" aria-label="Tire categories"><div class="wrap" id="catbar"></div></nav>
-<div class="proto"><div class="wrap">Early preview. Guides are being added, and quote requests open soon.</div></div>
+<div class="proto"><div class="wrap">Early preview. New guides and tire sizes are being added every week.</div></div>
 
 <main>
 
@@ -427,7 +427,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-forklift">Search by size or use</label>
       <input type="text" id="sf-forklift" placeholder="e.g. 18x7x12-1/8, press-on, pneumatic" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-forklift"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-forklift"></tbody></table></div>
     <p class="note" id="sfn-forklift" aria-live="polite"></p>
     <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
   </div>
@@ -503,7 +503,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-aviation">Search by size or use</label>
       <input type="text" id="sf-aviation" placeholder="e.g. 6.00-6" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-aviation"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-aviation"></tbody></table></div>
     <p class="note" id="sfn-aviation" aria-live="polite"></p>
     <p class="note">Only buy a tire that is TSO-approved for certificated aircraft, or labeled for experimental and light-sport use if that's what you fly, and that matches the size and ply rating in your parts catalog. Have the work done and logged as federal aviation regulations require.</p>
   </div>
@@ -558,23 +558,22 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     <div class="crumb"><a href="#home">All tires</a> / Get quotes</div>
     <span class="eyebrow">Free · no obligation</span>
     <h1>Get tire quotes</h1>
-    <p class="lede">Tell us what you're running. We'll send your request to up to three dealers who stock that kind of tire, and they'll reply with pricing.</p>
+    <p class="lede">For tires too big to mount yourself. Tell us what you're running and where, and we'll match you with up to three dealers who can supply and install it.</p>
   </div>
   <div class="wrap stack">
-    <div class="callout"><b>Quote requests open soon</b><p>We're lining up dealers now. In the meantime, the guides and the <a href="#decoder">size decoder</a> can help you pin down exactly which tire you need.</p></div>
-    <form class="quote" id="quote-form" novalidate hidden>
+    <form class="quote" id="quote-form" novalidate>
       <div class="fgrid">
         <div class="field"><label for="q-cat">Equipment type</label>
           <select id="q-cat" required>
-            <option>Forklift</option><option>Aviation</option><option>Farm &amp; ag</option><option>Construction / OTR</option><option>Commercial truck</option><option>Other</option>
+            <option>Forklift</option><option>Farm &amp; ag</option><option>Construction / OTR</option><option>Commercial truck</option><option>RV &amp; motorhome</option><option>Military &amp; specialty</option><option>Aviation</option><option>Other</option>
           </select></div>
-        <div class="field"><label for="q-make">Make and model</label><input id="q-make" type="text" value="Toyota 8FGCU25" required><span class="hint">Example filled in. Replace with yours.</span></div>
-        <div class="field"><label for="q-size">Tire size</label><input class="code" id="q-size" type="text" value="21x7x15" required><span class="hint">From the sidewall. Leave blank if unsure.</span></div>
+        <div class="field"><label for="q-make">Make and model</label><input id="q-make" type="text" placeholder="e.g. Toyota 8FGCU25" required></div>
+        <div class="field"><label for="q-size">Tire size</label><input class="code" id="q-size" type="text" placeholder="e.g. 21x7x15" required><span class="hint">From the sidewall. Leave blank if unsure.</span></div>
         <div class="field"><label for="q-qty">How many tires</label><input id="q-qty" type="number" min="1" value="4" required></div>
         <div class="field"><label for="q-when">Needed by</label>
           <select id="q-when"><option>As soon as possible</option><option>Within 2 weeks</option><option>This month</option><option>Just pricing for now</option></select></div>
-        <div class="field"><label for="q-zip">ZIP code</label><input id="q-zip" type="text" inputmode="numeric" value="46706" required><span class="hint">So we match dealers who serve your area.</span></div>
-        <div class="field full"><label for="q-notes">Anything else?</label><textarea id="q-notes" rows="3">Need non-marking, and on-site install if possible.</textarea></div>
+        <div class="field"><label for="q-zip">ZIP code</label><input id="q-zip" type="text" inputmode="numeric" placeholder="e.g. 46706" required><span class="hint">So we match dealers who serve your area.</span></div>
+        <div class="field full"><label for="q-notes">Anything else?</label><textarea id="q-notes" rows="3" placeholder="e.g. Need non-marking, on-site install if possible"></textarea></div>
         <div class="field"><label for="q-name">Your name</label><input id="q-name" type="text" required></div>
         <div class="field"><label for="q-co">Company (optional)</label><input id="q-co" type="text"></div>
         <div class="field"><label for="q-email">Email</label><input id="q-email" type="email" required></div>
@@ -587,7 +586,6 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     <div class="thanks" id="quote-thanks" hidden>
       <h3>Request received</h3>
       <p id="thanks-text"></p>
-      <p class="note">Prototype: in the live site, this step routes the request to matching paid dealers and emails you a copy.</p>
       <div class="row"><button class="btn ghost" type="button" id="quote-again">Start another request</button></div>
     </div>
   </div>
@@ -659,7 +657,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-bicycles">Search by size, model or use</label>
       <input type="text" id="sf-bicycles" placeholder="e.g. 700x28c, 29, fat, BMX" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-bicycles"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-bicycles"></tbody></table></div>
     <p class="note" id="sfn-bicycles" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://www.schwalbetires.com/tech_info/E-Bike" target="_blank" rel="noopener">Schwalbe e-bike tire guidance</a></p>
   </div>
@@ -712,7 +710,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-vintage">Search by size, model or use</label>
       <input type="text" id="sf-vintage" placeholder="e.g. Model T, G60-15, 30x3" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-vintage"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-vintage"></tbody></table></div>
     <p class="note" id="sfn-vintage" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://www.longstonetyres.co.uk/classic-car-tyres/ford/model-t.html" target="_blank" rel="noopener">Longstone Tyres, Model T</a> · <a href="https://www.performanceplustire.com/Blog/muscle-car-tire-sizes-decoded" target="_blank" rel="noopener">Performance Plus Tire, muscle car sizes</a></p>
   </div>
@@ -774,7 +772,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-military">Search by size, model or use</label>
       <input type="text" id="sf-military" placeholder="e.g. Humvee, deuce, 395" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-military"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-military"></tbody></table></div>
     <p class="note" id="sfn-military" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://www.steelsoldiers.com/goto/post?id=339702" target="_blank" rel="noopener">Steel Soldiers forum, deuce tires</a> · <a href="https://tiresize.com/rides/HMMWV" target="_blank" rel="noopener">TireSize.com, HMMWV</a></p>
   </div>
@@ -949,7 +947,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-atv">Search by size, model or use</label>
       <input type="text" id="sf-atv" placeholder="e.g. Rancher, 25x10-12, golf" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-atv"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-atv"></tbody></table></div>
     <p class="note" id="sfn-atv" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://www.atv.com/specs/honda/utility/2022/fourtrax-rancher/base/detail.html" target="_blank" rel="noopener">Honda Rancher specs</a> · <a href="https://www.polaris.com/en-us/off-road/sportsman/2020/1-seat/sportsman-570/sportsman-570-eps-titanium-metallic-2020-atv/" target="_blank" rel="noopener">Polaris Sportsman 570</a> · <a href="https://utvactionmag.com/2021-polaris-rzr-xp-1000-trails-rocks" target="_blank" rel="noopener">UTV Action, RZR XP 1000</a> · <a href="https://www.golfcarttiresupply.com/ezgo-golf-cart-tires/" target="_blank" rel="noopener">Golf Cart Tire Supply</a></p>
   </div>
@@ -1043,7 +1041,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-mobility">Search by size, model or use</label>
       <input type="text" id="sf-mobility" placeholder="e.g. 24, scooter, 260x85" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-mobility"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-mobility"></tbody></table></div>
     <p class="note" id="sfn-mobility" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://hollandbikeshop.com/en-gb/bicycle-tires-and-inner-tubes/schwalbe-bicycle-tires/schwalbe-wheelchair-tire/schwalbe-tire-24x1-00-25-540-gray-slick-wheelchair/" target="_blank" rel="noopener">Schwalbe wheelchair tires</a> · <a href="https://www.pu-tire.com/mobility-scooter-tires-and-wheels/polyurethane-tires-and-wheels/pu-mobility-scooter-wheels-and-tyres-9x3.html" target="_blank" rel="noopener">PU Tire scooter sizes</a> · <a href="https://sites.google.com/view/mobility-scooter-tire-c901db3d/mobility-scooter-tire-size-guide-for-different-models" target="_blank" rel="noopener">Scooter tire size guide</a></p>
   </div>
@@ -1134,7 +1132,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-motorsport">Search by size, model or use</label>
       <input type="text" id="sf-motorsport" placeholder="e.g. cadet, rear, 11x7.10-5" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-motorsport"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-motorsport"></tbody></table></div>
     <p class="note" id="sfn-motorsport" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://flowracers.com/blog/read-go-kart-tire-size/" target="_blank" rel="noopener">Flow Racers kart tire size guide</a></p>
   </div>
@@ -1213,7 +1211,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-farm">Search by size or use</label>
       <input type="text" id="sf-farm" placeholder="e.g. 18.4-38, compact tractor, front" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-farm"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-farm"></tbody></table></div>
     <p class="note" id="sfn-farm" aria-live="polite"></p>
     <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
   </div>
@@ -1287,7 +1285,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-semi">Search by size or use</label>
       <input type="text" id="sf-semi" placeholder="e.g. 11R22.5, steer, drive" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-semi"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-semi"></tbody></table></div>
     <p class="note" id="sfn-semi" aria-live="polite"></p>
     <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
   </div>
@@ -1431,7 +1429,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-construction">Search by size or use</label>
       <input type="text" id="sf-construction" placeholder="e.g. skid steer, backhoe, 20.5-25" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-construction"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-construction"></tbody></table></div>
     <p class="note" id="sfn-construction" aria-live="polite"></p>
     <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
   </div>
@@ -1461,7 +1459,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="sf-lawn">Search by size or use</label>
       <input type="text" id="sf-lawn" placeholder="e.g. hand truck, 20x10.00-8, front" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-lawn"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-lawn"></tbody></table></div>
     <p class="note" id="sfn-lawn" aria-live="polite"></p>
     <p class="note">Common sizes. Always confirm against the size molded on your current tire. Many of these come either as a bare tire or already mounted on a wheel, ready to bolt on.</p>
   </div>
@@ -1583,7 +1581,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <label for="mc-filter">Search by make, model or size</label>
       <input type="text" id="mc-filter" placeholder="e.g. Harley, Ninja, 180/55ZR17" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Motorcycle</th><th>Years checked</th><th>Front</th><th>Rear</th><th>Shop</th></tr></thead><tbody id="mc-rows"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Motorcycle</th><th>Years checked</th><th>Front</th><th>Rear</th><th>Shop</th><th>Install</th></tr></thead><tbody id="mc-rows"></tbody></table></div>
     <p class="note" id="mc-note" aria-live="polite"></p>
     <p class="note">Factory sizes from Michelin's fitment listings and spec sheets, checked for the years shown. Sizes usually carry across a model generation, but trims and years can differ. Always confirm with your owner's manual or the tire label on the bike before you buy.</p>
   </div>
@@ -1642,6 +1640,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 <script>
 (function(){
   var PREVIEW=true;
+  var SHOPQ={forklift:"forklift tire service",farm:"tractor tire service",construction:"skid steer tire service",atv:"ATV tire shop",aviation:"aircraft maintenance shop",military:"truck tire shop",motorcycle:"motorcycle tire shop",vintage:"classic car tire shop",trailer:"trailer tire shop",rv:"RV tire service",racing:"performance tire shop"};
+  var QCAT={forklift:"Forklift",farm:"Farm",construction:"Construction",semi:"Commercial",military:"Military",rv:"RV",aviation:"Aviation"};
   /* ---------- categories ---------- */
   var GROUPS=[["small","Small wheels"],["power","Powersports & racing"],["road","On the road"],["heavy","Heavy duty"],["air","Aircraft"]];
   var CATS=[
@@ -1860,6 +1860,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     var warn=yr&&b.y.length&&b.y.indexOf(yr)<0?" We haven't checked "+yr+" yet. Sizes usually match across a generation, but confirm on your bike.":"";
     n.textContent=checked+warn+(b.note?" "+b.note+".":"")+" As an Amazon Associate I earn from qualifying purchases.";
     mcOut.appendChild(n);
+    var ip=document.createElement("p");ip.className="note";ip.appendChild(document.createTextNode("Most riders have a motorcycle shop mount and balance new tires. "));var il=document.createElement("a");il.href=mapsUrl("motorcycle tire shop");il.target="_blank";il.rel="noopener";il.textContent="Find a motorcycle tire shop near you";ip.appendChild(il);ip.appendChild(document.createTextNode("."));mcOut.appendChild(ip);
     if(b.s){var sp=document.createElement("p");sp.className="note";var sa=document.createElement("a");sa.href=b.s;sa.target="_blank";sa.rel="noopener";sa.textContent="Source";sp.appendChild(sa);mcOut.appendChild(sp);}
   }
   mcMake.addEventListener("change",fillModels);mcModel.addEventListener("change",fillYears);mcYear.addEventListener("change",showMc);
@@ -1872,7 +1873,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       if(q&&hay.indexOf(q)<0)return;n++;
       var tr=document.createElement("tr");
       cell(tr,b.mk+" "+b.md);cell(tr,b.y.length?b.y.join(", "):"Not yet checked");cell(tr,b.f,"stamp");cell(tr,b.r,"stamp");
-      var td=document.createElement("td");mcShop(td,b);tr.appendChild(td);mcRows.appendChild(tr);
+      var td=document.createElement("td");mcShop(td,b);tr.appendChild(td);tr.appendChild(installCell("motorcycle","shop",""));mcRows.appendChild(tr);
     });
     mcNote.textContent=n?n+" motorcycle"+(n===1?"":"s")+" shown.":"No match. ";
     if(!n){var na=document.createElement("a");na.href="#request";na.setAttribute("data-rqcat","motorcycle");na.textContent="Tell us your bike and we'll add it";mcNote.appendChild(na);mcNote.appendChild(document.createTextNode("."));}
@@ -2042,6 +2043,11 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       sh.appendChild(amzLink(small?"Tire only":"This size",rz+" "+term));
       if(small)sh.appendChild(amzLink("Mounted on a wheel",rz+" tire and wheel assembly"));
       host.appendChild(sh);
+      var lvl=/^(lawn|mobility|bicycles|motorsport)$/.test(lk)||(lk==="atv"&&/golf/i.test(r.kind))?"diy":(lk==="semi"||/OTR|Farm tractor rear|Commercial|military|Older truck/i.test(r.kind))?"pro":"shop";
+      var ir=document.createElement("div");ir.className="row";ir.style.alignItems="center";
+      var il2=document.createElement("span");il2.className="note";il2.textContent=lvl==="diy"?"Install: most owners do this one at home.":lvl==="pro"?"Install: too big to mount yourself.":"Install: a local shop can mount it.";ir.appendChild(il2);
+      if(lvl!=="diy"){var tdx=installCell(lk||"",lvl,rz);while(tdx.firstChild)ir.appendChild(tdx.firstChild);}
+      host.appendChild(ir);
       var dn=document.createElement("p");dn.className="note";dn.textContent="As an Amazon Associate I earn from qualifying purchases."+(lk==="aviation"?" Aircraft tires must be TSO-approved, or labeled for experimental and light-sport use, and match your parts catalog.":"");host.appendChild(dn);
     }
   }
@@ -2079,9 +2085,18 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(!document.getElementById("q-consent").checked)miss.push("the box agreeing to share your request with dealers");
     if(miss.length){qerr.textContent="Please complete: "+miss.join(", ")+".";return;}
     qerr.textContent="";
-    var cat=document.getElementById("q-cat").value,qty=document.getElementById("q-qty").value,size=document.getElementById("q-size").value.trim()||"size to be confirmed";
-    document.getElementById("thanks-text").textContent="Thanks, "+name+". Your request for "+qty+" "+cat.toLowerCase()+" tire"+(qty==="1"?"":"s")+" ("+size+") near "+zip+" is in. Dealers usually reply within one business day, by email at "+email+".";
-    form.hidden=true;thanks.hidden=false;
+    var cat=document.getElementById("q-cat").value,qty=document.getElementById("q-qty").value,size=document.getElementById("q-size").value.trim();
+    var sb=form.querySelector("button[type=submit]");sb.disabled=true;qerr.textContent="Sending...";
+    var payload={type:"quote",page:cat,equipment:document.getElementById("q-make").value.trim(),size:size,qty:qty,timeline:document.getElementById("q-when").value,zip:zip,notes:document.getElementById("q-notes").value.trim(),name:name,company:document.getElementById("q-co").value.trim(),email:email,phone:document.getElementById("q-phone").value.trim(),website:""};
+    fetch("/api/request",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)})
+      .then(function(r){return r.json();}).catch(function(){return {saved:false};})
+      .then(function(res){
+        sb.disabled=false;
+        if(!res||!res.saved){qerr.textContent="We couldn't send your request just now. Please try again in a few minutes.";return;}
+        qerr.textContent="";
+        document.getElementById("thanks-text").textContent="Thanks, "+name+". We have your request for "+qty+" "+cat.toLowerCase()+" tire"+(qty==="1"?"":"s")+(size?" ("+size+")":"")+" near "+zip+". We'll match it with a dealer who serves your area and follow up by email at "+email+".";
+        form.hidden=true;thanks.hidden=false;
+      });
   });
   document.getElementById("quote-again").addEventListener("click",function(){thanks.hidden=true;form.hidden=false;});
 
@@ -2125,6 +2140,23 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     var d=document.createElement("p");d.className="note";d.textContent="As an Amazon Associate I earn from qualifying purchases. Links open Amazon search results, so check the size and reviews before you buy.";
     el.appendChild(h);el.appendChild(row);el.appendChild(d);
   });
+  function mapsUrl(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+" near me");}
+  function installLevel(k,r){
+    if(/^(lawn|mobility|bicycles|motorsport)$/.test(k))return "diy";
+    if(k==="atv")return /golf|EZGO|Club Car/i.test(r[2])?"diy":"shop";
+    if(k==="semi")return "pro";
+    if(k==="farm")return /^(18\.4-38|520\/85R38)$/.test(r[0])?"pro":"shop";
+    if(k==="construction")return /^(19\.5L-24|17\.5-25|20\.5-25|14\.00-24)$/.test(r[0])?"pro":"shop";
+    if(k==="military")return r[0]==="37x12.50R16.5"?"shop":"pro";
+    return "shop";
+  }
+  function installCell(k,lvl,size){
+    var td=document.createElement("td");
+    if(lvl==="diy"){var b=document.createElement("span");b.className="pill live";b.textContent="DIY";b.title="Most owners install these at home";td.appendChild(b);}
+    else if(lvl==="pro"){var a=document.createElement("a");a.href="#quote";a.setAttribute("data-cat",QCAT[k]||"Other");if(size)a.setAttribute("data-size",size);a.textContent="Get install quotes";td.appendChild(a);}
+    else{var m=document.createElement("a");m.href=mapsUrl(SHOPQ[k]||"tire shop");m.target="_blank";m.rel="noopener";m.textContent=k==="forklift"&&/press-on/i.test(size||"")?"Find a shop":"Find a shop";td.appendChild(m);}
+    return td;
+  }
   function mountQuery(k,r){
     if(k==="lawn")return r[0]+(/hand truck|wheelbarrow/i.test(r[2])?" wheel":" tire and wheel assembly");
     if(k==="atv"){
@@ -2274,6 +2306,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
         if(k==="vintage"&&!r[1]){var sb=document.createElement("button");sb.type="button";sb.className="shoplink";sb.style.background="none";sb.style.cursor="pointer";sb.textContent="Specialists";sb.addEventListener("click",function(){var d=document.getElementById("vintage-dealers");if(d)d.scrollIntoView({behavior:"smooth",block:"start"});});ts.appendChild(sb);}
         else{var mq=mountQuery(k,r);ts.appendChild(amzLink(mq?"Tire only":"Amazon",finderQuery(k,r)));if(mq){ts.appendChild(document.createTextNode(" "));ts.appendChild(amzLink("Mounted",mq));}}
         tr.appendChild(ts);
+        tr.appendChild(installCell(k,installLevel(k,r),r[4]||r[0]));
         body.appendChild(tr);
       });
       note.textContent=n?n+" size"+(n===1?"":"s")+" shown. Tap a size to decode it.":"No match. Try a shorter search, or ";
