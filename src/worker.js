@@ -50,7 +50,11 @@ async function handleRequest(request, env) {
   }
   if (!env.REQUESTS) return json({ saved: false });
 
-  const key = `${type}:${record.at}:${crypto.randomUUID().slice(0, 8)}`;
+  // Anything sent from a workers.dev address (preview builds) is saved as a test.
+  const host = new URL(request.url).hostname;
+  const prefix = host.endsWith(".workers.dev") ? "test-" : "";
+  if (prefix) record.test = true;
+  const key = `${prefix}${type}:${record.at}:${crypto.randomUUID().slice(0, 8)}`;
   await env.REQUESTS.put(key, JSON.stringify(record));
   return json({ saved: true });
 }

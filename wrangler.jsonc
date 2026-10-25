@@ -11,5 +11,15 @@
       "binding": "REQUESTS",
       "id": "706738c041bf482cb81a213867811e43"
     }
-  ]
+  ],
+  // Preview builds (wrangler preview) need their own binding list.
+  // They share the request store; preview submissions are saved with a "test-" prefix.
+  "previews": {
+    "kv_namespaces": [
+      {
+        "binding": "REQUESTS",
+        "id": "706738c041bf482cb81a213867811e43"
+      }
+    ]
+  }
 }
