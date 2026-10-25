@@ -1042,6 +1042,44 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 </section>
 
 <!-- MOBILITY -->
+<section class="view" id="v-toys" data-view="toys" hidden>
+  <div class="wrap pagehead">
+    <div class="crumb"><a href="#home">All tires</a> / Toys, RC &amp; ride-ons</div>
+    <span class="eyebrow">RC cars · RC planes · ride-on cars · scooters · skateboards</span>
+    <h1>Tires and wheels for toys, RC and ride-ons</h1>
+    <p class="lede">RC cars chew through tires. Ride-on cars spin their plastic wheels on wet grass. Scooter wheels wear flat. The good news is nearly all of it is easy to replace at the kitchen table, if you know which numbers to match.</p>
+  </div>
+
+  <div class="wrap stack">
+    <h2>Reading the size</h2>
+    <div class="grid3">
+      <div class="card"><span class="eyebrow">RC cars and trucks</span><div class="parts"><span class="hl">2.2</span><span>in</span><span>12 mm hex</span></div><p>RC wheels are sized by the <b>wheel</b> diameter in inches, not the tire. Then match the <b>hex</b> that drives the wheel: usually <b>12 mm</b> on 1/10 scale and <b>17 mm</b> on 1/8 scale.</p></div>
+      <div class="card"><span class="eyebrow">RC airplanes</span><div class="parts"><span class="hl">2.5</span><span>in</span><span>5/32 axle</span></div><p>Plane wheels go by <b>outside diameter</b>, then the <b>axle hole</b>. Foam wheels are lighter; rubber holds up better on pavement.</p></div>
+      <div class="card"><span class="eyebrow">Scooters and skateboards</span><div class="parts"><span class="hl">100</span><span>mm</span><span>88A</span></div><p>Kick scooter and skateboard wheels go by <b>diameter in mm</b> and <b>hardness</b> (durometer, like 88A). Most use standard <b>608</b> bearings.</p></div>
+    </div>
+  </div>
+  <div class="wrap stack">
+    <h2>Size finder</h2>
+    <div class="quick">
+      <label for="sf-toys">Search by size or toy</label>
+      <input type="text" id="sf-toys" placeholder="e.g. crawler, 2.8, scooter, ride-on" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-toys"></tbody></table></div>
+    <p class="note" id="sfn-toys" aria-live="polite"></p>
+    <p class="note">RC wheels must match your model's wheel size, hex and offset. Check the manual or the part number on your old wheel before you buy.</p>
+  </div>
+
+  <div class="wrap stack">
+    <h2>Good to know</h2>
+    <div class="grid3">
+      <div class="card"><h3>Glued or pre-mounted?</h3><p class="use">Most RC tires are glued to the wheel with CA tire glue, with a foam insert inside. Buying them pre-mounted saves a messy hour. Crawlers often use beadlock wheels that bolt on instead of glue.</p></div>
+      <div class="card"><h3>Ride-on cars spinning out?</h3><p class="use">Kids' 6V, 12V and 24V ride-ons come with hard plastic wheels. Rubber traction strips or rubber-tread replacement wheels made for your model help a lot on grass and wet driveways.</p></div>
+      <div class="card"><h3>Electric scooters and hoverboards</h3><p class="use">Many electric scooters use 8.5 or 10 inch air tires that can go flat. Solid replacements are an option. Hoverboard wheels usually have the motor inside, so they're replaced as a whole wheel.</p></div>
+    </div>
+  </div>
+  <div class="wrap stack"><div class="shop" data-shop="toys"></div></div>
+</section>
+
 <section class="view" id="v-mobility" data-view="mobility" hidden>
   <div class="wrap pagehead">
     <div class="crumb"><a href="#home">All tires</a> / Mobility &amp; medical</div>
@@ -1678,6 +1716,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   var CATS=[
     {g:"small",id:"bicycles",n:"Bicycles & e-bikes",d:"Road, gravel, mountain, BMX, fat, kids",live:true,m:"shop"},
     {g:"small",id:"mobility",n:"Mobility & medical",d:"Wheelchairs, mobility scooters, carts",live:true,m:"shop"},
+    {g:"small",id:"toys",n:"Toys, RC & ride-ons",d:"RC cars and planes, ride-on cars, scooters, skateboards",live:true,m:"shop"},
     {g:"small",id:"lawn",n:"Lawn & garden",d:"Riding mower, zero-turn, wheelbarrow, flat-free",live:true,m:"shop"},
     {g:"small",id:"motorsport",n:"Go-karts & karting",d:"Sprint, cadet and rental karts",live:true,m:"shop"},
     {g:"power",id:"motorcycle",n:"Motorcycles",d:"Touring, cruiser, sport; stock sizes and darkside cautions",live:true,m:"shop"},
@@ -2162,6 +2201,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     motorsport:[["Go-kart tires","go kart tires 10x4.50-5"],["Low-pressure tire gauge","low pressure tire gauge 0-15 psi"],["Tire pyrometer","tire pyrometer"],["Kart stand","go kart stand"]],
     forklift:[["Press-on forklift tires","press on forklift tire"],["Pneumatic forklift tires","pneumatic forklift tire"],["Solid flat-proof forklift tires","solid forklift tire"],["Tread depth gauge","tire tread depth gauge"]],
     farm:[["Compact tractor tires","compact tractor tires"],["Row-crop tractor tires","tractor tire 18.4-38"],["Front tractor tires (F-2)","front tractor tire 3 rib"],["Tractor tire inner tubes","tractor tire inner tube"],["Tractor valve stems","tractor tire valve stem"]],
+    toys:[["RC tire glue","RC tire CA glue"],["RC tire foam inserts","RC tire foam inserts"],["RC beadlock wheels","RC crawler beadlock wheels 1.9"],["608 skate and scooter bearings","608 bearings skateboard scooter"],["Ride-on car rubber tires","ride on car rubber tires"]],
     aviation:[["Tire pressure gauge","dial tire pressure gauge"],["Tire changing tools","tire spoons bead breaker"]],
     semi:[["11R22.5 steer tires","11R22.5 steer tire"],["11R22.5 drive tires","11R22.5 drive tire"],["Dual-foot truck tire gauge","dual foot truck tire pressure gauge"],["Tread depth gauge","truck tire tread depth gauge"],["Valve stem extenders","truck dual wheel valve stem extenders"]],
     construction:[["Skid steer tires","skid steer tires 12-16.5"],["Backhoe tires","backhoe tires"],["Loader tires","loader tire 20.5-25"],["Heavy-duty tire inflator","heavy duty tire inflator"]]
@@ -2184,7 +2224,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   });
   function mapsUrl(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+" near me");}
   function installLevel(k,r){
-    if(/^(lawn|mobility|bicycles|motorsport)$/.test(k))return "diy";
+    if(/^(lawn|mobility|bicycles|motorsport|toys)$/.test(k))return "diy";
     if(k==="atv")return /golf|EZGO|Club Car/i.test(r[2])?"diy":"shop";
     if(k==="semi")return "pro";
     if(k==="farm")return /^(18\.4-38|520\/85R38)$/.test(r[0])?"pro":"shop";
@@ -2210,6 +2250,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     return null;
   }
   function finderQuery(k,r){
+    if(k==="toys")return r[5];
     if(k==="forklift")return r[0]+" forklift tire";
     if(k==="farm")return r[0]+(/skid/i.test(r[2])&&!/tractor/i.test(r[2])?" tire":" tractor tire");
     if(k==="construction")return r[0]+(/skid/i.test(r[2])?" skid steer tire":/backhoe/i.test(r[2])?" backhoe tire":/loader/i.test(r[2])?" loader tire":/grader/i.test(r[2])?" grader tire":" tire");
@@ -2328,6 +2369,26 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       ["10x4.00-5","4.00/10.0-5","Kid karts (Cadet, Micro, Mini), front","Check your class rules"],
       ["11x5.00-5","5.00/11.0-5","Kid karts (Cadet, Micro, Mini), rear","Check your class rules"]
     ],
+    toys:[
+      ["1.9 in","","1/10 scale rock crawlers","The most common crawler size; usually 12 mm hex","","1.9 RC crawler tires"],
+      ["2.2 in","","1/10 buggies, stadium trucks and crawlers","Fronts and rears often differ on buggies","","2.2 RC tires 12mm hex"],
+      ["2.2/3.0 in","","1/10 short course trucks","Short course wheel; 12 mm hex","","2.2/3.0 short course RC tires"],
+      ["2.8 in","","1/10 monster trucks and stadium trucks","Often sold already mounted","","2.8 RC tires pre-mounted 12mm hex"],
+      ["3.8 in","","1/8 scale monster trucks","17 mm hex","","3.8 RC tires pre-mounted 17mm hex"],
+      ["1/8 buggy","","1/8 scale buggies and truggies","17 mm hex","","1/8 buggy RC tires 17mm hex"],
+      ["26 mm","","1/10 touring and on-road cars","Width is what matters; 12 mm hex","","1/10 touring car RC tires 26mm"],
+      ["1.5 in","38 mm","RC airplane tail wheels, small park flyers","Match the axle hole","","1.5 inch RC airplane wheels"],
+      ["2.5 in","64 mm","RC airplane main wheels","Match the axle hole, often 5/32 in","","2.5 inch RC airplane wheels"],
+      ["3 in","76 mm","Larger RC airplanes","Rubber holds up on pavement","","3 inch RC airplane wheels"],
+      ["Ride-on wheel","","Kids' 6V, 12V and 24V ride-on cars","Plastic; buy wheels made for your model or add rubber traction strips","","ride on car rubber tires traction"],
+      ["100 mm","","Kids' kick scooters","608 bearings","","100mm scooter wheels with bearings"],
+      ["120 mm","","Pro and adult kick scooters","Check the fork has room","","120mm scooter wheels with bearings"],
+      ["8.5 x 2","8.5 in","Electric scooters","Air tire with tube; solid versions sold too","","8.5 x 2 electric scooter tire"],
+      ["10 x 2.5","10 in","Larger electric scooters","Air or solid","","10 x 2.5 electric scooter tire"],
+      ["6.5 in","","Hoverboards","The motor is in the wheel; replaced as a unit","","6.5 inch hoverboard wheel motor"],
+      ["52-54 mm","","Street skateboards","Hard wheels (99A) for skateparks","","52mm skateboard wheels 99A"],
+      ["60 mm","","Cruiser boards and longboards","Softer (78A to 85A) for rough pavement","","60mm cruiser skateboard wheels"]
+    ],
     mobility:[
       ["24 x 1-3/8","37-540","Manual wheelchair, rear","Standard everyday size","37-540"],
       ["24 x 1","25-540","Manual wheelchair, rear","Narrower; sport and lightweight chairs","25-540"],
@@ -2348,8 +2409,9 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       FINDERS[k].forEach(function(r){
         if(q&&r.slice(0,4).join(" ").toLowerCase().indexOf(q)<0)return;n++;
         var tr=document.createElement("tr"),td0=document.createElement("td"),b=document.createElement("button");
+        if(k==="toys"){b=document.createElement("b");b.textContent=r[0];b.style.fontFamily="var(--mono)";}else{
         b.type="button";b.className="chip";b.textContent=r[0];b.title="Decode this size";
-        b.addEventListener("click",function(){decIn.value=r[4]||r[0];location.hash="decoder";goDecode();});
+        b.addEventListener("click",function(){decIn.value=r[4]||r[0];location.hash="decoder";goDecode();});}
         td0.appendChild(b);tr.appendChild(td0);
         for(var i=1;i<4;i++){var td=document.createElement("td");td.textContent=r[i]||"—";tr.appendChild(td);}
         var ts=document.createElement("td");
@@ -2360,14 +2422,14 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
         tr.appendChild(installCell(k,installLevel(k,r),r[4]||r[0]));
         body.appendChild(tr);
       });
-      note.textContent=n?n+" size"+(n===1?"":"s")+" shown. Tap a size to decode it.":"No match. Try a shorter search, or ";
+      note.textContent=n?n+" size"+(n===1?"":"s")+" shown."+(k==="toys"?"":" Tap a size to decode it."):"No match. Try a shorter search, or ";
       if(!n){var na=document.createElement("a");na.href="#request";na.setAttribute("data-rqcat",k);na.setAttribute("data-rqsize",inp.value.trim());na.textContent="tell us what you need";note.appendChild(na);note.appendChild(document.createTextNode("."));}
     }
     inp.addEventListener("input",draw);draw();
   });
 
   /* ---------- can't find your tire? request form ---------- */
-  var RQ_TERM={bicycles:"bike tire",mobility:"mobility scooter tire",lawn:"lawn mower tire",motorsport:"go kart tire",motorcycle:"motorcycle tire",racing:"racing tire",atv:"ATV tire",cars:"tire",trucks:"truck tire",trailer:"trailer tire",rv:"RV tire",vintage:"tire",forklift:"forklift tire",semi:"truck tire",farm:"tractor tire",construction:"skid steer tire",military:"military truck tire",aviation:"aircraft tire","":"tire"};
+  var RQ_TERM={toys:"RC tire",bicycles:"bike tire",mobility:"mobility scooter tire",lawn:"lawn mower tire",motorsport:"go kart tire",motorcycle:"motorcycle tire",racing:"racing tire",atv:"ATV tire",cars:"tire",trucks:"truck tire",trailer:"trailer tire",rv:"RV tire",vintage:"tire",forklift:"forklift tire",semi:"truck tire",farm:"tractor tire",construction:"skid steer tire",military:"military truck tire",aviation:"aircraft tire","":"tire"};
   function catName(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id)return CATS[i].n;}return "";}
   // Short call-to-action on every category page and the decoder
   Object.keys(RQ_TERM).concat(["decoder"]).forEach(function(k){
@@ -2479,7 +2541,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   dotIn.addEventListener("keydown",function(e){if(e.key==="Enter")dotRun();});
   dotRun();
 
-  var VIEWS=["home","cars","trucks","forklift","aviation","motorcycle","farm","semi","trailer","construction","lawn","atv","rv","mobility","motorsport","racing","bicycles","vintage","military","request","decoder","quote","partners","legal","about","privacy"];
+  var VIEWS=["home","cars","trucks","forklift","aviation","motorcycle","farm","semi","trailer","construction","lawn","atv","rv","mobility","toys","motorsport","racing","bicycles","vintage","military","request","decoder","quote","partners","legal","about","privacy"];
   function route(){
     var h=(location.hash||"").replace("#","");
     if(VIEWS.indexOf(h)<0)h="home";
