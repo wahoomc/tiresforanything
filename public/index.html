@@ -193,6 +193,13 @@ form.quote{display:grid;gap:14px;background:var(--surface);border:1px solid var(
 footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--muted);font-size:.86rem}
 footer .wrap{display:grid;gap:10px}
 
+/* amazon shop */
+.shop{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:16px;display:grid;gap:10px}
+.shop h3{font-size:1.25rem}
+.shoplink{display:inline-flex;align-items:center;font-weight:600;font-size:.9rem;border:1.5px solid var(--ink);border-radius:999px;padding:6px 12px;text-decoration:none;color:var(--ink)}
+.shoplink::after{content:"\2197";margin-left:6px;font-size:.85em}
+.shoplink:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 /* caution + legal */
 :root{--warn:#A8381C}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--warn:#F08766}}
@@ -399,6 +406,7 @@ footer .wrap{display:grid;gap:10px}
     <div class="grid2" id="dealers-forklift"></div>
     <div class="aff"><span><b>Need just one or two?</b> <span class="note">Online retailers ship forklift tires direct.</span></span><span class="sample">Partner link goes here</span></div>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="forklift"></div></div>
 </section>
 
 <!-- AVIATION -->
@@ -651,6 +659,7 @@ footer .wrap{display:grid;gap:10px}
     </div>
     <p class="note">Legal limits from <a href="https://tirerack.com/tires/tiretech/techpage.jsp?techid=197" target="_blank" rel="noopener">Tire Rack's tread depth guide</a>. California and Idaho use 1/32 in; Texas inspections use 3/32 in.</p>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="cars"></div></div>
 </section>
 
 <!-- TRUCKS -->
@@ -711,6 +720,7 @@ footer .wrap{display:grid;gap:10px}
     </ul>
     <p class="note">Enter the new size and the stock size in the <a href="#decoder">decoder</a> to compare overall diameters.</p>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="trucks"></div></div>
 </section>
 
 <!-- ATV -->
@@ -736,7 +746,7 @@ footer .wrap{display:grid;gap:10px}
       <label for="sf-atv">Search by size, model or use</label>
       <input type="text" id="sf-atv" placeholder="e.g. Rancher, 25x10-12, golf" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th></tr></thead><tbody id="sft-atv"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-atv"></tbody></table></div>
     <p class="note" id="sfn-atv" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://www.atv.com/specs/honda/utility/2022/fourtrax-rancher/base/detail.html" target="_blank" rel="noopener">Honda Rancher specs</a> · <a href="https://www.polaris.com/en-us/off-road/sportsman/2020/1-seat/sportsman-570/sportsman-570-eps-titanium-metallic-2020-atv/" target="_blank" rel="noopener">Polaris Sportsman 570</a> · <a href="https://utvactionmag.com/2021-polaris-rzr-xp-1000-trails-rocks" target="_blank" rel="noopener">UTV Action, RZR XP 1000</a> · <a href="https://www.golfcarttiresupply.com/ezgo-golf-cart-tires/" target="_blank" rel="noopener">Golf Cart Tire Supply</a></p>
   </div>
@@ -759,6 +769,7 @@ footer .wrap{display:grid;gap:10px}
       <li><b>Pre-mounted wheel and tire sets</b> bolt straight on. No bead breaker, no balancing.</li>
     </ul>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="atv"></div></div>
 </section>
 
 <!-- RV -->
@@ -799,6 +810,7 @@ footer .wrap{display:grid;gap:10px}
       <li><b>A tire pressure monitoring system</b> warns you about a slow leak before it becomes a blowout.</li>
     </ul>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="rv"></div></div>
 </section>
 
 <!-- MOBILITY -->
@@ -828,7 +840,7 @@ footer .wrap{display:grid;gap:10px}
       <label for="sf-mobility">Search by size, model or use</label>
       <input type="text" id="sf-mobility" placeholder="e.g. 24, scooter, 260x85" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th></tr></thead><tbody id="sft-mobility"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-mobility"></tbody></table></div>
     <p class="note" id="sfn-mobility" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://hollandbikeshop.com/en-gb/bicycle-tires-and-inner-tubes/schwalbe-bicycle-tires/schwalbe-wheelchair-tire/schwalbe-tire-24x1-00-25-540-gray-slick-wheelchair/" target="_blank" rel="noopener">Schwalbe wheelchair tires</a> · <a href="https://www.pu-tire.com/mobility-scooter-tires-and-wheels/polyurethane-tires-and-wheels/pu-mobility-scooter-wheels-and-tyres-9x3.html" target="_blank" rel="noopener">PU Tire scooter sizes</a> · <a href="https://sites.google.com/view/mobility-scooter-tire-c901db3d/mobility-scooter-tire-size-guide-for-different-models" target="_blank" rel="noopener">Scooter tire size guide</a></p>
   </div>
@@ -870,7 +882,7 @@ footer .wrap{display:grid;gap:10px}
       <label for="sf-motorsport">Search by size, model or use</label>
       <input type="text" id="sf-motorsport" placeholder="e.g. cadet, rear, 11x7.10-5" autocomplete="off">
     </div>
-    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th></tr></thead><tbody id="sft-motorsport"></tbody></table></div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-motorsport"></tbody></table></div>
     <p class="note" id="sfn-motorsport" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://flowracers.com/blog/read-go-kart-tire-size/" target="_blank" rel="noopener">Flow Racers kart tire size guide</a></p>
   </div>
@@ -892,6 +904,7 @@ footer .wrap{display:grid;gap:10px}
       <li><b>Store them cool and out of the sun,</b> away from electric motors that give off ozone.</li>
     </ul>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="motorsport"></div></div>
 </section>
 
 <!-- FARM -->
@@ -1014,6 +1027,7 @@ footer .wrap{display:grid;gap:10px}
     </div>
     <div class="grid2" id="dealers-semi"></div>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="semi"></div></div>
 </section>
 
 <!-- TRAILER -->
@@ -1072,6 +1086,7 @@ footer .wrap{display:grid;gap:10px}
     </ul>
     <div class="aff"><span><b>Trailer tires ship to your door.</b> <span class="note">Retail partner links for ST and LT trailer tires go here.</span></span><span class="sample">Partner link goes here</span></div>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="trailer"></div></div>
 </section>
 
 <!-- CONSTRUCTION -->
@@ -1146,6 +1161,7 @@ footer .wrap{display:grid;gap:10px}
     </div>
     <div class="grid2" id="dealers-construction"></div>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="construction"></div></div>
 </section>
 
 <!-- LAWN -->
@@ -1180,6 +1196,7 @@ footer .wrap{display:grid;gap:10px}
     </ul>
     <div class="aff"><span><b>Lawn and garden tires ship to your door.</b> <span class="note">Retail partner links go here.</span></span><span class="sample">Partner link goes here</span></div>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="lawn"></div></div>
 </section>
 
 <!-- ABOUT -->
@@ -1265,6 +1282,7 @@ footer .wrap{display:grid;gap:10px}
     <div class="row"><a class="btn yellow" href="https://darksidetires.com" target="_blank" rel="noopener">Visit Darkside Tires</a></div>
     <p class="note">Darkside Tires is a sister site run by the same owner. Its own terms and disclaimers apply.</p>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="motorcycle"></div></div>
 </section>
 
 <!-- LEGAL -->
@@ -1285,7 +1303,7 @@ footer .wrap{display:grid;gap:10px}
       <div><h3>5. Aviation</h3><p>Aircraft tires must meet the requirements for your aircraft and its certification. Nothing on this site establishes airworthiness or approval for any aircraft. Confirm size, ply rating and approval status, including TSO status, in your aircraft's parts catalog. Have all work performed, approved for return to service and recorded as federal aviation regulations require. Tires marked "Not FAA-approved" are listed for experimental and light-sport aircraft only.</p></div>
       <div><h3>6. Limitation of liability</h3><p>To the fullest extent the law allows, [Tires for Anything LLC], its owners, employees and contributors are not liable for any direct, indirect, incidental, consequential, special or punitive damages, including personal injury, property damage or lost profits, arising from your use of this site or from any tire, product, dealer or service you find through it. Where liability can't be excluded, it is limited to [amount set by attorney].</p></div>
       <div><h3>7. Indemnification</h3><p>You agree to defend, indemnify and hold harmless [Tires for Anything LLC] and its owners from any claims, losses or costs arising from your use of the site, your breach of these terms, or your purchase, installation or use of any tire.</p></div>
-      <div><h3>8. Affiliate links</h3><p>Some links are affiliate links, and we may earn a commission when you buy through them, at no extra cost to you. Commissions do not change our guides. We do not sell products. Any purchase is between you and the retailer, under the retailer's terms.</p></div>
+      <div><h3>8. Affiliate links</h3><p>Some links are affiliate links, and we may earn a commission when you buy through them, at no extra cost to you. Commissions do not change our guides. We do not sell products. Any purchase is between you and the retailer, under the retailer's terms. As an Amazon Associate I earn from qualifying purchases.</p></div>
       <div><h3>9. Dealer listings and quote requests</h3><p>Dealers listed on this site are independent businesses, not our agents, employees or partners. Featured listings are paid placements and are labeled. We do not guarantee any dealer's prices, workmanship, licensing, insurance or products. When you request a quote, you agree that we may share your request and contact details with up to three matching dealers. See the <a href="#privacy">privacy policy</a>.</p></div>
       <div><h3>10. Rider and owner reports</h3><p>Reports from riders, pilots and equipment owners reflect their own experience, not ours. They may be incomplete, wrong or out of date.</p></div>
       <div><h3>11. Trademarks</h3><p>Product and company names are trademarks of their owners and are used here for identification only. Tires for Anything is not affiliated with, sponsored by or endorsed by Honda, Michelin or any other manufacturer named on this site.</p></div>
@@ -1303,7 +1321,7 @@ footer .wrap{display:grid;gap:10px}
     <div><b style="font-family:var(--display);text-transform:uppercase;font-size:1.1rem;color:var(--ink)">Tires for Anything</b> · tiresforanything.com</div>
     <div class="row" style="gap:16px"><a href="#about">About</a><a href="#privacy">Privacy policy</a><a href="#legal">Terms and disclaimers</a><a href="#partners">For dealers</a></div>
     <p><b>Safety notice:</b> Information on this site is general and educational. It is not professional, mechanical or aviation advice, and it doesn't replace your manufacturer's specifications or a qualified technician. You are responsible for verifying any tire before you buy, install or use it. <a href="#legal">Read the full terms and disclaimers</a>.</p>
-    <p>Some links on this site are affiliate links. If you buy through them, we may earn a commission at no extra cost to you. Featured dealers pay for placement, and they're always labeled. We never earn commissions on non-standard fitments.</p>
+    <p>Some links on this site are affiliate links. If you buy through them, we may earn a commission at no extra cost to you. Featured dealers pay for placement, and they're always labeled. We never earn commissions on non-standard fitments. As an Amazon Associate I earn from qualifying purchases.</p>
     <p>Product and company names are trademarks of their owners, used for identification only. Tires for Anything is not affiliated with any manufacturer named on this site.</p>
   </div>
 </footer>
@@ -1627,6 +1645,39 @@ footer .wrap{display:grid;gap:10px}
   });
 
   /* ---------- router ---------- */
+  /* ---------- amazon affiliate links ---------- */
+  var AMZ_TAG="stuffguysbuy-20";
+  function amz(q){return "https://www.amazon.com/s?k="+encodeURIComponent(q)+"&tag="+AMZ_TAG;}
+  function amzLink(label,q,cls){var a=document.createElement("a");a.className=cls||"shoplink";a.href=amz(q);a.target="_blank";a.rel="sponsored nofollow noopener";a.textContent=label;return a;}
+  var SHOP={
+    cars:[["Digital tire pressure gauge","digital tire pressure gauge"],["Tread depth gauge","tire tread depth gauge"],["Portable tire inflator","portable tire inflator car"],["Tire plug repair kit","tire plug repair kit"],["Torque wrench","1/2 inch drive torque wrench"]],
+    trucks:[["Heavy-duty tire inflator","12v heavy duty tire inflator truck"],["Tire pressure gauge, 0 to 100 psi","tire pressure gauge 100 psi"],["Tread depth gauge","tire tread depth gauge"],["Truck tire plug kit","heavy duty tire plug kit"]],
+    trailer:[["ST trailer tires","ST trailer tire"],["Trailer tire and wheel assemblies","trailer tire and wheel assembly"],["Trailer tire pressure monitor","trailer tire pressure monitoring system"],["Tire covers","trailer tire covers"],["Wheel chocks","wheel chocks"]],
+    rv:[["RV tire pressure monitor","RV tire pressure monitoring system"],["Valve stem extenders for duals","dual wheel valve stem extenders"],["Dual-foot tire gauge","dual foot truck tire pressure gauge"],["RV tire covers","RV tire covers"],["Wheel chocks","RV wheel chocks"]],
+    lawn:[["Riding mower front tires 15x6.00-6","15x6.00-6 lawn mower tire"],["Riding mower rear tires 20x10.00-8","20x10.00-8 lawn mower tire"],["Flat-free wheelbarrow tires","flat free wheelbarrow tire 4.10/3.50-4"],["Tire sealant","tire sealant lawn mower"]],
+    atv:[["ATV tire plug kit","ATV tire plug kit"],["Low-pressure tire gauge","low pressure tire gauge ATV"],["Golf cart wheel and tire sets","golf cart wheel and tire set 18x8.50-8"],["Bead breaker","ATV tire bead breaker"]],
+    motorcycle:[["Motorcycle tire pressure gauge","motorcycle tire pressure gauge"],["Motorcycle tire plug kit","motorcycle tubeless tire plug kit"],["Tire irons","motorcycle tire irons"],["Wheel balancer","motorcycle wheel balancer"]],
+    motorsport:[["Go-kart tires","go kart tires 10x4.50-5"],["Low-pressure tire gauge","low pressure tire gauge 0-15 psi"],["Tire pyrometer","tire pyrometer"],["Kart stand","go kart stand"]],
+    forklift:[["Forklift tires","forklift tire"],["Tread depth gauge","tire tread depth gauge"]],
+    semi:[["Dual-foot truck tire gauge","dual foot truck tire pressure gauge"],["Tread depth gauge","truck tire tread depth gauge"],["Valve stem extenders","truck dual wheel valve stem extenders"]],
+    construction:[["Skid steer tires","skid steer tires 12-16.5"],["Heavy-duty tire inflator","heavy duty tire inflator"]]
+  };
+  document.querySelectorAll(".shop").forEach(function(el){
+    var items=SHOP[el.getAttribute("data-shop")]||[];
+    if(!items.length){el.parentNode.hidden=true;return;}
+    var h=document.createElement("h3");h.textContent="Shop on Amazon";
+    var row=document.createElement("div");row.className="chips";
+    items.forEach(function(it){row.appendChild(amzLink(it[0],it[1]));});
+    var d=document.createElement("p");d.className="note";d.textContent="As an Amazon Associate I earn from qualifying purchases. Links open Amazon search results, so check the size and reviews before you buy.";
+    el.appendChild(h);el.appendChild(row);el.appendChild(d);
+  });
+  function finderQuery(k,r){
+    if(/^20 to/.test(r[0]))return "lifted golf cart tires";
+    if(k==="atv")return r[0]+(/golf/i.test(r[2])?" golf cart tire":/UTV|RZR/i.test(r[2])?" UTV tire":" ATV tire");
+    if(k==="motorsport")return r[0]+" go kart tire";
+    return r[0]+(/wheelchair, rear/i.test(r[2])?" wheelchair tire":/caster/i.test(r[2])?" caster wheel":" mobility scooter tire");
+  }
+
   /* ---------- size finders ---------- */
   var FINDERS={
     atv:[
@@ -1674,6 +1725,7 @@ footer .wrap{display:grid;gap:10px}
         b.addEventListener("click",function(){decIn.value=r[4]||r[0];location.hash="decoder";goDecode();});
         td0.appendChild(b);tr.appendChild(td0);
         for(var i=1;i<4;i++){var td=document.createElement("td");td.textContent=r[i]||"—";tr.appendChild(td);}
+        var ts=document.createElement("td");ts.appendChild(amzLink("Amazon",finderQuery(k,r)));tr.appendChild(ts);
         body.appendChild(tr);
       });
       note.textContent=n?n+" size"+(n===1?"":"s")+" shown. Tap a size to decode it.":"No match. Try a shorter search, or read the size off your sidewall and use the decoder.";
