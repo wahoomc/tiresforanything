@@ -951,43 +951,9 @@ footer .wrap{display:grid;gap:10px}
   <div class="wrap stack" id="darkside-guide">
     <span class="eyebrow">Alternative fitments</span>
     <h2>Darkside and double darkside</h2>
-    <p>Some touring and cruiser riders replace the rear motorcycle tire with a car tire, a practice called <b>going to the darkside</b>. <b>Double darkside</b> usually means also mounting a rear motorcycle tire on the front wheel, turned around so it rotates the other way. Riders who do it most often point to lower cost and longer tread life.</p>
-    <div class="warn" role="note">
-      <b>Not approved by tire or motorcycle manufacturers</b>
-      <p>Michelin states that passenger car tires are not recommended for motorcycles and can be dangerous, in part because car and motorcycle rims seat a tire's bead differently. A car tire has a flat tread, so it also behaves differently in a lean. Running any tire other than the one your manufacturer specifies can change handling, braking and stability, and may affect your warranty or insurance coverage.</p>
-      <p>Tires for Anything does not recommend, endorse, sell or earn commissions on darkside fitments. The information below reports what riders say they use. We have not tested or verified it.</p>
-    </div>
-
-    <div class="stack" style="gap:8px">
-      <h3>Before you consider it</h3>
-      <ul class="clean">
-        <li>Read your owner's manual and the tire maker's fitment guidance.</li>
-        <li>Ask your insurance company and warranty provider how they treat non-standard tires.</li>
-        <li>Talk to a qualified motorcycle technician who knows your model.</li>
-        <li>Check that any tire you use is DOT-certified and rated for the weight you carry, including a passenger and a trailer.</li>
-      </ul>
-    </div>
-
-    <div class="gate" id="ds-gate">
-      <b>Rider-reported cross-reference</b>
-      <p>To view the table, confirm that you've read the warning above.</p>
-      <label class="ack" for="ds-ack"><input type="checkbox" id="ds-ack"> I understand that these alternatives are not approved by tire or motorcycle manufacturers, that this table is rider-reported and unverified, and that I alone am responsible for any decision to use a non-standard tire.</label>
-      <div class="row"><button class="btn" type="button" id="ds-show" disabled>Show the cross-reference</button></div>
-    </div>
-    <div id="ds-table" class="stack" hidden>
-      <div class="tablewrap"><table><thead><tr><th>Motorcycle</th><th>Position</th><th>Stock</th><th>Alternative riders report</th><th>What riders say</th><th>Source</th></tr></thead><tbody id="ds-rows"></tbody></table></div>
-      <p class="note">Rider reports collected from public owner forums in October 2026. Fit and results vary by model year, suspension, load and rider. This table has no purchase links, by design.</p>
-    </div>
-
-    <div class="stack" style="gap:8px">
-      <h3>What riders say to watch for</h3>
-      <div class="grid2">
-        <div class="card"><h3>Run-flat vs. regular</h3><p class="use">On the GL1800, riders most often report run-flat car tires. Their stiff sidewalls are a big part of the reason.</p></div>
-        <div class="card"><h3>Clearance</h3><p class="use">Some sizes rub the inner fender or sit close to the swingarm at full suspension travel.</p></div>
-        <div class="card"><h3>Tire pressure</h3><p class="use">Reported pressures vary widely from rider to rider. There is no agreed number.</p></div>
-        <div class="card"><h3>Gearing and speedometer</h3><p class="use">A taller tire changes overall diameter. One Valkyrie rider reports engine RPM dropping about 200 at speed.</p></div>
-      </div>
-    </div>
+    <p>Some touring and cruiser riders run a car tire on the rear of their motorcycle, a practice called going to the darkside. Tire and motorcycle makers don't approve it, so we cover it on its own site, along with rider reports, sizes and the cautions that go with them.</p>
+    <div class="row"><a class="btn yellow" href="https://darksidetires.com" target="_blank" rel="noopener">Visit Darkside Tires</a></div>
+    <p class="note">Darkside Tires is a sister site run by the same owner. Its own terms and disclaimers apply.</p>
   </div>
 </section>
 
@@ -1167,23 +1133,9 @@ footer .wrap{display:grid;gap:10px}
   function cell(tr,txt,cls){var c=document.createElement("td");if(cls){var s=document.createElement("span");s.className=cls;s.textContent=txt;c.appendChild(s);}else{c.textContent=txt;}tr.appendChild(c);return c;}
   var stockBody=document.getElementById("moto-stock");
   MOTO.forEach(function(b){var tr=document.createElement("tr");cell(tr,b.n);cell(tr,b.f,"stamp");cell(tr,b.r,"stamp");stockBody.appendChild(tr);});
-  var dsBody=document.getElementById("ds-rows");
-  XREF.forEach(function(x){
-    var b=bikeOf(x.bike),tr=document.createElement("tr");
-    cell(tr,b.n);cell(tr,x.pos);cell(tr,x.pos==="Front"?b.f:b.r,"stamp");
-    var c=cell(tr,x.alt);
-    if(x.type){var sm=document.createElement("small");sm.style.display="block";sm.style.color="var(--muted)";sm.textContent=x.type;c.appendChild(sm);}
-    cell(tr,x.say||"—");
-    var sc=document.createElement("td");
-    if(x.src){var a=document.createElement("a");a.href=SRC[x.src].u;a.target="_blank";a.rel="noopener";a.textContent=SRC[x.src].t;sc.appendChild(a);}else{sc.textContent="—";}
-    tr.appendChild(sc);dsBody.appendChild(tr);
-  });
   var STOCK_IDX={},ALT_IDX={};
   MOTO.forEach(function(b){[["Front",b.f],["Rear",b.r]].forEach(function(p){var k=nz(p[1]);(STOCK_IDX[k]=STOCK_IDX[k]||[]).push({n:b.n,p:p[0]});});});
   [["195/55-16",["gl1800a","valk"]],["195/60-16",["gl1500"]],["185/75-16",["gl1500"]],["205/60-16",["valk"]],["205/65-16",["valk"]]].forEach(function(a){ALT_IDX[a[0]]=a[1].map(function(k){return bikeOf(k).n;});});
-  var dsAck=document.getElementById("ds-ack"),dsShow=document.getElementById("ds-show");
-  dsAck.addEventListener("change",function(){dsShow.disabled=!dsAck.checked;});
-  dsShow.addEventListener("click",function(){if(!dsAck.checked)return;document.getElementById("ds-gate").hidden=true;document.getElementById("ds-table").hidden=false;});
 
   /* ---------- size decoder ---------- */
   var LI={70:335,71:345,72:355,73:365,74:375,75:387,76:400,77:412,78:425,79:437,80:450,81:462,82:475,83:487,84:500,85:515,86:530,87:545,88:560,89:580,90:600,91:615,92:630,93:650,94:670,95:690,96:710,97:730,98:750,99:775,100:800,101:825,102:850,103:875,104:900,105:925,106:950,107:975,108:1000,109:1030,110:1060,111:1090,112:1120,113:1150,114:1180,115:1215,116:1250,117:1285,118:1320,119:1360,120:1400,121:1450,122:1500,123:1550,124:1600,125:1650,126:1700,127:1750,128:1800,129:1850,130:1900};
@@ -1297,9 +1249,9 @@ footer .wrap{display:grid;gap:10px}
     });
     host.appendChild(d);
     if(r.extra){var x=document.createElement("p");x.className="note";x.textContent=r.extra;host.appendChild(x);}
-    function xbox(title,body,linkText){var bx=document.createElement("div");bx.className="xref";var t=document.createElement("b");t.textContent=title;var p=document.createElement("p");p.textContent=body;var a=document.createElement("a");a.href="#motorcycle";a.textContent=linkText;bx.appendChild(t);bx.appendChild(p);bx.appendChild(a);host.appendChild(bx);}
-    if(st.length)xbox("Stock size on: "+st.map(function(s){return s.n+", "+s.p.toLowerCase();}).join("; "),"Some riders replace stock motorcycle tires with non-standard alternatives. Tire and motorcycle makers don't approve this. Read the warnings before you view rider reports.","Motorcycle guide and darkside cautions");
-    if(al.length)xbox("Riders report running this car tire on the rear of: "+al.join("; "),"That's a darkside fitment. Tire and motorcycle makers don't approve car tires on motorcycles, and Tires for Anything doesn't recommend it.","Read the cautions first");
+    function xbox(title,body,linkText,href){var bx=document.createElement("div");bx.className="xref";var t=document.createElement("b");t.textContent=title;var p=document.createElement("p");p.textContent=body;var a=document.createElement("a");a.href=href||"#motorcycle";if(href){a.target="_blank";a.rel="noopener";}a.textContent=linkText;bx.appendChild(t);bx.appendChild(p);bx.appendChild(a);host.appendChild(bx);}
+    if(st.length)xbox("Stock size on: "+st.map(function(s){return s.n+", "+s.p.toLowerCase();}).join("; "),"Some riders replace stock motorcycle tires with non-standard alternatives that tire and motorcycle makers don't approve. Our sister site, Darkside Tires, covers those alternatives and their risks.","Open the motorcycle guide");
+    if(al.length)xbox("Riders report running this car tire on the rear of: "+al.join("; "),"That's a darkside fitment. Tire and motorcycle makers don't approve car tires on motorcycles, and Tires for Anything doesn't recommend it.","Read more on Darkside Tires","https://darksidetires.com");
     var foot=document.createElement("div");foot.className="row";
     if(r.link){var a=document.createElement("a");a.className="btn ghost";a.href="#"+r.link;a.textContent="Open the "+r.cat+" guide";foot.appendChild(a);}
     else{var sp=document.createElement("span");sp.className="note";sp.textContent="Category: "+r.cat+" (guide coming soon)";sp.style.alignSelf="center";foot.appendChild(sp);}
