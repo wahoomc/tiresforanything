@@ -7,6 +7,9 @@ export default {
     if (url.pathname === "/api/request") {
       return handleRequest(request, env);
     }
+    if (url.pathname === "/api/event") {
+      return handleEvent(request, env);
+    }
     return env.ASSETS.fetch(request);
   },
 };
@@ -56,7 +59,40 @@ async function handleRequest(request, env) {
   if (prefix) record.test = true;
   const key = `${prefix}${type}:${record.at}:${crypto.randomUUID().slice(0, 8)}`;
   await env.REQUESTS.put(key, JSON.stringify(record));
+  await count(env, request, type === "quote" ? "quote_submit" : "request_submit", record.page);
   return json({ saved: true });
+}
+
+// Click counting. One record per day, like stats:2026-10-25 = {"amazon | trailer-tires": 12, ...}.
+// No personal data is stored. Visits from workers.dev (preview) are kept separate as test-stats.
+const EVENTS = ["amazon", "darkside", "find_shop", "quote_open", "request_open", "decode"];
+
+async function handleEvent(request, env) {
+  if (request.method !== "POST") return json({ error: "Use POST" }, 405);
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ ok: false }, 400);
+  }
+  if (!EVENTS.includes(body.e)) return json({ ok: false }, 400);
+  await count(env, request, body.e, String(body.p || "home"));
+  return json({ ok: true });
+}
+
+async function count(env, request, ev, page) {
+  if (!env.REQUESTS) return;
+  try {
+    const host = new URL(request.url).hostname;
+    const day = new Date().toISOString().slice(0, 10);
+    const key = (host.endsWith(".workers.dev") ? "test-stats:" : "stats:") + day;
+    const label = `${ev} | ${String(page).replace(/[^a-z0-9\/ -]/gi, "").slice(0, 60)}`;
+    const cur = (await env.REQUESTS.get(key, "json")) || {};
+    cur[label] = (cur[label] || 0) + 1;
+    await env.REQUESTS.put(key, JSON.stringify(cur));
+  } catch {
+    // counting must never break the site
+  }
 }
 
 function json(obj, status = 200) {

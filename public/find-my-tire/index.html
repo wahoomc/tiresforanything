@@ -1,0 +1,1265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3E%3Ccircle cx=%2715%27 cy=%2715%27 r=%2713%27 fill=%27none%27 stroke=%27%2315191D%27 stroke-width=%275%27 stroke-dasharray=%273 2.2%27/%3E%3Ccircle cx=%2715%27 cy=%2715%27 r=%275.5%27 fill=%27%23E9B300%27/%3E%3C/svg%3E">
+<script src="/t.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+[hidden]{display:none!important}
+img{max-width:100%}
+.aff{display:none!important}
+/* Layout: sticky "sidewall" nav over a concrete-toned shop floor; hash views (home, forklift, aviation, decoder, quote, partners); content column ~68rem, size codes always set in mono like molded sidewall stamps. */
+:root{
+  --bg:#EEF0EE;        /* shop-floor concrete */
+  --surface:#FFFFFF;
+  --surface-2:#E3E6E4;
+  --ink:#15191D;       /* rubber black */
+  --muted:#59616A;
+  --line:#C9CECC;
+  --accent:#E9B300;    /* hi-vis safety yellow */
+  --accent-ink:#15191D;
+  --link:#235A8C;      /* steel blue */
+  --good:#2F7A4C;
+  --stamp-bg:#1E2328;  /* sidewall */
+  --stamp-ink:#F2F3F1;
+  --display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111417; --surface:#191D21; --surface-2:#22272C; --ink:#E8EAE9; --muted:#9BA4AC;
+    --line:#2F363C; --accent:#F0C33A; --accent-ink:#15191D; --link:#7FB2E5; --good:#6CC08E;
+    --stamp-bg:#0B0D0F; --stamp-ink:#E8EAE9; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111417; --surface:#191D21; --surface-2:#22272C; --ink:#E8EAE9; --muted:#9BA4AC;
+  --line:#2F363C; --accent:#F0C33A; --accent-ink:#15191D; --link:#7FB2E5; --good:#6CC08E;
+  --stamp-bg:#0B0D0F; --stamp-ink:#E8EAE9; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--stamp-bg)}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{width:100%;max-width:68rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.02;text-wrap:balance;margin:0;letter-spacing:.005em}
+h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:900;text-transform:uppercase}
+h2{font-size:clamp(1.9rem,4.2vw,2.7rem);font-weight:800;text-transform:uppercase}
+h3{font-size:1.45rem;font-weight:800;text-transform:uppercase}
+p{margin:0;max-width:65ch}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.stamp{font-family:var(--mono);font-weight:700;background:var(--stamp-bg);color:var(--stamp-ink);padding:.08em .45em;border-radius:3px;white-space:nowrap;font-size:.92em;letter-spacing:.02em}
+.tread{height:12px;background:repeating-linear-gradient(115deg,var(--ink) 0 8px,transparent 8px 18px);opacity:.14}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--stamp-bg);color:var(--stamp-ink)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--stamp-ink)}
+.brand svg{flex:none}
+.brand b{font-family:var(--display);font-weight:900;font-size:1.45rem;text-transform:uppercase;letter-spacing:.02em;line-height:1}
+.brand b span{color:var(--accent)}
+.nav{display:flex;gap:4px;overflow-x:auto;margin-left:auto;scrollbar-width:none;max-width:100%}
+.nav::-webkit-scrollbar{display:none}
+.nav a{color:var(--stamp-ink);text-decoration:none;font-size:.88rem;font-weight:600;padding:7px 11px;border-radius:999px;white-space:nowrap;opacity:.85}
+.nav a:hover{opacity:1;background:rgba(255,255,255,.08)}
+.nav a[aria-current="page"]{background:var(--accent);color:var(--accent-ink);opacity:1}
+.proto{background:var(--accent);color:var(--accent-ink);font-size:.82rem;font-weight:600}
+.proto .wrap{padding-block:6px}
+
+main{padding-block:0 48px}
+section.view{display:grid;gap:48px}
+.band{padding-block:40px}
+.stack{display:grid;gap:16px}
+.lede{font-size:1.12rem;color:var(--muted)}
+
+/* hero */
+.hero{padding-block:44px 28px;display:grid;gap:28px;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:end}
+.hero h1 em{font-style:normal;background:var(--accent);color:var(--accent-ink);padding:0 .12em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.quick{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:12px}
+.quick label{font-weight:700}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:7px;padding:10px 12px;width:100%;min-width:0}
+input.code{font-family:var(--mono);font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.btn{font:inherit;font-weight:700;border:0;border-radius:7px;padding:10px 16px;cursor:pointer;background:var(--ink);color:var(--bg);text-decoration:none;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn.yellow{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn:hover{filter:brightness(1.08)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.8rem;font-weight:700;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer}
+.chip:hover{border-color:var(--ink)}
+
+/* category grid */
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(14.5rem,1fr));gap:10px}
+.cat{display:grid;gap:6px;align-content:start;padding:14px 14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-decoration:none;color:var(--ink);min-width:0}
+.cat.live{border:2px solid var(--ink)}
+.cat:hover{border-color:var(--ink)}
+.cat .t{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cat b{font-family:var(--display);font-weight:800;font-size:1.25rem;text-transform:uppercase;line-height:1.05}
+.cat small{color:var(--muted);font-size:.86rem;line-height:1.4}
+.pill{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap;border:1px solid var(--line);color:var(--muted)}
+.pill.live{background:var(--good);color:#fff;border-color:var(--good)}
+.pill.quote{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;counter-reset:s}
+.steps > div{display:grid;gap:8px;border-top:3px solid var(--ink);padding-top:12px}
+.steps > div::before{counter-increment:s;content:"Step " counter(s);font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+.cta{background:var(--stamp-bg);color:var(--stamp-ink);border-radius:12px;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.cta p{color:var(--stamp-ink);opacity:.82}
+
+/* section pages */
+.pagehead{padding-block:40px 8px;display:grid;gap:14px}
+.crumb{font-size:.88rem;color:var(--muted)}
+.crumb a{color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h3{font-size:1.3rem}
+.card .use{font-size:.9rem;color:var(--muted)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.92rem}
+.kv dt{font-weight:700}
+.kv dd{margin:0;color:var(--muted)}
+.callout{border-left:5px solid var(--accent);background:var(--surface);padding:14px 16px;border-radius:0 8px 8px 0;display:grid;gap:6px}
+.callout b{font-family:var(--display);text-transform:uppercase;font-size:1.15rem;letter-spacing:.01em}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:36rem;font-size:.93rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+.note{font-size:.86rem;color:var(--muted)}
+ul.clean{margin:0;padding-left:1.1em;display:grid;gap:6px;max-width:65ch}
+
+/* finder */
+.finder{background:var(--surface);border:2px solid var(--ink);border-radius:10px;padding:20px;display:grid;gap:16px}
+.q{display:grid;gap:8px}
+.q > span{font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts label{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:7px;padding:7px 11px;cursor:pointer;font-size:.93rem}
+.opts input{accent-color:var(--ink)}
+.opts label:has(input:checked){border-color:var(--ink);background:var(--surface-2);font-weight:600}
+.result{background:var(--stamp-bg);color:var(--stamp-ink);border-radius:8px;padding:16px;display:grid;gap:6px}
+.result b{font-family:var(--display);font-size:1.6rem;text-transform:uppercase;line-height:1.05}
+.result p{color:var(--stamp-ink);opacity:.85}
+
+/* sizing diagram */
+.sizefig{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.sizefig .card{text-align:left}
+.sizefig code{font-family:var(--mono);font-size:1.25rem;font-weight:700}
+.parts{display:flex;flex-wrap:wrap;gap:4px;font-family:var(--mono);font-weight:700;font-size:1.2rem}
+.parts span{padding:2px 6px;border-radius:4px;background:var(--surface-2)}
+.parts span.hl{background:var(--accent);color:var(--accent-ink)}
+
+/* dealers */
+.dealer{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+.dealer .meta{font-size:.88rem;color:var(--muted)}
+.sample{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--line);padding:2px 6px;border-radius:4px}
+.aff{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border:1px dashed var(--line);border-radius:8px;padding:12px 14px;background:var(--surface)}
+
+/* decoder output */
+.out{display:grid;gap:12px}
+.out .head{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.out .head .stamp{font-size:1.3rem}
+.decode{display:grid;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.decode div{display:grid;grid-template-columns:7.5rem 1fr;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.decode div:last-child{border-bottom:0}
+.decode code{font-family:var(--mono);font-weight:700;background:var(--accent);color:var(--accent-ink);padding:1px 6px;border-radius:4px;justify-self:start;height:fit-content}
+.decode span{min-width:0}
+.decode span small{display:block;color:var(--muted);font-size:.85rem}
+.err{border:1.5px solid var(--line);border-radius:8px;padding:14px;background:var(--surface)}
+
+/* form */
+form.quote{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field{display:grid;gap:5px;min-width:0}
+.field label{font-weight:700;font-size:.92rem}
+.field .hint{font-size:.8rem;color:var(--muted)}
+.full{grid-column:1/-1}
+.thanks{border:2px solid var(--good);border-radius:10px;padding:20px;background:var(--surface);display:grid;gap:10px}
+.thanks h3{color:var(--good)}
+
+.price{display:grid;gap:6px}
+.price .amt{font-family:var(--display);font-weight:900;font-size:2.2rem;line-height:1}
+.copyrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.copyrow code{font-family:var(--mono);font-weight:700;user-select:all}
+
+footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--muted);font-size:.86rem}
+footer .wrap{display:grid;gap:10px}
+
+/* category bar */
+.catbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.catbar .wrap{display:flex;flex-wrap:wrap;gap:4px 22px;padding-block:8px}
+.cg{display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.cgl{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-right:4px;white-space:nowrap}
+.catbar a,.catbar .soon{font-size:.85rem;font-weight:600;padding:4px 8px;border-radius:999px;white-space:nowrap;text-decoration:none}
+.catbar a{color:var(--ink)}
+.catbar a:hover{background:var(--surface-2)}
+.catbar a[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
+.catbar .soon{color:var(--muted);font-weight:400;opacity:.75;cursor:default}
+.cgh{grid-column:1/-1;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;padding-top:10px;border-top:1px solid var(--line);margin-top:4px}
+.cgh:first-child{border-top:0;margin-top:0;padding-top:0}
+@media (max-width:760px){
+  .catbar .wrap{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .catbar .wrap::-webkit-scrollbar{display:none}
+  .cg{flex-wrap:nowrap}
+}
+/* request form */
+.rqbox{border:2px dashed var(--line);border-radius:10px;background:var(--surface);padding:18px;display:grid;gap:12px}
+.rqbox > b{font-family:var(--display);text-transform:uppercase;font-size:1.35rem;letter-spacing:.01em}
+.rqbox form{display:grid;gap:12px}
+.rqout{display:grid;gap:10px}
+.rqout:empty{display:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.rqcta{display:flex;justify-content:space-between;align-items:center;gap:12px 20px;flex-wrap:wrap;border:2px dashed var(--line);border-radius:10px;background:var(--surface);padding:16px 18px}
+.rqcta > div{display:grid;gap:4px;min-width:0;flex:1 1 18rem}
+.rqcta b{font-family:var(--display);text-transform:uppercase;font-size:1.3rem;letter-spacing:.01em}
+.rqcta p{color:var(--muted);font-size:.95rem}
+/* amazon shop */
+.shop{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:16px;display:grid;gap:10px}
+.shop h3{font-size:1.25rem}
+.shoplink{display:inline-flex;align-items:center;font-weight:600;font-size:.9rem;border:1.5px solid var(--ink);border-radius:999px;padding:6px 12px;text-decoration:none;color:var(--ink)}
+.shoplink::after{content:"\2197";margin-left:6px;font-size:.85em}
+.shoplink:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
+/* caution + legal */
+:root{--warn:#A8381C}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--warn:#F08766}}
+:root[data-theme="dark"]{--warn:#F08766}
+.warn{border:2px solid var(--warn);background:var(--surface);border-radius:8px;padding:16px;display:grid;gap:8px}
+.warn > b{font-family:var(--display);text-transform:uppercase;font-size:1.2rem;color:var(--warn);letter-spacing:.01em}
+.gate{border:2px dashed var(--line);border-radius:8px;padding:16px;display:grid;gap:10px;background:var(--surface)}
+.gate > b{font-family:var(--display);text-transform:uppercase;font-size:1.2rem}
+.ack{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;line-height:1.45;max-width:70ch}
+.ack input{margin-top:.25em;flex:none;width:18px;height:18px;accent-color:var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;filter:none}
+.xref{border-left:5px solid var(--warn);background:var(--surface);padding:12px 14px;border-radius:0 8px 8px 0;display:grid;gap:6px}
+.xref p{font-size:.92rem;color:var(--muted)}
+.legal{display:grid;gap:18px;max-width:70ch}
+.legal > div{display:grid;gap:6px}
+.legal h3{font-size:1.2rem}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;padding-top:28px}
+  .steps,.grid2,.grid3,.sizefig,.fgrid{grid-template-columns:1fr}
+  .cta{grid-template-columns:1fr}
+  .top .wrap{gap:8px}
+  .nav{margin-left:0;width:100%}
+  .decode div{grid-template-columns:1fr;gap:4px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .view{animation:in .25s ease-out}
+  @keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+</style>
+<meta name="robots" content="noindex, nofollow">
+<title>Can&#x27;t Find Your Tire? We&#x27;ll Help</title>
+<meta name="description" content="Tell us what your tire goes on, and we&#x27;ll show shopping options right away and help track it down.">
+<link rel="canonical" href="https://tiresforanything.com/find-my-tire/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tires for Anything">
+<meta property="og:title" content="Can&#x27;t Find Your Tire? We&#x27;ll Help">
+<meta property="og:description" content="Tell us what your tire goes on, and we&#x27;ll show shopping options right away and help track it down.">
+<meta property="og:url" content="https://tiresforanything.com/find-my-tire/">
+<meta property="og:image" content="https://tiresforanything.com/og/default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://tiresforanything.com/"}, {"@type": "ListItem", "position": 2, "name": "Can't Find Your Tire? We'll Help", "item": "https://tiresforanything.com/find-my-tire/"}]}</script>
+</head>
+<body data-page="request">
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Tires for Anything home">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <circle cx="15" cy="15" r="13" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="3 2.2"/>
+        <circle cx="15" cy="15" r="5.5" fill="var(--accent)"/>
+      </svg>
+      <b>Tires for <span>Anything</span></b>
+    </a>
+    <nav class="nav" aria-label="Site">
+      <a href="/">All tires</a>
+      <a href="/tire-size-decoder/">Size decoder</a>
+      <a href="/blog/">Blog</a>
+      <a href="/tire-quotes/">Get quotes</a>
+      <a href="/for-dealers/">For dealers</a>
+    </nav>
+  </div>
+</header>
+<nav class="catbar" aria-label="Tire categories"><div class="wrap" id="catbar"><div class="cg"><span class="cgl">Small wheels</span><a href="/bike-tires/">Bicycles &amp; e-bikes</a><a href="/wheelchair-mobility-scooter-tires/">Mobility &amp; medical</a><a href="/rc-toy-ride-on-tires/">Toys, RC &amp; ride-ons</a><a href="/lawn-garden-tires/">Lawn &amp; garden</a><a href="/go-kart-tires/">Go-karts &amp; karting</a></div><div class="cg"><span class="cgl">Powersports &amp; racing</span><a href="/motorcycle-tires/">Motorcycles</a><a href="/race-car-tires/">Race cars</a><a href="/atv-utv-golf-cart-tires/">ATV, UTV &amp; golf</a></div><div class="cg"><span class="cgl">On the road</span><a href="/passenger-car-tires/">Passenger cars</a><a href="/light-truck-suv-tires/">Light trucks &amp; SUVs</a><a href="/trailer-tires/">Trailers</a><a href="/rv-motorhome-tires/">RV &amp; motorhome</a><a href="/vintage-antique-tires/">Vintage &amp; antique</a></div><div class="cg"><span class="cgl">Heavy duty</span><a href="/forklift-tires/">Forklift &amp; industrial</a><a href="/semi-truck-tires/">Semi &amp; commercial</a><a href="/farm-tractor-tires/">Farm &amp; ag</a><a href="/construction-skid-steer-tires/">Construction &amp; OTR</a><a href="/military-truck-tires/">Military &amp; specialty</a></div><div class="cg"><span class="cgl">Aircraft</span><a href="/aircraft-tires/">Aviation</a></div></div></nav>
+<div class="proto"><div class="wrap">Early preview. New guides and tire sizes are being added every week.</div></div>
+
+<main>
+
+<section class="view" id="v-request" data-view="request">
+  <div class="wrap pagehead">
+    <div class="crumb"><a href="/">All tires</a> / Can't find your tire?</div>
+    <span class="eyebrow">Tell us what you need</span>
+    <h1>Can't find your tire?</h1>
+    <p class="lede">Tell us what you're running. We'll show you shopping options right away, and look at adding it to the site.</p>
+    <p><a href="/" id="rq-back">Back to all tires</a></p>
+  </div>
+  <div class="wrap stack"><div class="rqbox" id="rq-box"></div></div>
+</section>
+
+<section class="view" id="v-decoder" data-view="decoder" hidden>
+  <div class="wrap pagehead">
+    <div class="crumb"><a href="/">All tires</a> / Size decoder</div>
+    <span class="eyebrow">Tool</span>
+    <h1>Tire size decoder</h1>
+    <p class="lede">Type the size molded on the sidewall. The decoder figures out which sizing system it uses and explains each part.</p>
+  </div>
+  <div class="wrap stack">
+    <div class="quick">
+      <label for="dec-code">Tire size</label>
+      <div class="row">
+        <input class="code" id="dec-code" type="text" value="P225/50R17 98V" autocomplete="off" style="flex:1 1 12rem">
+        <button class="btn yellow" id="dec-go" type="button">Decode</button>
+      </div>
+      <div class="chips" aria-label="Example sizes">
+        <button class="chip" type="button" data-code="P225/50R17 98V">Car</button>
+        <button class="chip" type="button" data-code="LT275/65R18 123/120S">Light truck</button>
+        <button class="chip" type="button" data-code="33x12.50R15">Off-road</button>
+        <button class="chip" type="button" data-code="11R22.5">Semi</button>
+        <button class="chip" type="button" data-code="IF 480/80R46">Tractor</button>
+        <button class="chip" type="button" data-code="18.4-38">Tractor (bias)</button>
+        <button class="chip" type="button" data-code="18x7x12-1/8">Forklift press-on</button>
+        <button class="chip" type="button" data-code="7.00-12">Forklift pneumatic</button>
+        <button class="chip" type="button" data-code="15x6.0-6">Aircraft</button>
+        <button class="chip" type="button" data-code="26x6.6">Jet</button>
+        <button class="chip" type="button" data-code="25x8-12">ATV</button>
+        <button class="chip" type="button" data-code="180/60R16">Gold Wing rear</button>
+        <button class="chip" type="button" data-code="195/55R16">Car 195/55R16</button>
+        <button class="chip" type="button" data-code="ST205/75R15">Trailer</button>
+        <button class="chip" type="button" data-code="20.5R25">Wheel loader</button>
+        <button class="chip" type="button" data-code="12-16.5">Skid steer</button>
+        <button class="chip" type="button" data-code="20x10.00-8">Riding mower</button>
+        <button class="chip" type="button" data-code="4.10/3.50-4">Wheelbarrow</button>
+        <button class="chip" type="button" data-code="700x28c">Road bike</button>
+        <button class="chip" type="button" data-code="29x2.4">Mountain bike</button>
+      </div>
+    </div>
+    <div class="out" id="dec-out" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="view" id="v-quote" data-view="quote" hidden>
+  <div class="wrap pagehead">
+    <div class="crumb"><a href="/">All tires</a> / Get quotes</div>
+    <span class="eyebrow">Free · no obligation</span>
+    <h1>Get tire quotes</h1>
+    <p class="lede">For tires too big to mount yourself. Tell us what you're running and where, and we'll match you with up to three dealers who can supply and install it.</p>
+  </div>
+  <div class="wrap stack">
+    <form class="quote" id="quote-form" novalidate>
+      <div class="fgrid">
+        <div class="field"><label for="q-cat">Equipment type</label>
+          <select id="q-cat" required>
+            <option>Forklift</option><option>Farm &amp; ag</option><option>Construction / OTR</option><option>Commercial truck</option><option>RV &amp; motorhome</option><option>Military &amp; specialty</option><option>Aviation</option><option>Other</option>
+          </select></div>
+        <div class="field"><label for="q-make">Make and model</label><input id="q-make" type="text" placeholder="e.g. Toyota 8FGCU25" required></div>
+        <div class="field"><label for="q-size">Tire size</label><input class="code" id="q-size" type="text" placeholder="e.g. 21x7x15" required><span class="hint">From the sidewall. Leave blank if unsure.</span></div>
+        <div class="field"><label for="q-qty">How many tires</label><input id="q-qty" type="number" min="1" value="4" required></div>
+        <div class="field"><label for="q-when">Needed by</label>
+          <select id="q-when"><option>As soon as possible</option><option>Within 2 weeks</option><option>This month</option><option>Just pricing for now</option></select></div>
+        <div class="field"><label for="q-zip">ZIP code</label><input id="q-zip" type="text" inputmode="numeric" placeholder="e.g. 46706" required><span class="hint">So we match dealers who serve your area.</span></div>
+        <div class="field full"><label for="q-notes">Anything else?</label><textarea id="q-notes" rows="3" placeholder="e.g. Need non-marking, on-site install if possible"></textarea></div>
+        <div class="field"><label for="q-name">Your name</label><input id="q-name" type="text" required></div>
+        <div class="field"><label for="q-co">Company (optional)</label><input id="q-co" type="text"></div>
+        <div class="field"><label for="q-email">Email</label><input id="q-email" type="email" required></div>
+        <div class="field"><label for="q-phone">Phone (optional)</label><input id="q-phone" type="tel"></div>
+      </div>
+      <label class="ack" for="q-consent"><input type="checkbox" id="q-consent"> I agree that Tires for Anything may share this request and my contact details with up to three matching dealers, and I accept the <a href="/terms/">terms and disclaimers</a> and <a href="/privacy/">privacy policy</a>.</label>
+      <p class="note" id="q-err" role="alert"></p>
+      <div class="row"><button class="btn yellow" type="submit">Request quotes</button><span class="note" style="align-self:center">Your info goes only to the dealers matched to this request.</span></div>
+    </form>
+    <div class="thanks" id="quote-thanks" hidden>
+      <h3>Request received</h3>
+      <p id="thanks-text"></p>
+      <div class="row"><button class="btn ghost" type="button" id="quote-again">Start another request</button></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b style="font-family:var(--display);text-transform:uppercase;font-size:1.1rem;color:var(--ink)">Tires for Anything</b> · tiresforanything.com</div>
+    <div class="row" style="gap:16px"><a href="/blog/">Blog</a><a href="/about/">About</a><a href="/privacy/">Privacy policy</a><a href="/terms/">Terms and disclaimers</a><a href="/for-dealers/">For dealers</a><a href="#request">Can't find your tire?</a></div>
+    <p><b>Safety notice:</b> Information on this site is general and educational. It is not professional, mechanical or aviation advice, and it doesn't replace your manufacturer's specifications or a qualified technician. You are responsible for verifying any tire before you buy, install or use it. <a href="/terms/">Read the full terms and disclaimers</a>.</p>
+    <p>Some links on this site are affiliate links. If you buy through them, we may earn a commission at no extra cost to you. Featured dealers pay for placement, and they're always labeled. We never earn commissions on non-standard fitments. As an Amazon Associate I earn from qualifying purchases.</p>
+    <p>Product and company names are trademarks of their owners, used for identification only. Tires for Anything is not affiliated with any manufacturer named on this site.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Each view has its own real page. Tool views (decoder, quote, request) also live on every page so in-page links work.
+  var PAGES={home:"/",cars:"/passenger-car-tires/",trucks:"/light-truck-suv-tires/",forklift:"/forklift-tires/",aviation:"/aircraft-tires/",motorcycle:"/motorcycle-tires/",farm:"/farm-tractor-tires/",semi:"/semi-truck-tires/",trailer:"/trailer-tires/",construction:"/construction-skid-steer-tires/",lawn:"/lawn-garden-tires/",atv:"/atv-utv-golf-cart-tires/",rv:"/rv-motorhome-tires/",mobility:"/wheelchair-mobility-scooter-tires/",toys:"/rc-toy-ride-on-tires/",motorsport:"/go-kart-tires/",racing:"/race-car-tires/",bicycles:"/bike-tires/",vintage:"/vintage-antique-tires/",military:"/military-truck-tires/",decoder:"/tire-size-decoder/",quote:"/tire-quotes/",request:"/find-my-tire/",partners:"/for-dealers/",legal:"/terms/",about:"/about/",privacy:"/privacy/"};
+  var TOOLS={decoder:1,quote:1,request:1};
+  function pageHref(v){return TOOLS[v]?"#"+v:(PAGES[v]||"/");}
+  var PAGE_VIEW=document.body.getAttribute("data-page")||"home";
+  // Missing elements (sections that live on other pages) get a throwaway stand-in so nothing breaks.
+  function $id(id){return document.getElementById(id)||document.createElement("div");}
+  var PREVIEW=true;
+  var SHOPQ={forklift:"forklift tire service",farm:"tractor tire service",construction:"skid steer tire service",atv:"ATV tire shop",aviation:"aircraft maintenance shop",military:"truck tire shop",motorcycle:"motorcycle tire shop",vintage:"classic car tire shop",trailer:"trailer tire shop",rv:"RV tire service",racing:"performance tire shop"};
+  // Tires for FAA-certificated aircraft aren't sold on Amazon, so aircraft tire buttons open the quote form.
+  function airQuote(label,size){var a=document.createElement("a");a.className="shoplink";a.href="#quote";a.setAttribute("data-cat","Aviation");if(size)a.setAttribute("data-size",String(size).trim());a.textContent=label;return a;}
+  var QCAT={forklift:"Forklift",farm:"Farm",construction:"Construction",semi:"Commercial",military:"Military",rv:"RV",aviation:"Aviation"};
+  /* ---------- categories ---------- */
+  var GROUPS=[["small","Small wheels"],["power","Powersports & racing"],["road","On the road"],["heavy","Heavy duty"],["air","Aircraft"]];
+  var CATS=[
+    {g:"small",id:"bicycles",n:"Bicycles & e-bikes",d:"Road, gravel, mountain, BMX, fat, kids",live:true,m:"shop"},
+    {g:"small",id:"mobility",n:"Mobility & medical",d:"Wheelchairs, mobility scooters, carts",live:true,m:"shop"},
+    {g:"small",id:"toys",n:"Toys, RC & ride-ons",d:"RC cars and planes, ride-on cars, scooters, skateboards",live:true,m:"shop"},
+    {g:"small",id:"lawn",n:"Lawn & garden",d:"Riding mower, zero-turn, wheelbarrow, flat-free",live:true,m:"shop"},
+    {g:"small",id:"motorsport",n:"Go-karts & karting",d:"Sprint, cadet and rental karts",live:true,m:"shop"},
+    {g:"power",id:"motorcycle",n:"Motorcycles",d:"Touring, cruiser, sport; stock sizes and darkside cautions",live:true,m:"shop"},
+    {g:"power",id:"racing",n:"Race cars",d:"Autocross, track days, road racing, drag, dirt oval",live:true,m:"shop"},
+    {g:"power",id:"atv",n:"ATV, UTV & golf",d:"Four-wheelers, side-by-sides, golf carts",live:true,m:"shop"},
+    {g:"road",id:"cars",n:"Passenger cars",d:"All-season, winter, performance, EV, run-flat",live:true,m:"shop"},
+    {g:"road",id:"trucks",n:"Light trucks & SUVs",d:"Highway, all-terrain, mud-terrain, LT load ranges",live:true,m:"shop"},
+    {g:"road",id:"trailer",n:"Trailers",d:"ST tires for boat, utility, horse and camper",live:true,m:"shop"},
+    {g:"road",id:"rv",n:"RV & motorhome",d:"Class A, B and C coaches",live:true,m:"shop"},
+    {g:"road",id:"vintage",n:"Vintage & antique",d:"Bias-ply, whitewall, beaded-edge, wagon",live:true,m:"shop"},
+    {g:"heavy",id:"forklift",n:"Forklift & industrial",d:"Press-on, pneumatic, solid, foam-filled, non-marking",live:true,m:"quote"},
+    {g:"heavy",id:"semi",n:"Semi & commercial",d:"Steer, drive, trailer, wide-base, retreads",live:true,m:"quote"},
+    {g:"heavy",id:"farm",n:"Farm & ag",d:"R-1 to R-4, IF/VF, implement, sprayer, combine",live:true,m:"quote"},
+    {g:"heavy",id:"construction",n:"Construction & OTR",d:"Loader, grader, haul truck, skid steer",live:true,m:"quote"},
+    {g:"heavy",id:"military",n:"Military & specialty",d:"Surplus trucks, run-flats, CTIS, ground support",live:true,m:"quote"},
+    {g:"air",id:"aviation",n:"Aviation",d:"Type III, three-part and Type VII; retreads, tundra",live:true,m:"quote"}
+  ];
+  var catbar=$id("catbar");catbar.textContent="";
+  GROUPS.forEach(function(gr){
+    var wrap=document.createElement("div");wrap.className="cg";
+    var lab=document.createElement("span");lab.className="cgl";lab.textContent=gr[1];wrap.appendChild(lab);
+    CATS.forEach(function(c){
+      if(c.g!==gr[0])return;
+      var el=document.createElement(c.live?"a":"span");
+      el.textContent=c.n;
+      if(c.live){el.href=pageHref(c.id);}else{el.className="soon";el.title="Coming soon";}
+      wrap.appendChild(el);
+    });
+    catbar.appendChild(wrap);
+  });
+  var catsEl=$id("cats"),lastG="";catsEl.textContent="";
+  CATS.forEach(function(c){
+    if(c.g!==lastG){lastG=c.g;var gh=document.createElement("div");gh.className="cgh";GROUPS.forEach(function(gr){if(gr[0]===c.g)gh.textContent=gr[1];});catsEl.appendChild(gh);}
+    var a=document.createElement(c.live?"a":"div");
+    a.className="cat"+(c.live?" live":"");
+    if(c.live)a.href=pageHref(c.id);
+    var t=document.createElement("div");t.className="t";
+    var b=document.createElement("b");b.textContent=c.n;
+    var p=document.createElement("span");
+    p.className="pill"+(c.live?" live":"");p.textContent=c.live?"Open":"Soon";
+    t.appendChild(b);t.appendChild(p);
+    var s=document.createElement("small");s.textContent=c.d;
+    var m=document.createElement("span");
+    m.className="pill"+(c.m==="quote"?" quote":"");m.style.justifySelf="start";
+    m.textContent=c.m==="quote"?"Quotes":"Shop";
+    a.appendChild(t);a.appendChild(s);a.appendChild(m);
+    catsEl.appendChild(a);
+  });
+
+  /* ---------- sample dealers ---------- */
+  var DEALERS={
+    forklift:[
+      {n:"Example Material Handling Co.",l:"Fort Wayne, IN",x:"On-site press service · Cushion & pneumatic",f:true},
+      {n:"Sample Industrial Tire Supply",l:"Ships nationwide",x:"Solid pneumatic · Non-marking · Poly",f:false}
+    ],
+    aviation:[
+      {n:"Example Aero Supply",l:"Ships nationwide",x:"New & retread · Tubes · Type III and three-part",f:true},
+      {n:"Sample Field Maintenance",l:"Northeast Indiana",x:"Tire change & install at your hangar",f:false}
+    ],
+    farm:[
+      {n:"Example Ag Tire Service",l:"DeKalb County, IN",x:"On-farm service trucks · Radial, IF/VF, duals",f:true},
+      {n:"Sample Implement Tire Co.",l:"Ships regionally",x:"Implement, sprayer and grain cart tires",f:false}
+    ],
+    semi:[
+      {n:"Example Fleet Tire Center",l:"Fort Wayne, IN",x:"24/7 road service · New & retread",f:true},
+      {n:"Sample Commercial Tire Supply",l:"Indianapolis, IN",x:"Steer, drive & trailer · Wide-base singles",f:false}
+    ],
+    construction:[
+      {n:"Example OTR Tire Service",l:"Serves Indiana & Ohio",x:"Loader, grader & haul truck · Field service",f:true},
+      {n:"Sample Skid Steer Tires",l:"Ships nationwide",x:"Pneumatic, foam-filled & solid",f:false}
+    ]
+  };
+  var DCAT={forklift:"Forklift",aviation:"Aviation",farm:"Farm",semi:"Commercial",construction:"Construction"};
+  Object.keys(DEALERS).forEach(function(k){
+    var host=$id("dealers-"+k);
+    if(PREVIEW){var pn=document.createElement("p");pn.className="note";pn.textContent="We're lining up dealers in this category now. Send a quote request and we'll match you with one.";host.appendChild(pn);return;}
+    DEALERS[k].forEach(function(d){
+      var c=document.createElement("div");c.className="card dealer";
+      if(d.f)c.style.border="2px solid var(--ink)";
+      var left=document.createElement("div");left.style.display="grid";left.style.gap="4px";left.style.minWidth="0";
+      var tags=document.createElement("div");tags.className="row";tags.style.gap="6px";
+      if(d.f){var fp=document.createElement("span");fp.className="pill quote";fp.textContent="Featured";tags.appendChild(fp);}
+      var sp=document.createElement("span");sp.className="sample";sp.textContent="Sample listing";tags.appendChild(sp);
+      var h=document.createElement("h3");h.textContent=d.n;h.style.fontSize="1.2rem";
+      var m=document.createElement("div");m.className="meta";m.textContent=d.l+" · "+d.x;
+      left.appendChild(tags);left.appendChild(h);left.appendChild(m);
+      var btn=document.createElement("a");btn.className="btn ghost";btn.href="#quote";btn.textContent="Quote";
+      btn.setAttribute("data-cat",DCAT[k]);
+      c.appendChild(left);c.appendChild(btn);host.appendChild(c);
+    });
+  });
+
+  /* ---------- forklift finder ---------- */
+  var finder=$id("finder"),fout=$id("finder-out");
+  function val(n){var e=finder.querySelector('input[name="'+n+'"]:checked');return e?e.value:"";}
+  function runFinder(){
+    var fr=val("frame"),w=val("where"),need=val("need"),t,why;
+    if(fr==="cushion"){
+      if(need==="marks"){t="Non-marking press-on";why="Same fit as your current tires, without the black streaks.";}
+      else if(w!=="indoor"){t="Traction press-on";why="Cushion trucks aren't built for rough ground, but a grooved traction tread helps on ramps and the odd trip outside. If you're outside a lot, a pneumatic truck is the real fix.";}
+      else if(need==="ride"){t="Soft-compound press-on";why="A softer rubber takes some of the jolt out of floor joints and dock plates.";}
+      else{t="Smooth press-on rubber";why="The workhorse for indoor concrete. Longest life for the money.";}
+    }else{
+      if(need==="flats"||w==="rough"){t="Solid pneumatic";why="Same rim as your air tires, and nothing on the ground can flatten it.";}
+      else if(need==="ride"){t="Air pneumatic";why="Nothing rides softer. Keep the pressure checked, and keep a spare if flats are a risk.";}
+      else if(need==="marks"){t="Non-marking solid pneumatic";why="Puncture-proof, and gray rubber keeps indoor floors clean on the days you come inside.";}
+      else{t=w==="mixed"?"Solid pneumatic or foam-filled":"Air pneumatic";why=w==="mixed"?"Both stop downtime from flats. Solid lasts longer, foam-filled rides a little softer.":"Good grip and comfort at the lowest price.";}
+    }
+    fout.textContent="";
+    var e=document.createElement("span");e.className="eyebrow";e.style.color="var(--stamp-ink)";e.style.opacity=".7";e.textContent="Our pick";
+    var b=document.createElement("b");b.textContent=t;
+    var p=document.createElement("p");p.textContent=why;
+    var a=document.createElement("a");a.className="btn yellow";a.href="#quote";a.setAttribute("data-cat","Forklift");a.textContent="Get quotes for this tire";a.style.justifySelf="start";a.style.marginTop="6px";
+    fout.appendChild(e);fout.appendChild(b);fout.appendChild(p);fout.appendChild(a);
+  }
+  finder.addEventListener("change",runFinder);runFinder();
+
+  /* ---------- motorcycle data + darkside cross-reference ---------- */
+  var MOTO=[
+    {k:"gl1500",n:"Honda Gold Wing GL1500 (1988 to 2000)",f:"130/70-18",r:"160/80-16"},
+    {k:"gl1800a",n:"Honda Gold Wing GL1800 (2001 to 2017)",f:"130/70R18",r:"180/60R16"},
+    {k:"gl1800b",n:"Honda Gold Wing (2018 and later)",f:"130/70-18",r:"200/55-16"},
+    {k:"valk",n:"Honda Valkyrie GL1500C (1997 to 2003)",f:"150/80-17",r:"180/70-16"}
+  ];
+  var SRC={
+    gwd:{t:"GoldwingDocs",u:"https://goldwingdocs.com/forum/viewtopic.php?p=406601"},
+    vf1:{t:"Valkyrie Riders",u:"https://www.valkyrieforum.com/bbs/index.php?msg=92557"},
+    vf2:{t:"Valkyrie Riders",u:"https://www.valkyrieforum.com/bbs/index.php/topic,72248.0.html"}
+  };
+  var XREF=[
+    {bike:"gl1500",pos:"Rear",type:"Car tire (darkside)",alt:"175R16 taxi-type, 6-ply",say:"Some riders report rubbing on the inner fender at full suspension travel.",src:"gwd"},
+    {bike:"gl1500",pos:"Rear",type:"Car tire (darkside)",alt:"195/60R16",say:"One rider reports slight fender rub and a soft feel in hard cornering.",src:"gwd"},
+    {bike:"gl1500",pos:"Rear",type:"Car tire (darkside)",alt:"185/75R16 van tire, 8-ply",say:"One rider reports fender scrub under heavy loads with a trailer and passenger.",src:"gwd"},
+    {bike:"gl1800a",pos:"Rear",type:"Car tire (darkside)",alt:"195/55R16 run-flat",say:"The most commonly reported choice. Some riders run 60-series or 205 widths.",src:"gwd"},
+    {bike:"gl1800b",pos:"Rear",type:"",alt:"No rider reports collected yet",say:"",src:""},
+    {bike:"valk",pos:"Rear",type:"Car tire (darkside)",alt:"195/55R16, 205/60R16, 205/65R16",say:"One rider reports engine RPM dropping about 200 with the taller 205/65.",src:"vf1"},
+    {bike:"valk",pos:"Front",type:"Rear motorcycle tire, reversed (double darkside)",alt:"Rear-pattern tire near 150/80-17; one rider reports a 130/70-17 rear",say:"Mounted with the rotation arrow reversed.",src:"vf2"}
+  ];
+  function bikeOf(k){for(var i=0;i<MOTO.length;i++){if(MOTO[i].k===k)return MOTO[i];}return null;}
+  function nz(s){var m=String(s).toUpperCase().replace(/\s+/g,"").match(/(\d{3})\/(\d{2})(?:ZR|R|-|B|D)?(\d{2})/);return m?(+m[1])+"/"+(+m[2])+"-"+(+m[3]):"";}
+  function cell(tr,txt,cls){var c=document.createElement("td");if(cls){var s=document.createElement("span");s.className=cls;s.textContent=txt;c.appendChild(s);}else{c.textContent=txt;}tr.appendChild(c);return c;}
+  var MSRC={
+    mich:"https://www.michelinman.com/motorcycle/manufacturers",
+    gwd:"https://goldwingdocs.com/forum/viewtopic.php?p=147640",
+    mcom:"https://www.motorcycle.com/specs/honda/touring/2018/gold-wing/base/detail.html",
+    vf:"https://www.valkyrieforum.com/bbs/index.php?msg=92557"
+  };
+  var MC=[
+    {mk:"Harley-Davidson",md:"Street Glide (FLHX)",y:[2016,2018],f:"130/60B19",r:"180/65B16",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/harley-davidson/flhx-street-glide/2018/1584/130---60-B-19-M---C-61H-F-TL---TT_180---65-B-16-M---C-81H-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Road Glide (FLTR)",y:[2012],f:"130/80B17",r:"180/65B16",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/harley-davidson/fltr-road-glide/2012/1584/130---80-B-17-M---C-65H-F-TL---TT_180---65-B-16-M---C-81H-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Fat Boy (FLSTF / FLFBS)",y:[2008,2015,2020],f:"140/75R17",r:"200/55R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2020/harley-davidson/flstfbs-fat-boy/1801/140---75-R-17-67V-F-TL_200---55-R-17-78V-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Sportster Iron 883 (XL883N)",y:[2010,2022],f:"100/90B19",r:"150/80B16",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2022/harley-davidson/xl-883-n-sportster-iron/883/100---90-B-19-M---C-57H-F-TL---TT_150---80-B-16-M---C-77H-REINF-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Sportster Forty-Eight (XL1200X)",y:[2020,2025],f:"130/90B16",r:"150/80B16",s:"https://en.michelin.co.th/motorbike/browse-tyres/by-vehicle/harley-davidson/xl-1200x-forty-eight/2020/1202/130---90-B-16-73H-F_150---80-B-16-77H-R"},
+    {mk:"Harley-Davidson",md:"Sportster 1200 Custom (XL1200C)",y:[2014,2023],f:"130/90B16",r:"150/80B16",s:"https://www.michelin.ca/en/motorcycle/browse-tires/by-vehicle/harley-davidson/xl1200c-sportster-custom-cb/2014/1202/130---90-B-16-73H-REINF-F-TL---TT_150---80-B-16-77H-REINF-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Nightster (RH975)",y:[2022],f:"100/90B19",r:"150/80B16",s:"https://en.michelin.co.th/motorbike/browse-tyres/by-vehicle/harley-davidson/rh-975-nightster/2022/975/100---90-B-19-M---C-57H-F-TL_150---80-B-16-M---C-77H-R-TL"},
+    {mk:"Harley-Davidson",md:"Dyna Super Glide Custom (FXDC)",y:[2009],f:"100/90B19",r:"160/70B17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/harley-davidson/fxdc-dyna-super-glide-custom/2009/1690/100---90-B-19-M---C-57H-F-TL---TT_160---70-B-17-M---C-73V-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"CVO Breakout",y:[2013],f:"130/60B21",r:"240/40R18",s:"https://en.michelin.co.th/motorbike/browse-tyres/by-vehicle/harley-davidson/cvo-breakout/2013/1803/130---60-B-21-M---C-63H-F-TL_240---40-R-18-M---C-79V-R-TL"},
+    {mk:"Honda",md:"Gold Wing GL1500",y:[],f:"130/70-18",r:"160/80-16",s:"",note:"Not yet checked against the owner's manual"},
+    {mk:"Honda",md:"Gold Wing GL1800",y:[2001,2017],f:"130/70R18",r:"180/60R16",s:MSRC.gwd},
+    {mk:"Honda",md:"Gold Wing (new generation)",y:[2018],f:"130/70R18",r:"200/55R16",s:MSRC.mcom},
+    {mk:"Honda",md:"Africa Twin 1100",y:[2023],f:"90/90-21",r:"150/70R18",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/honda/africa-twin-1100/2023/1100/90---90-21-M---C-54H-F-TL_150---70-R-18-M---C-70H-R-TL"},
+    {mk:"Honda",md:"Grom",y:[2014,2023],f:"120/70-12",r:"130/70-12",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/honda/grom/2023/124/120---70-12-M---C-51L-F-TL_130---70-12-M---C-56L-R-TL"},
+    {mk:"Honda",md:"Valkyrie GL1500C",y:[],f:"150/80-17",r:"180/70-16",s:MSRC.vf,note:"Front size not yet checked against the owner's manual"},
+    {mk:"Yamaha",md:"MT-07",y:[2019,2022],f:"120/70ZR17",r:"180/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/yamaha/mt-07/2022/689/120---70-ZR-17-M---C-(58W)-F-TL_180---55-ZR-17-M---C-(73W)-R-TL"},
+    {mk:"Yamaha",md:"MT-09",y:[2024],f:"120/70ZR17",r:"180/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2024/yamaha/mt-09/890/120---70-ZR-17-M---C-(58W)-F-TL_180---55-ZR-17-M---C-(73W)-R-TL"},
+    {mk:"Yamaha",md:"Tracer 900 GT",y:[2020,2021],f:"120/70ZR17",r:"180/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/yamaha/tracer-900-gt/2021/847/120---70-ZR-17-(58W)-F_180---55-ZR-17-(73W)-R"},
+    {mk:"Yamaha",md:"YZF-R6",y:[2020],f:"120/70ZR17",r:"180/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2020/yamaha/yzf-r6/599/120---70-ZR-17-(58W)-F-TL_180---55-ZR-17-(73W)-R-TL"},
+    {mk:"Yamaha",md:"YZF-R1",y:[2025],f:"120/70ZR17",r:"190/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2025/yamaha/yzf-r1-abs/998/120---70-ZR-17-M---C-(58W)-F-TL_190---55-ZR-17-M---C-(75W)-R-TL"},
+    {mk:"Kawasaki",md:"Ninja 500 SE",y:[2025],f:"110/70R17",r:"150/60R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/kawasaki/ninja-500-se/2025/451/110---70-R-17-M---C-54H-F-TL_150---60-R-17-M---C-66H-R-TL"},
+    {mk:"Kawasaki",md:"Ninja 650",y:[2020,2025],f:"120/70ZR17",r:"160/60ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2025/kawasaki/ninja-650/649/120---70-ZR-17-M---C-(58W)-F-TL_160---60-ZR-17-M---C-(69W)-R-TL"},
+    {mk:"Kawasaki",md:"Vulcan S",y:[2023],f:"120/70R18",r:"160/60R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/kawasaki/vulcan-s/2023/650/120---70-R-18-M---C-59H-F_160---60-R-17-M---C-69H-R"},
+    {mk:"Kawasaki",md:"KLR 650",y:[2000,2018,2022,2025],f:"90/90-21",r:"130/80-17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/kawasaki/klr-650/2022/650/90---90-21-54S-F-TT_130---80-17-65S-R-TT",note:"Tube type"},
+    {mk:"Suzuki",md:"Hayabusa (GSX1300R)",y:[2002,2007],f:"120/70ZR17",r:"190/50ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/suzuki/gsx-r1300-hayabusa/2007/1300/120---70-ZR-17-M---C-(58W)-F-TL_190---50-ZR-17-M---C-(73W)-R-TL"},
+    {mk:"Suzuki",md:"V-Strom 650 (DL650)",y:[2025],f:"110/80R19",r:"150/70R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/suzuki/v-strom-dl650/2025/650/110---80-R-19-M---C-59H-F-TL---TT_150---70-R-17-M---C-69H-R-TL---TT"},
+    {mk:"BMW",md:"R 1250 GS",y:[2022,2023],f:"120/70R19",r:"170/60R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2022/bmw/r-1250-gs/1254/120---70-R-19-M---C-60V-F-TL---TT_170---60-R-17-M---C-72V-R-TL---TT"}
+  ];
+  function mcQ(size,pos){return size+" motorcycle tire "+pos;}
+  function mcShop(td,b){td.appendChild(amzLink("Front",mcQ(b.f,"front")));td.appendChild(document.createTextNode(" "));td.appendChild(amzLink("Rear",mcQ(b.r,"rear")));}
+  var mcMake=$id("mc-make"),mcModel=$id("mc-model"),mcYear=$id("mc-year"),mcOut=$id("mc-out");
+  function opt(sel,v,t){var o=document.createElement("option");o.value=v;o.textContent=t;sel.appendChild(o);}
+  var makes=[];MC.forEach(function(b){if(makes.indexOf(b.mk)<0)makes.push(b.mk);});makes.sort();
+  opt(mcMake,"","Choose a make");makes.forEach(function(m){opt(mcMake,m,m);});
+  function fillModels(){
+    mcModel.textContent="";opt(mcModel,"","Choose a model");
+    MC.forEach(function(b,i){if(b.mk===mcMake.value)opt(mcModel,String(i),b.md);});
+    mcModel.disabled=!mcMake.value;fillYears();
+  }
+  function fillYears(){
+    mcYear.textContent="";var b=MC[+mcModel.value];
+    if(!mcModel.value||!b){opt(mcYear,"","Choose a year");mcYear.disabled=true;showMc();return;}
+    mcYear.disabled=false;opt(mcYear,"","Any year");
+    var now=new Date().getFullYear()+1;for(var y=now;y>=1980;y--)opt(mcYear,String(y),String(y));
+    showMc();
+  }
+  function showMc(){
+    mcOut.textContent="";var b=mcModel.value?MC[+mcModel.value]:null;if(!b)return;
+    var yr=mcYear.value?+mcYear.value:0;
+    var h=document.createElement("h3");h.textContent=(yr?yr+" ":"")+b.mk+" "+b.md;mcOut.appendChild(h);
+    var g=document.createElement("div");g.className="grid2";
+    [["Front",b.f,"front"],["Rear",b.r,"rear"]].forEach(function(t){
+      var c=document.createElement("div");c.className="card";
+      var e=document.createElement("span");e.className="eyebrow";e.textContent=t[0]+" tire";
+      var z=document.createElement("span");z.className="stamp";z.style.fontSize="1.3rem";z.style.justifySelf="start";z.textContent=t[1];
+      var r=document.createElement("div");r.className="row";r.appendChild(amzLink("Shop "+t[2]+" tires on Amazon",mcQ(t[1],t[2])));
+      var d=document.createElement("button");d.type="button";d.className="btn ghost";d.textContent="Decode size";d.addEventListener("click",function(){decIn.value=t[1];location.hash="decoder";goDecode();});r.appendChild(d);
+      c.appendChild(e);c.appendChild(z);c.appendChild(r);g.appendChild(c);
+    });
+    mcOut.appendChild(g);
+    var n=document.createElement("p");n.className="note";
+    var checked=b.y.length?"Checked for "+b.y.join(", ")+".":"Not yet checked for a specific year.";
+    var warn=yr&&b.y.length&&b.y.indexOf(yr)<0?" We haven't checked "+yr+" yet. Sizes usually match across a generation, but confirm on your bike.":"";
+    n.textContent=checked+warn+(b.note?" "+b.note+".":"")+" As an Amazon Associate I earn from qualifying purchases.";
+    mcOut.appendChild(n);
+    var ip=document.createElement("p");ip.className="note";ip.appendChild(document.createTextNode("Most riders have a motorcycle shop mount and balance new tires. "));var il=document.createElement("a");il.href=mapsUrl("motorcycle tire shop");il.target="_blank";il.rel="noopener";il.textContent="Find a motorcycle tire shop near you";ip.appendChild(il);ip.appendChild(document.createTextNode("."));mcOut.appendChild(ip);
+    if(b.s){var sp=document.createElement("p");sp.className="note";var sa=document.createElement("a");sa.href=b.s;sa.target="_blank";sa.rel="noopener";sa.textContent="Source";sp.appendChild(sa);mcOut.appendChild(sp);}
+  }
+  mcMake.addEventListener("change",fillModels);mcModel.addEventListener("change",fillYears);mcYear.addEventListener("change",showMc);
+  fillModels();
+  var mcRows=$id("mc-rows"),mcFilter=$id("mc-filter"),mcNote=$id("mc-note");
+  function drawMc(){
+    var q=(mcFilter.value||"").toLowerCase().replace(/\s+/g,""),n=0;mcRows.textContent="";
+    MC.forEach(function(b){
+      var hay=(b.mk+b.md+b.f+b.r).toLowerCase().replace(/\s+/g,"");
+      if(q&&hay.indexOf(q)<0)return;n++;
+      var tr=document.createElement("tr");
+      cell(tr,b.mk+" "+b.md);cell(tr,b.y.length?b.y.join(", "):"Not yet checked");cell(tr,b.f,"stamp");cell(tr,b.r,"stamp");
+      var td=document.createElement("td");mcShop(td,b);tr.appendChild(td);tr.appendChild(installCell("motorcycle","shop",""));mcRows.appendChild(tr);
+    });
+    mcNote.textContent=n?n+" motorcycle"+(n===1?"":"s")+" shown.":"No match. ";
+    if(!n){var na=document.createElement("a");na.href="#request";na.setAttribute("data-rqcat","motorcycle");na.textContent="Tell us your bike and we'll add it";mcNote.appendChild(na);mcNote.appendChild(document.createTextNode("."));}
+  }
+  mcFilter.addEventListener("input",drawMc);drawMc();
+  var STOCK_IDX={},ALT_IDX={};
+  MC.forEach(function(b){[["Front",b.f],["Rear",b.r]].forEach(function(p){var k=nz(p[1]);if(k)(STOCK_IDX[k]=STOCK_IDX[k]||[]).push({n:b.mk+" "+b.md,p:p[0]});});});
+  [["195/55-16",["gl1800a","valk"]],["195/60-16",["gl1500"]],["185/75-16",["gl1500"]],["205/60-16",["valk"]],["205/65-16",["valk"]]].forEach(function(a){ALT_IDX[a[0]]=a[1].map(function(k){return bikeOf(k).n;});});
+
+  /* ---------- size decoder ---------- */
+  var LI={70:335,71:345,72:355,73:365,74:375,75:387,76:400,77:412,78:425,79:437,80:450,81:462,82:475,83:487,84:500,85:515,86:530,87:545,88:560,89:580,90:600,91:615,92:630,93:650,94:670,95:690,96:710,97:730,98:750,99:775,100:800,101:825,102:850,103:875,104:900,105:925,106:950,107:975,108:1000,109:1030,110:1060,111:1090,112:1120,113:1150,114:1180,115:1215,116:1250,117:1285,118:1320,119:1360,120:1400,121:1450,122:1500,123:1550,124:1600,125:1650,126:1700,127:1750,128:1800,129:1850,130:1900};
+  var SR={L:75,M:81,N:87,P:93,Q:99,R:106,S:112,T:118,U:124,H:130,V:149,W:168,Y:186};
+  var BSD={590:"26 x 1-3/8 (older 3-speed)",540:"24 x 1-3/8 (fraction size)",451:"20 x 1-3/8 (fraction size)",349:"16 x 1-3/8 (fraction size)",254:"14 inch",622:"700c / 29 inch",584:"650b / 27.5 inch",559:"26 inch mountain",571:"650c",507:"24 inch",406:"20 inch (BMX / kids)",305:"16 inch",203:"12 inch"};
+  function lbs(kg){return Math.round(kg*2.20462).toLocaleString();}
+  function frac(s){var m=s.match(/^(\d+)[-\s](\d+)\/(\d+)$/);if(m)return (+m[1]+ m[2]/m[3]);return parseFloat(s);}
+
+  function decode(raw){
+    var s=(raw||"").toUpperCase().replace(/\s+/g,"");
+    var m;
+    if(!s)return null;
+    // Metric radial: car / LT / ST / motorcycle / ag (IF/VF)
+    m=s.match(/^(IF|VF|P|LT|ST|T)?(\d{2,3})\/(\d{2})(ZR|R|D|B|-)(\d{2}(?:\.5)?)(\d{2,3}(?:\/\d{2,3})?)?([A-Z])?$/);
+    if(m){
+      var pre=m[1]||"",w=+m[2],ar=+m[3],con=m[4],rim=+m[5],load=m[6],spd=m[7];
+      var ag=(pre==="IF"||pre==="VF")||(w>=380&&rim>=24);
+      var moto=!pre&&!ag&&w<=200&&[17,18,19,21].indexOf(rim)>=0&&!load;
+      var small=!pre&&!ag&&rim<=12,heavy=!pre&&!ag&&(/\.5$/.test(m[5])||w>=315);
+      var kind=small?"Small vehicle metric (golf cart or UTV)":heavy?"Commercial, RV or military truck metric":ag?"Farm & ag metric radial":pre==="LT"?"Light truck metric":pre==="ST"?"Special trailer":pre==="T"?"Temporary spare":moto?"Metric (likely motorcycle)":"Passenger / metric radial";
+      var parts=[];
+      if(pre)parts.push([pre,{P:"Passenger car tire (P-metric)",LT:"Light truck tire, built for heavier loads and towing",ST:"Special trailer tire. For trailers only, never a tow vehicle",T:"Temporary spare. Drive on it only to get to a shop",IF:"Improved Flexion: carries 20% more load than a standard tire at the same pressure",VF:"Very high Flexion: carries 40% more load at the same pressure"}[pre]]);
+      parts.push([String(w),"Section width "+w+" mm ("+(w/25.4).toFixed(1)+" in) from sidewall to sidewall"]);
+      parts.push([String(ar),"Aspect ratio. Sidewall height is "+ar+"% of the width, about "+(w*ar/100/25.4).toFixed(1)+" in"]);
+      parts.push([con,{R:"Radial construction",ZR:"Radial, rated for very high speed",D:"Diagonal (bias-ply) construction",B:"Belted bias construction","-":"Bias-ply construction"}[con]]);
+      parts.push([String(m[5]),"Fits a "+m[5]+" in diameter wheel"]);
+      var dia=(w*ar/100*2/25.4+rim);
+      if(load){var li=load.split("/");var kg=LI[+li[0]];
+        parts.push([load,kg?("Load index: up to "+kg.toLocaleString()+" kg ("+lbs(kg)+" lb) per tire"+(li[1]?" in single use; the second number is the rating when run as duals":"")):"Load index. Look up the exact rating in a load table"]);}
+      if(spd)parts.push([spd,SR[spd]?("Speed rating: sustained speed up to "+SR[spd]+" mph"):"Speed rating symbol"]);
+      return {kind:kind,parts:parts,extra:ag?null:"Overall diameter is about "+dia.toFixed(1)+" in.",cat:small?"ATV, UTV & golf":heavy?"Semi & commercial":ag?"Farm & ag":moto?"Motorcycles":pre==="ST"?"Trailers":pre==="LT"?"Light trucks & SUVs":"Passenger cars",link:small?"atv":heavy?"semi":ag?"farm":moto?"motorcycle":pre==="ST"?"trailer":pre==="LT"?"trucks":pre==="T"?"":"cars",norm:w+"/"+ar+"-"+rim};
+    }
+    // Commercial truck inch radial: 11R22.5
+    m=s.match(/^(\d{1,2}(?:\.\d{1,2})?)R(22\.5|24\.5|19\.5|17\.5|16|20|24)$/);
+    if(m)return {kind:"Commercial truck (inch radial)",parts:[[m[1],"Section width about "+m[1]+" in"],["R","Radial construction"],[m[2],"Wheel diameter "+m[2]+" in"+(/\.5$/.test(m[2])?". The .5 sizes are tubeless truck wheels":"")]],extra:"Two of the most common semi tire sizes are 11R22.5 and 295/75R22.5.",cat:"Semi & commercial",link:"semi"};
+    // OTR radial: 20.5R25
+    m=s.match(/^(\d{1,2}\.\d)R(25|29|33|35|39|49|51|57|63)$/);
+    if(m)return {kind:"Construction / OTR (radial)",parts:[[m[1],"Section width "+m[1]+" in"],["R","Radial construction"],[m[2],"Fits a "+m[2]+" in rim"]],extra:"Common on wheel loaders, graders and articulated haul trucks. Check the industry code on the sidewall too, like L-3 or E-4.",cat:"Construction & OTR",link:"construction"};
+    // Skid steer: 12-16.5
+    m=s.match(/^(\d{1,2})-(16\.5|15\.5)$/);
+    if(m)return {kind:"Skid steer or implement",parts:[[m[1],"Section width about "+m[1]+" in"],["-","Bias-ply construction"],[m[2],"Fits a "+m[2]+" in rim"]],extra:"The 16.5 in rim is a skid steer standard, which is why 10-16.5 and 12-16.5 are the most common skid steer sizes.",cat:"Construction & OTR",link:"construction"};
+    // Dual-section small tire: 4.10/3.50-4
+    m=s.match(/^(\d{1,2}\.\d{2})\/(\d{1,2}\.\d{2})-(\d{1,2})$/);
+    if(m&&+m[3]>=16)return {kind:"Vintage balloon (dual-section)",parts:[[m[1]+"/"+m[2],"Fits as either a "+m[1]+" or "+m[2]+" in section width"],[m[3],"Fits a "+m[3]+" in rim"]],extra:"Balloon sizes like 4.40/4.50-21 came on cars from the mid-1920s.",cat:"Vintage & antique",link:"vintage"};
+    if(m)return {kind:"Small equipment (dual-section)",parts:[[m[1]+"/"+m[2],"Fits as either a "+m[1]+" or "+m[2]+" in section width"],[m[3],"Fits a "+m[3]+" in rim"]],extra:"Common on wheelbarrows, hand trucks, small carts and mobility scooters.",cat:"Lawn & garden",link:"lawn"};
+    // Press-on: 18x7x12-1/8
+    m=s.match(/^(\d{1,2}(?:\.\d+)?)X(\d{1,2}(?:\.\d+)?)X(\d{1,2}(?:-\d+\/\d+|\.\d+)?)$/);
+    if(m)return {kind:"Forklift press-on (cushion)",parts:[[m[1],"Outside diameter "+m[1]+" in"],[m[2],"Tread width "+m[2]+" in"],[m[3].replace("-"," "),"Inside diameter "+frac(m[3])+" in. Must match your wheel exactly"]],extra:"Press-on tires need a hydraulic press to install. Most dealers do it in the shop or on-site.",cat:"Forklift & industrial",link:"forklift"};
+    // LT flotation: 33x12.50R15
+    // Early clincher: 30x3-1/2
+    m=s.match(/^(2[4-9]|3[0-9])X([2-5](?:-1\/2|-3\/4|-1\/4)?)$/);
+    if(m)return {kind:"Early clincher (beaded-edge)",parts:[[m[1],"Overall diameter "+m[1]+" in"],[m[2],"Tire width "+m[2].replace("-"," ")+" in"]],extra:"Brass-era sizing used into the 1920s. These tires need tubes and high pressure.",cat:"Vintage & antique",link:"vintage"};
+    // Alpha-numeric: G78-14, GR70-15
+    m=s.match(/^([A-N])(R)?(\d{2})-(\d{2})$/);
+    if(m)return {kind:"Alpha-numeric (late 1960s and 1970s)",parts:[[m[1],"Load and width class, from A (smallest) to N (largest)"]].concat(m[2]?[["R","Radial construction"]]:[]).concat([[m[3],"Aspect ratio: sidewall about "+m[3]+"% of the width"],[m[4],"Fits a "+m[4]+" in rim"]]),extra:"No R means bias-ply. To convert to a modern size, match the overall diameter, not just the width.",cat:"Vintage & antique",link:"vintage"};
+    m=s.match(/^(\d{2}(?:\.\d)?)X(\d{1,2}\.\d{1,2})R(\d{2}(?:\.5)?)(LT)?$/);
+    if(m)return {kind:"Flotation (light truck / off-road)",parts:[[m[1],"Overall diameter "+m[1]+" in"],[m[2],"Section width "+m[2]+" in"],["R","Radial construction"],[m[3],"Fits a "+m[3]+" in wheel"]],extra:"Common on lifted trucks and Jeeps. Sizes are in inches end to end.",cat:"Light trucks & SUVs",link:"trucks"};
+    // Bicycle 700x28c
+    m=s.match(/^700X(\d{2})C?$/);
+    if(m)return {kind:"Bicycle (French sizing)",parts:[["700","Nominal 700 mm diameter. Fits 622 mm bead-seat rims"],[m[1],"Tire width "+m[1]+" mm"]],extra:"The same tire in ISO/ETRTO terms is "+m[1]+"-622.",cat:"Bicycles & e-bikes",link:"bicycles"};
+    // Bicycle ETRTO 28-622
+    m=s.match(/^(\d{2})-(\d{3})$/);
+    if(m&&+m[2]===540)return {kind:"Wheelchair (ISO / ETRTO)",parts:[[m[1],"Tire width "+m[1]+" mm"],[m[2],"Bead-seat diameter 540 mm, a 24 in wheelchair wheel"]],extra:"37-540 is the metric name for the common 24 x 1-3/8 wheelchair tire.",cat:"Mobility & medical",link:"mobility"};
+    if(m&&BSD[+m[2]])return {kind:"Bicycle (ISO / ETRTO)",parts:[[m[1],"Tire width "+m[1]+" mm"],[m[2],"Bead-seat diameter "+m[2]+" mm. That's a "+BSD[+m[2]]+" wheel"]],extra:"ETRTO is the most reliable bike size. If the second number matches your rim, it fits.",cat:"Bicycles & e-bikes",link:"bicycles"};
+    // Three-part: 15x6.0-6, 25x8-12, H22x8.25-10
+    m=s.match(/^(H)?(\d{1,2}(?:\.\d+)?)X(\d{1,2}(?:\.\d+)?)(-|R)(\d{1,2}(?:\.\d+)?)$/);
+    if(m){
+      var od=+m[2],wd=+m[3],rr=+m[5];
+      var guess=m[1]?"Aircraft (high-speed three-part)":(rr<=10&&wd>=5&&wd<=7&&od<=22&&/\./.test(m[3]))?"Aircraft or industrial (three-part)":(od>=20&&od<=32&&rr>=10&&rr<=15)?"ATV / UTV or lawn":"Three-part size (industrial, lawn, ATV or aircraft)";
+      if(!m[1]&&rr===5&&od<=12)guess="Kart (sprint)";
+      if(!m[1]&&od===18&&wd===8.5&&rr===8)guess="Golf cart (also some mowers)";
+      var isAir=/^Aircraft/.test(guess),isAtv=/^ATV|^Golf/.test(guess),isKart=/^Kart/.test(guess);
+      var lawn=!isAir&&!isAtv&&!isKart&&wd/od>=0.45;
+      if(lawn)guess="Lawn & garden (three-part)";
+      var cat=isAir?"Aviation":isAtv?"ATV, UTV & golf":isKart?"Go-karts & karting":lawn?"Lawn & garden":"Forklift & industrial";
+      var p3=[];
+      if(m[1])p3.push(["H","High-speed aircraft tire"]);
+      p3.push([m[2],"Outside diameter "+m[2]+" in"],[m[3],"Section width "+m[3]+" in"],[m[4],m[4]==="R"?"Radial construction":"Bias-ply construction"],[m[5],"Fits a "+m[5]+" in wheel"]);
+      return {kind:guess,parts:p3,extra:"This format shows up on aircraft (15x6.0-6), forklifts (18x7-8), mowers (20x10-8) and ATVs (25x8-12). The equipment it came off tells you which.",cat:cat,link:cat==="Aviation"?"aviation":cat==="Forklift & industrial"?"forklift":cat==="Lawn & garden"?"lawn":cat==="ATV, UTV & golf"?"atv":cat==="Go-karts & karting"?"motorsport":""};
+    }
+    // Small wheel, inches: 8x2, 14x3
+    m=s.match(/^([4-9]|1[0-6])X([1-4])$/);
+    if(m)return {kind:"Small wheel or caster (inches)",parts:[[m[1],"Overall diameter about "+m[1]+" in"],[m[2],"Width about "+m[2]+" in"]],extra:"Common on wheelchair casters, mobility scooters and carts. Match the axle or bearing size too.",cat:"Mobility & medical",link:"mobility"};
+    // Small wheel, metric: 200x50, 260x85
+    m=s.match(/^(\d{3})X(\d{2,3})$/);
+    if(m)return {kind:"Small wheel (metric, mm)",parts:[[m[1],"Overall diameter "+m[1]+" mm ("+(m[1]/25.4).toFixed(1)+" in)"],[m[2],"Width "+m[2]+" mm ("+(m[2]/25.4).toFixed(1)+" in)"]],extra:"A metric way of listing scooter and caster wheels. 260x85 is the same tire as 3.00-4.",cat:"Mobility & medical",link:"mobility"};
+    // Bicycle fraction sizes: 20 x 1-3/8, 26 x 1-3/8, 12-1/2 x 2-1/4
+    var FR={"16X1-3/8":349,"20X1-3/8":451,"24X1-3/8":540,"26X1-3/8":590,"27X1-1/4":630,"28X1-1/2":635,"12-1/2X2-1/4":203};
+    if(FR[s]){var fw=s.split("X");return {kind:"Bicycle (fraction sizing)",parts:[[fw[0],"Nominal "+fw[0].replace("-"," ")+" in wheel"],[fw[1],"Tire width "+fw[1].replace("-"," ")+" in"],[String(FR[s]),"Fits a "+FR[s]+" mm bead-seat wheel"]],extra:FR[s]===203?"Same wheel as a 12x2.125 decimal tire.":"Fraction sizes don't fit decimal wheels with the same first number. Match the "+FR[s]+" in the ETRTO size on the sidewall.",cat:"Bicycles & e-bikes",link:"bicycles"};}
+    // Two-part: 26x6.6 (Type VII) or 29x2.4 / 20x2.125 (bike)
+    m=s.match(/^(\d{2}(?:\.\d)?)X(\d{1,2}\.\d{1,3})$/);
+    if(m){
+      var a=+m[1],b2=+m[2],BW={12:203,14:254,16:305,20:406,24:507,26:559,27.5:584,29:622};
+      if(b2<5&&BW[a])return {kind:"Bicycle (inch sizing)",parts:[[m[1],a+" inch wheel ("+BW[a]+" mm bead seat)"],[m[2],"Tire width "+m[2]+" in"]],extra:"Inch bike sizes can be vague. Check the ETRTO number on the same sidewall; it should end in "+BW[a]+".",cat:"Bicycles & e-bikes",link:"bicycles"};
+      return {kind:"Aircraft Type VII",parts:[[m[1],"Outside diameter "+m[1]+" in"],[m[2],"Section width "+m[2]+" in"]],extra:"Type VII tires run at high pressure and are used on jets and larger turboprops. The wheel size isn't in the name; check the parts catalog.",cat:"Aviation",link:"aviation"};
+    }
+    // Width-rim: 6.00-6, 7.00-12, 18.4-38, 11.00-20
+    m=s.match(/^(\d{1,2}\.\d{1,2})-(\d{1,2}(?:\.\d)?)$/);
+    if(m){
+      var ww=+m[1],r2=+m[2],k,c,ln="";
+      if(r2>=13&&r2<=16&&ww>=5.2&&ww<=9.5){k="Vintage car or light truck (bias, inch)";c="Vintage & antique";ln="vintage";}
+      else if(r2<=10&&ww<=4.1){k="Mobility scooter, power chair or small equipment";c="Mobility & medical";ln="mobility";}
+      else if([25,29,33,35,39,49,51,57,63].indexOf(r2)>=0){k="Construction / OTR (bias)";c="Construction & OTR";ln="construction";}
+      else if(r2>=24){k="Farm tractor rear (bias)";c="Farm & ag";ln="farm";}
+      else if(r2>=20){k="Older truck or farm (bias)";c="Farm & ag";ln="farm";}
+      else if(r2<=10&&ww<=8.5){k="Aircraft Type III or industrial pneumatic";c="Aviation";ln="aviation";}
+      else{k="Industrial pneumatic or implement (bias)";c="Forklift & industrial";ln="forklift";}
+      return {kind:k,parts:[[m[1],"Section width "+m[1]+" in"],["-","Bias-ply construction"],[m[2],"Fits a "+m[2]+" in wheel"]],extra:"This is one of the oldest sizing formats. The same 6.00-6 code could be on a Cessna or a piece of shop equipment, so check what it came off of. Ply rating matters as much as size.",cat:c,link:ln};
+    }
+    return null;
+  }
+
+  function renderDecode(raw,host){
+    host.textContent="";
+    var r=decode(raw);
+    if(!r){
+      var e=document.createElement("div");e.className="err";
+      e.textContent="We couldn't read that size. Copy it exactly as it's molded on the sidewall, like 225/60R16, 6.00-6 or 18x7x12-1/8. Ignore extra codes like DOT numbers.";
+      var el=document.createElement("p");var ea=document.createElement("a");ea.href="#request";ea.setAttribute("data-rqcat","");ea.setAttribute("data-rqsize",String(raw).trim());ea.textContent="Still stuck? Tell us what you need";el.appendChild(ea);e.appendChild(el);
+      host.appendChild(e);return;
+    }
+    var stk=(r.norm&&STOCK_IDX[r.norm])||[],al=(r.norm&&ALT_IDX[r.norm])||[];
+    if(stk.length){r.kind="Motorcycle (metric)";r.cat="Motorcycles";r.link="motorcycle";r.extra=null;}
+    var head=document.createElement("div");head.className="head";
+    var st=document.createElement("span");st.className="stamp";st.textContent=raw.trim().toUpperCase();
+    var h=document.createElement("h3");h.textContent=r.kind;
+    head.appendChild(st);head.appendChild(h);host.appendChild(head);
+    var d=document.createElement("div");d.className="decode";
+    r.parts.forEach(function(p){
+      var row=document.createElement("div");
+      var c=document.createElement("code");c.textContent=p[0];
+      var t=document.createElement("span");t.textContent=p[1];
+      row.appendChild(c);row.appendChild(t);d.appendChild(row);
+    });
+    host.appendChild(d);
+    if(r.extra){var x=document.createElement("p");x.className="note";x.textContent=r.extra;host.appendChild(x);}
+    function xbox(title,body,linkText,href){var bx=document.createElement("div");bx.className="xref";var t=document.createElement("b");t.textContent=title;var p=document.createElement("p");p.textContent=body;var a=document.createElement("a");a.href=href||"#motorcycle";if(href){a.target="_blank";a.rel="noopener";}a.textContent=linkText;bx.appendChild(t);bx.appendChild(p);bx.appendChild(a);host.appendChild(bx);}
+    if(stk.length){var names=stk.slice(0,4).map(function(x){return x.n+", "+x.p.toLowerCase();});xbox("Factory size on: "+names.join("; ")+(stk.length>4?"; and "+(stk.length-4)+" more":""),"Find your exact bike, with front and rear sizes, in the motorcycle tire finder.","Open the motorcycle tire finder");}
+    if(al.length)xbox("Riders report running this car tire on the rear of: "+al.join("; "),"That's a darkside fitment. Tire and motorcycle makers don't approve car tires on motorcycles, and Tires for Anything doesn't recommend it.","Read more on Darkside Tires","https://darksidetires.com");
+    if(typeof FINDERS!=="undefined"&&FINDERS){
+      var key=String(raw).toUpperCase().replace(/\s+/g,""),seen={};
+      Object.keys(FINDERS).forEach(function(k){FINDERS[k].forEach(function(r){
+        var a1=r[0].toUpperCase().replace(/\s+/g,""),a2=String(r[4]||"").toUpperCase().replace(/\s+/g,"");
+        if((a1===key||a2===key)&&!seen[k+r[2]]){seen[k+r[2]]=1;
+          var bx=document.createElement("div");bx.className="callout";
+          var t=document.createElement("b");t.textContent="Found in our size finder";
+          var p=document.createElement("p");p.textContent=r[2]+(r[3]?". "+r[3]+".":".");
+          var a=document.createElement("a");a.href=pageHref(k);a.textContent="Open that guide";
+          bx.appendChild(t);bx.appendChild(p);bx.appendChild(a);host.appendChild(bx);}
+      });});
+    }
+    var foot=document.createElement("div");foot.className="row";
+    if(r.link){var a=document.createElement("a");a.className="btn ghost";a.href=pageHref(r.link);a.textContent="Open the "+r.cat+" guide";foot.appendChild(a);}
+    else{var sp=document.createElement("span");sp.className="note";sp.textContent="Category: "+r.cat;sp.style.alignSelf="center";foot.appendChild(sp);}
+    var q=document.createElement("a");q.className="btn yellow";q.href="#quote";q.textContent="Find this tire";q.setAttribute("data-size",raw.trim().toUpperCase());
+    foot.appendChild(q);host.appendChild(foot);
+    var lk=r.link||"",term=(typeof RQ_TERM!=="undefined"&&RQ_TERM.hasOwnProperty(lk))?RQ_TERM[lk]:"tire";
+    if(term&&!(lk==="vintage"&&/clincher|balloon|alpha/i.test(r.kind))){
+      var sh=document.createElement("div");sh.className="row";sh.style.alignItems="center";
+      var lb=document.createElement("span");lb.className="note";lb.textContent="Shop on Amazon:";sh.appendChild(lb);
+      var rz=raw.trim(),small=/^(lawn|atv|trailer|mobility)$/.test(lk);
+      if(lk==="aviation"){lb.textContent="Aircraft tires:";sh.appendChild(airQuote("Get a quote for this size",rz));}
+      else sh.appendChild(amzLink(small?"Tire only":"This size",rz+" "+term));
+      if(small)sh.appendChild(amzLink("Mounted on a wheel",rz+" tire and wheel assembly"));
+      host.appendChild(sh);
+      var lvl=/^(lawn|mobility|bicycles|motorsport)$/.test(lk)||(lk==="atv"&&/golf/i.test(r.kind))?"diy":(lk==="semi"||/OTR|Farm tractor rear|Commercial|military|Older truck/i.test(r.kind))?"pro":"shop";
+      var ir=document.createElement("div");ir.className="row";ir.style.alignItems="center";
+      var il2=document.createElement("span");il2.className="note";il2.textContent=lvl==="diy"?"Install: most owners do this one at home.":lvl==="pro"?"Install: too big to mount yourself.":"Install: a local shop can mount it.";ir.appendChild(il2);
+      if(lvl!=="diy"){var tdx=installCell(lk||"",lvl,rz);while(tdx.firstChild)ir.appendChild(tdx.firstChild);}
+      host.appendChild(ir);
+      var dn=document.createElement("p");dn.className="note";dn.textContent="As an Amazon Associate I earn from qualifying purchases."+(lk==="aviation"?" Aircraft tires must be TSO-approved, or labeled for experimental and light-sport use, and match your parts catalog.":"");host.appendChild(dn);
+    }
+  }
+  var decIn=$id("dec-code"),decOut=$id("dec-out");
+  function goDecode(){renderDecode(decIn.value,decOut);}
+  $id("dec-go").addEventListener("click",goDecode);
+  decIn.addEventListener("keydown",function(e){if(e.key==="Enter")goDecode();});
+  document.querySelectorAll("#v-decoder .chip").forEach(function(b){b.addEventListener("click",function(){decIn.value=b.getAttribute("data-code");goDecode();});});
+  goDecode();
+
+  var homeIn=$id("home-code");
+  function homeGo(){if(homeIn.value.trim()){decIn.value=homeIn.value;}location.hash="decoder";goDecode();}
+  $id("home-go").addEventListener("click",homeGo);
+  homeIn.addEventListener("keydown",function(e){if(e.key==="Enter")homeGo();});
+  document.querySelectorAll("#v-home .chip").forEach(function(b){b.addEventListener("click",function(){homeIn.value=b.getAttribute("data-code");homeGo();});});
+
+  /* ---------- prefill quote from links ---------- */
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest("a[href='#quote']");
+    if(!a)return;
+    var c=a.getAttribute("data-cat"),sz=a.getAttribute("data-size");
+    if(c){var sel=$id("q-cat");for(var i=0;i<sel.options.length;i++){if(sel.options[i].text.indexOf(c)===0)sel.selectedIndex=i;}}
+    if(sz)$id("q-size").value=sz;
+  });
+
+  /* ---------- quote form ---------- */
+  var form=$id("quote-form"),thanks=$id("quote-thanks"),qerr=$id("q-err");
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var name=$id("q-name").value.trim(),email=$id("q-email").value.trim(),zip=$id("q-zip").value.trim();
+    var miss=[];
+    if(!name)miss.push("your name");
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))miss.push("a valid email");
+    if(!/^\d{5}$/.test(zip))miss.push("a 5-digit ZIP code");
+    if(!$id("q-consent").checked)miss.push("the box agreeing to share your request with dealers");
+    if(miss.length){qerr.textContent="Please complete: "+miss.join(", ")+".";return;}
+    qerr.textContent="";
+    var cat=$id("q-cat").value,qty=$id("q-qty").value,size=$id("q-size").value.trim();
+    var sb=form.querySelector("button[type=submit]");sb.disabled=true;qerr.textContent="Sending...";
+    var payload={type:"quote",page:cat,equipment:$id("q-make").value.trim(),size:size,qty:qty,timeline:$id("q-when").value,zip:zip,notes:$id("q-notes").value.trim(),name:name,company:$id("q-co").value.trim(),email:email,phone:$id("q-phone").value.trim(),website:""};
+    fetch("/api/request",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)})
+      .then(function(r){return r.json();}).catch(function(){return {saved:false};})
+      .then(function(res){
+        sb.disabled=false;
+        if(!res||!res.saved){qerr.textContent="We couldn't send your request just now. Please try again in a few minutes.";return;}
+        qerr.textContent="";
+        $id("thanks-text").textContent="Thanks, "+name+". We have your request for "+qty+" "+cat.toLowerCase()+" tire"+(qty==="1"?"":"s")+(size?" ("+size+")":"")+" near "+zip+". We'll match it with a dealer who serves your area and follow up by email at "+email+".";
+        form.hidden=true;thanks.hidden=false;
+      });
+  });
+  $id("quote-again").addEventListener("click",function(){thanks.hidden=true;form.hidden=false;});
+
+  /* ---------- copy email ---------- */
+  $id("copy-email").addEventListener("click",function(){
+    var t=$id("partner-email").textContent,msg=$id("copy-msg");
+    function sel(){var r=document.createRange();r.selectNodeContents($id("partner-email"));var s=window.getSelection();s.removeAllRanges();s.addRange(r);msg.textContent="Selected. Press copy on your device.";}
+    try{navigator.clipboard.writeText(t).then(function(){msg.textContent="Copied";},sel);}catch(err){sel();}
+  });
+
+  /* ---------- router ---------- */
+  /* ---------- amazon affiliate links ---------- */
+  var AMZ_TAG="stuffguysbuy-20";
+  function amz(q){return "https://www.amazon.com/s?k="+encodeURIComponent(q)+"&tag="+(AMZ_TAG||"stuffguysbuy-20");}
+  function amzLink(label,q,cls){var a=document.createElement("a");a.className=cls||"shoplink";a.href=amz(q);a.target="_blank";a.rel="sponsored nofollow noopener";a.textContent=label;return a;}
+  var SHOP={
+    cars:[["Digital tire pressure gauge","digital tire pressure gauge"],["Tread depth gauge","tire tread depth gauge"],["Portable tire inflator","portable tire inflator car"],["Tire plug repair kit","tire plug repair kit"],["Torque wrench","1/2 inch drive torque wrench"]],
+    trucks:[["Heavy-duty tire inflator","12v heavy duty tire inflator truck"],["Tire pressure gauge, 0 to 100 psi","tire pressure gauge 100 psi"],["Tread depth gauge","tire tread depth gauge"],["Truck tire plug kit","heavy duty tire plug kit"]],
+    trailer:[["ST trailer tires","ST trailer tire"],["Trailer tire and wheel assemblies","trailer tire and wheel assembly"],["Trailer tire pressure monitor","trailer tire pressure monitoring system"],["Tire covers","trailer tire covers"],["Wheel chocks","wheel chocks"]],
+    rv:[["RV tire pressure monitor","RV tire pressure monitoring system"],["Valve stem extenders for duals","dual wheel valve stem extenders"],["Dual-foot tire gauge","dual foot truck tire pressure gauge"],["RV tire covers","RV tire covers"],["Wheel chocks","RV wheel chocks"]],
+    lawn:[["Riding mower front tires 15x6.00-6","15x6.00-6 lawn mower tire"],["Riding mower rear tires 20x10.00-8","20x10.00-8 lawn mower tire"],["Mower tires mounted on wheels","lawn mower tire and wheel assembly"],["Hand truck wheels","4.10/3.50-4 hand truck wheel"],["Flat-free wheelbarrow tires","flat free wheelbarrow tire 4.10/3.50-4"],["Tire sealant","tire sealant lawn mower"]],
+    atv:[["ATV tire plug kit","ATV tire plug kit"],["Low-pressure tire gauge","low pressure tire gauge ATV"],["Golf cart wheel and tire sets","golf cart wheel and tire set 18x8.50-8"],["Bead breaker","ATV tire bead breaker"]],
+    motorcycle:[["Motorcycle tire pressure gauge","motorcycle tire pressure gauge"],["Motorcycle tire plug kit","motorcycle tubeless tire plug kit"],["Tire irons","motorcycle tire irons"],["Wheel balancer","motorcycle wheel balancer"]],
+    bicycles:[["Inner tubes","bike inner tube"],["Floor pump with gauge","bike floor pump with gauge"],["Tire levers","bike tire levers"],["Patch kit","bike tube patch kit"],["Tubeless sealant","tubeless tire sealant bike"],["CO2 inflator","bike CO2 inflator"]],
+    vintage:[["Whitewall tire cleaner","whitewall tire cleaner"],["Dial tire pressure gauge","dial tire pressure gauge"],["Tire covers","car tire covers storage"]],
+    military:[["Truck tire pressure gauge","truck tire pressure gauge 160 psi"],["Valve core tool","valve core removal tool"],["Heavy-duty tire inflator","heavy duty tire inflator"],["Tread depth gauge","truck tire tread depth gauge"]],
+    racing:[["Racing tire pressure gauge","racing tire pressure gauge bleed valve"],["Tire pyrometer","tire pyrometer"],["Tire storage bags","racing tire storage bags"],["Low-profile aluminum floor jack","low profile aluminum floor jack"],["Tread depth gauge","tire tread depth gauge"]],
+    motorsport:[["Go-kart tires","go kart tires 10x4.50-5"],["Low-pressure tire gauge","low pressure tire gauge 0-15 psi"],["Tire pyrometer","tire pyrometer"],["Kart stand","go kart stand"]],
+    forklift:[["Press-on forklift tires","press on forklift tire"],["Pneumatic forklift tires","pneumatic forklift tire"],["Solid flat-proof forklift tires","solid forklift tire"],["Tread depth gauge","tire tread depth gauge"]],
+    farm:[["Compact tractor tires","compact tractor tires"],["Row-crop tractor tires","tractor tire 18.4-38"],["Front tractor tires (F-2)","front tractor tire 3 rib"],["Tractor tire inner tubes","tractor tire inner tube"],["Tractor valve stems","tractor tire valve stem"]],
+    toys:[["RC tire glue","RC tire CA glue"],["RC tire foam inserts","RC tire foam inserts"],["RC beadlock wheels","RC crawler beadlock wheels 1.9"],["608 skate and scooter bearings","608 bearings skateboard scooter"],["Ride-on car rubber tires","ride on car rubber tires"]],
+    aviation:[["Tire pressure gauge","dial tire pressure gauge"],["Tire changing tools","tire spoons bead breaker"]],
+    semi:[["11R22.5 steer tires","11R22.5 steer tire"],["11R22.5 drive tires","11R22.5 drive tire"],["Dual-foot truck tire gauge","dual foot truck tire pressure gauge"],["Tread depth gauge","truck tire tread depth gauge"],["Valve stem extenders","truck dual wheel valve stem extenders"]],
+    construction:[["Skid steer tires","skid steer tires 12-16.5"],["Backhoe tires","backhoe tires"],["Loader tires","loader tire 20.5-25"],["Heavy-duty tire inflator","heavy duty tire inflator"]]
+  };
+  document.querySelectorAll(".shop").forEach(function(el){
+    el.textContent="";var items=SHOP[el.getAttribute("data-shop")]||[];
+    if(!items.length){el.parentNode.hidden=true;return;}
+    if(el.getAttribute("data-shop")==="aviation"){
+      var ah=document.createElement("h3");ah.textContent="Aircraft tires and tubes";
+      var ar=document.createElement("div");ar.className="chips";
+      ar.appendChild(airQuote("Get aircraft tire quotes",""));
+      var an=document.createElement("p");an.className="note";an.textContent="Tires and tubes for FAA-certificated aircraft aren't sold on Amazon. Request a quote and we'll connect you with aviation tire suppliers. Confirm the TSO, ply rating and part number for your aircraft with your A&P.";
+      el.appendChild(ah);el.appendChild(ar);el.appendChild(an);
+    }
+    var h=document.createElement("h3");h.textContent="Shop on Amazon";
+    var row=document.createElement("div");row.className="chips";
+    items.forEach(function(it){row.appendChild(amzLink(it[0],it[1]));});
+    var d=document.createElement("p");d.className="note";d.textContent="As an Amazon Associate I earn from qualifying purchases. Links open Amazon search results, so check the size and reviews before you buy.";
+    el.appendChild(h);el.appendChild(row);el.appendChild(d);
+  });
+  function mapsUrl(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+" near me");}
+  function installLevel(k,r){
+    if(/^(lawn|mobility|bicycles|motorsport|toys)$/.test(k))return "diy";
+    if(k==="atv")return /golf|EZGO|Club Car/i.test(r[2])?"diy":"shop";
+    if(k==="semi")return "pro";
+    if(k==="farm")return /^(18\.4-38|520\/85R38)$/.test(r[0])?"pro":"shop";
+    if(k==="construction")return /^(19\.5L-24|17\.5-25|20\.5-25|14\.00-24)$/.test(r[0])?"pro":"shop";
+    if(k==="military")return r[0]==="37x12.50R16.5"?"shop":"pro";
+    return "shop";
+  }
+  function installCell(k,lvl,size){
+    var td=document.createElement("td");
+    if(lvl==="diy"){var b=document.createElement("span");b.className="pill live";b.textContent="DIY";b.title="Most owners install these at home";td.appendChild(b);}
+    else if(lvl==="pro"){var a=document.createElement("a");a.href="#quote";a.setAttribute("data-cat",QCAT[k]||"Other");if(size)a.setAttribute("data-size",size);a.textContent="Get install quotes";td.appendChild(a);}
+    else{var m=document.createElement("a");m.href=mapsUrl(SHOPQ[k]||"tire shop");m.target="_blank";m.rel="noopener";m.textContent=k==="forklift"&&/press-on/i.test(size||"")?"Find a shop":"Find a shop";td.appendChild(m);}
+    return td;
+  }
+  function mountQuery(k,r){
+    if(k==="lawn")return r[0]+(/hand truck|wheelbarrow/i.test(r[2])?" wheel":" tire and wheel assembly");
+    if(k==="atv"){
+      if(/^20 to/.test(r[0]))return "lifted golf cart wheel and tire set";
+      if(/golf|EZGO|Club Car/i.test(r[2]))return r[0]+" golf cart wheel and tire";
+      return r[0]+(/UTV|RZR/i.test(r[2])?" UTV wheel and tire":" ATV tire and wheel");
+    }
+    if(k==="mobility"&&!/wheelchair, rear/i.test(r[2]))return r[0]+(/caster/i.test(r[2])?" caster wheel":" scooter wheel and tire");
+    return null;
+  }
+  function finderQuery(k,r){
+    if(k==="toys")return r[5];
+    if(k==="forklift")return r[0]+" forklift tire";
+    if(k==="farm")return r[0]+(/skid/i.test(r[2])&&!/tractor/i.test(r[2])?" tire":" tractor tire");
+    if(k==="construction")return r[0]+(/skid/i.test(r[2])?" skid steer tire":/backhoe/i.test(r[2])?" backhoe tire":/loader/i.test(r[2])?" loader tire":/grader/i.test(r[2])?" grader tire":" tire");
+    if(k==="semi")return r[0]+" truck tire";
+    if(k==="lawn")return r[0]+(/hand truck|wheelbarrow/i.test(r[2])?" tire":" lawn mower tire");
+    if(/^20 to/.test(r[0]))return "lifted golf cart tires";
+    if(k==="atv")return r[0]+(/golf|EZGO|Club Car/i.test(r[2])?" golf cart tire":/UTV|RZR/i.test(r[2])?" UTV tire":" ATV tire");
+    if(k==="motorsport")return r[0]+" go kart tire";
+    if(k==="bicycles")return r[0]+" bike tire";
+    if(k==="military")return r[0]+" tire";
+    if(k==="vintage")return r[1].replace(/^about /,"")+" tire";
+    return r[0]+(/wheelchair, rear/i.test(r[2])?" wheelchair tire":/caster/i.test(r[2])?" caster wheel":" mobility scooter tire");
+  }
+
+  /* ---------- size finders ---------- */
+  var FINDERS={
+    atv:[
+      ["24x8-12","","Honda FourTrax Rancher (2022), front","Utility ATV"],
+      ["24x10-11","","Honda FourTrax Rancher (2022), rear","Rear rides on an 11 in wheel"],
+      ["25x8-12","","Polaris Sportsman 570 (2020), front; many utility 4x4 ATVs","The most common utility ATV front size"],
+      ["25x10-12","","Polaris Sportsman 570 (2020), rear; many utility 4x4 ATVs","Common utility ATV rear size"],
+      ["30x9-14","","Polaris RZR XP 1000 Trails & Rocks (2021), front","Sport UTV"],
+      ["30x12-14","","Polaris RZR XP 1000 Trails & Rocks (2021), rear","Sport UTV"],
+      ["27x9R14","","Many UTVs, front","Radial; rides smoother at speed"],
+      ["27x11R14","","Many UTVs, rear","Radial"],
+      ["18x8.50-8","","EZGO and Club Car carts, no lift","The standard golf cart size; all four corners"],
+      ["205/50-10","","Golf carts on 10 in custom wheels","Low profile; no lift needed"],
+      ["205/30-12","","Golf carts on 12 in custom wheels","Low profile; no lift needed"],
+      ["20 to 23 in","","Lifted golf carts","All-terrain and street; needs a lift kit","22x11-10"]
+    ],
+    forklift:[
+      ["18x7x12-1/8","","Cushion forklifts, press-on","One of the most common press-on sizes; needs a tire press"],
+      ["21x8x15","","Larger cushion forklifts, press-on","Needs a tire press"],
+      ["18x7-8","","Pneumatic forklifts, front","Sold in air and solid (flat-proof) versions"],
+      ["6.50-10","","Pneumatic forklifts","Tube type; usually sold with tube and flap"],
+      ["7.00-12","","Pneumatic forklifts, drive tires","Tube type; usually sold with tube and flap"]
+    ],
+    farm:[
+      ["23x8.50-12","","Sub-compact tractors (R-4); also skid steers","Industrial tread"],
+      ["11.2-24","","Compact and utility tractor rears","Bias, R-1 or turf"],
+      ["18.4-38","","Row-crop tractor rears","Big and heavy; usually dealer-mounted"],
+      ["520/85R38","","Row-crop tractor rears, radial","Radial version of the 18.4-38 class"],
+      ["7.50-16","","Two-wheel-drive tractor fronts (F-2)","Three-rib front tire"],
+      ["6.50-16","","Smaller tractor fronts (F-2)","Three-rib front tire"]
+    ],
+    construction:[
+      ["10-16.5","","Skid steer loaders","Smaller skid steers"],
+      ["12-16.5","","Skid steer loaders","The most common skid steer size"],
+      ["12.5/80-18","","Backhoe loader fronts (R-4)","Also some skid steers"],
+      ["19.5L-24","","Backhoe loader rears (R-4)","Heavy; usually dealer-mounted"],
+      ["17.5-25","","Wheel loaders (L-3)","Heavy; usually dealer-mounted"],
+      ["20.5-25","","Wheel loaders (L-3)","Heavy; usually dealer-mounted"],
+      ["14.00-24","","Motor graders (G-2)","Heavy; usually dealer-mounted"]
+    ],
+    semi:[
+      ["11R22.5","","Class 8 tractors, trailers and buses","Sold as steer, drive or trailer tires"],
+      ["295/75R22.5","","Class 8 tractors and trailers, low profile","Sold as steer, drive or trailer tires"]
+    ],
+    aviation:[
+      ["6.00-6","","Main gear on many light singles, like the Cessna 172","Check ply rating and TSO before you buy"]
+    ],
+    lawn:[
+      ["13x5.00-6","","Riding mower and lawn tractor fronts","Common front size"],
+      ["15x6.00-6","","Riding mower and lawn tractor fronts","Common front size"],
+      ["16x6.50-8","","Riding mower fronts and zero-turn casters","Common front size"],
+      ["18x8.50-8","","Riding mower rears","Same size as many golf carts"],
+      ["20x10.00-8","","Riding mower and lawn tractor rears","Common rear size"],
+      ["4.10/3.50-4","","Hand trucks, wheelbarrows and carts","The common 10 in hand truck tire"],
+      ["4.80/4.00-8","","Wheelbarrows","The common 16 in wheelbarrow tire"]
+    ],
+    bicycles:[
+      ["700x25c","25-622","Road bikes","Classic road width"],
+      ["700x28c","28-622","Road and endurance bikes","Today's most common road width"],
+      ["700x32c","32-622","Gravel and commuter bikes","Comfortable on rough pavement"],
+      ["700x40c","40-622","Gravel bikes","Room for dirt roads"],
+      ["29x2.4","about 61-622","29er mountain bikes","Trail and enduro"],
+      ["27.5x2.4","about 61-584","27.5 in (650b) mountain bikes","Trail and enduro"],
+      ["26x2.1","about 54-559","Older mountain bikes and cruisers","Classic 26 in size"],
+      ["26x4.0","about 100-559","Fat bikes","Low pressure for snow and sand"],
+      ["24x1.95","about 50-507","Youth mountain bikes","Kids around 8 to 12"],
+      ["24x2.125","57-507","Youth bikes and cruisers","Kids around 8 to 12"],
+      ["20x1.75","47-406","BMX, kids and folding bikes","The BMX standard wheel"],
+      ["20x2.125","57-406","Kids and BMX bikes","Kids around 6 to 9; fits any 20 in decimal wheel"],
+      ["16x1.75","47-305","Kids bikes","Younger riders"],
+      ["16x2.125","57-305","Kids bikes","Kids around 4 to 6"],
+      ["14x2.125","57-254","Kids bikes","Kids around 3 to 5"],
+      ["12-1/2 x 2-1/4","57-203","Kids bikes and balance bikes","Kids around 2 to 4; same wheel as 12x2.125","57-203"],
+      ["12x2.125","57-203","Kids bikes and balance bikes","Kids around 2 to 4"],
+      ["26 x 1-3/8","37-590","Older 3-speeds and vintage bikes","Not the same as 26 x 1.375","37-590"],
+      ["24 x 1-3/8","37-540","Wheelchairs and some older kids bikes","Fraction size; won't fit a 24x1.95 wheel","37-540"],
+      ["20 x 1-3/8","37-451","Folding bikes and older kids bikes","Fraction size; won't fit a 20x1.95 wheel","37-451"],
+      ["16 x 1-3/8","37-349","Folding bikes","Fraction size; won't fit a 16x2.125 wheel","37-349"]
+    ],
+    vintage:[
+      ["30x3","","Ford Model T front, 1908 to 1927 (early cars)","Beaded-edge clincher; needs a tube"],
+      ["30x3-1/2","","Ford Model T rear; front and rear on later US cars from 1918","Beaded-edge clincher; needs a tube"],
+      ["4.40/4.50-21","","Ford Model T with balloon tires, from 1924","On 21 in wire wheels"],
+      ["6.00-20","","Ford Model T truck",""],
+      ["F70-14","about 205/70R14","1970s cars","Approximate modern size"],
+      ["G70-15","about 225/70R15","Muscle cars","Approximate modern size"],
+      ["G78-15","about 215/75R15","1970s cars","Approximate modern size"],
+      ["G60-15","about 235/60R15","Muscle cars","Approximate modern size"],
+      ["L60-15","about 275/60R15","Big-block muscle car rears","Approximate modern size"]
+    ],
+    military:[
+      ["37x12.50R16.5","","HMMWV (Humvee)","Usually with run-flat inserts"],
+      ["9.00-20","","M35A2 deuce-and-a-half","Stock bias size; runs as rear duals"],
+      ["11.00-20","11R20","M35-series upgrade","Owners report more ground clearance; check fit"],
+      ["14.5R20","","M35A3","Needs A3-style rims"],
+      ["395/85R20","","FMTV/LMTV trucks; singled 6x6 conversions","About 43 in tall"]
+    ],
+    motorsport:[
+      ["10x4.50-5","4.50/10.0-5","Sprint kart front; rental karts","Most common kart front size"],
+      ["11x7.10-5","7.10/11.0-5","Sprint kart rear","Most common kart rear size"],
+      ["11x6.00-5","6.00/11.0-5","Sprint kart rear","Narrower rear used in some classes"],
+      ["10x4.00-5","4.00/10.0-5","Kid karts (Cadet, Micro, Mini), front","Check your class rules"],
+      ["11x5.00-5","5.00/11.0-5","Kid karts (Cadet, Micro, Mini), rear","Check your class rules"]
+    ],
+    toys:[
+      ["1.9 in","","1/10 scale rock crawlers","The most common crawler size; usually 12 mm hex","","1.9 RC crawler tires"],
+      ["2.2 in","","1/10 buggies, stadium trucks and crawlers","Fronts and rears often differ on buggies","","2.2 RC tires 12mm hex"],
+      ["2.2/3.0 in","","1/10 short course trucks","Short course wheel; 12 mm hex","","2.2/3.0 short course RC tires"],
+      ["2.8 in","","1/10 monster trucks and stadium trucks","Often sold already mounted","","2.8 RC tires pre-mounted 12mm hex"],
+      ["3.8 in","","1/8 scale monster trucks","17 mm hex","","3.8 RC tires pre-mounted 17mm hex"],
+      ["1/8 buggy","","1/8 scale buggies and truggies","17 mm hex","","1/8 buggy RC tires 17mm hex"],
+      ["26 mm","","1/10 touring and on-road cars","Width is what matters; 12 mm hex","","1/10 touring car RC tires 26mm"],
+      ["1.5 in","38 mm","RC airplane tail wheels, small park flyers","Match the axle hole","","1.5 inch RC airplane wheels"],
+      ["2.5 in","64 mm","RC airplane main wheels","Match the axle hole, often 5/32 in","","2.5 inch RC airplane wheels"],
+      ["3 in","76 mm","Larger RC airplanes","Rubber holds up on pavement","","3 inch RC airplane wheels"],
+      ["Ride-on wheel","","Kids' 6V, 12V and 24V ride-on cars","Plastic; buy wheels made for your model or add rubber traction strips","","ride on car rubber tires traction"],
+      ["100 mm","","Kids' kick scooters","608 bearings","","100mm scooter wheels with bearings"],
+      ["120 mm","","Pro and adult kick scooters","Check the fork has room","","120mm scooter wheels with bearings"],
+      ["8.5 x 2","8.5 in","Electric scooters","Air tire with tube; solid versions sold too","","8.5 x 2 electric scooter tire"],
+      ["10 x 2.5","10 in","Larger electric scooters","Air or solid","","10 x 2.5 electric scooter tire"],
+      ["6.5 in","","Hoverboards","The motor is in the wheel; replaced as a unit","","6.5 inch hoverboard wheel motor"],
+      ["52-54 mm","","Street skateboards","Hard wheels (99A) for skateparks","","52mm skateboard wheels 99A"],
+      ["60 mm","","Cruiser boards and longboards","Softer (78A to 85A) for rough pavement","","60mm cruiser skateboard wheels"]
+    ],
+    mobility:[
+      ["24 x 1-3/8","37-540","Manual wheelchair, rear","Standard everyday size","37-540"],
+      ["24 x 1","25-540","Manual wheelchair, rear","Narrower; sport and lightweight chairs","25-540"],
+      ["8 x 2","","Wheelchair and scooter casters","Check the axle size before ordering","8x2"],
+      ["3.00-4","260x85","Mobility scooters","One of the most common scooter sizes"],
+      ["2.80/2.50-4","9x3","Smaller scooters and power chairs","Often sold under either size"],
+      ["4.10/3.50-4","","Mid-size scooters","Also fits wheelbarrows and hand trucks"],
+      ["200x50","","Compact scooter and power chair casters","Usually solid","200x50"],
+      ["3.00-8","14x3","Larger scooters; some power chair drive wheels","Pneumatic or solid"],
+      ["4.00-8","","Some Pride Jazzy power chairs","Usually solid"],
+      ["3.50-10","","Larger outdoor scooters","For rough or uneven ground"]
+    ]
+  };
+  Object.keys(FINDERS).forEach(function(k){
+    var body=$id("sft-"+k),inp=$id("sf-"+k),note=$id("sfn-"+k);
+    function draw(){
+      var q=(inp.value||"").toLowerCase().trim(),n=0;body.textContent="";
+      FINDERS[k].forEach(function(r){
+        if(q&&r.slice(0,4).join(" ").toLowerCase().indexOf(q)<0)return;n++;
+        var tr=document.createElement("tr"),td0=document.createElement("td"),b=document.createElement("button");
+        if(k==="toys"){b=document.createElement("b");b.textContent=r[0];b.style.fontFamily="var(--mono)";}else{
+        b.type="button";b.className="chip";b.textContent=r[0];b.title="Decode this size";
+        b.addEventListener("click",function(){decIn.value=r[4]||r[0];location.hash="decoder";goDecode();});}
+        td0.appendChild(b);tr.appendChild(td0);
+        for(var i=1;i<4;i++){var td=document.createElement("td");td.textContent=r[i]||"—";tr.appendChild(td);}
+        var ts=document.createElement("td");
+        if(k==="vintage"&&!r[1]){var sb=document.createElement("button");sb.type="button";sb.className="shoplink";sb.style.background="none";sb.style.cursor="pointer";sb.textContent="Specialists";sb.addEventListener("click",function(){var d=$id("vintage-dealers");if(d)d.scrollIntoView({behavior:"smooth",block:"start"});});ts.appendChild(sb);}
+        else if(k==="aviation"){ts.appendChild(airQuote("Get a quote",r[0]));}
+        else{var mq=mountQuery(k,r);ts.appendChild(amzLink(mq?"Tire only":"Amazon",finderQuery(k,r)));if(mq){ts.appendChild(document.createTextNode(" "));ts.appendChild(amzLink("Mounted",mq));}}
+        tr.appendChild(ts);
+        tr.appendChild(installCell(k,installLevel(k,r),r[4]||r[0]));
+        body.appendChild(tr);
+      });
+      note.textContent=n?n+" size"+(n===1?"":"s")+" shown."+(k==="toys"?"":" Tap a size to decode it."):"No match. Try a shorter search, or ";
+      if(!n){var na=document.createElement("a");na.href="#request";na.setAttribute("data-rqcat",k);na.setAttribute("data-rqsize",inp.value.trim());na.textContent="tell us what you need";note.appendChild(na);note.appendChild(document.createTextNode("."));}
+    }
+    inp.addEventListener("input",draw);draw();
+  });
+
+  /* ---------- can't find your tire? request form ---------- */
+  var RQ_TERM={toys:"RC tire",bicycles:"bike tire",mobility:"mobility scooter tire",lawn:"lawn mower tire",motorsport:"go kart tire",motorcycle:"motorcycle tire",racing:"racing tire",atv:"ATV tire",cars:"tire",trucks:"truck tire",trailer:"trailer tire",rv:"RV tire",vintage:"tire",forklift:"forklift tire",semi:"truck tire",farm:"tractor tire",construction:"skid steer tire",military:"military truck tire",aviation:"aircraft tire","":"tire"};
+  function catName(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id)return CATS[i].n;}return "";}
+  // Short call-to-action on every category page and the decoder
+  Object.keys(RQ_TERM).concat(["decoder"]).forEach(function(k){
+    if(!k)return;
+    var sec=$id("v-"+k);if(!sec)return;
+    var wrap=document.createElement("div");wrap.className="wrap stack";
+    var box=document.createElement("div");box.className="rqcta";
+    var txt=document.createElement("div");
+    var h=document.createElement("b");h.textContent="Can't find your tire?";
+    var p=document.createElement("p");p.textContent=k==="aviation"?"Tell us your aircraft and the tire you need, and we'll research it.":"Tell us what you need. We'll show you shopping options right away and look at adding it.";
+    txt.appendChild(h);txt.appendChild(p);
+    var a=document.createElement("a");a.className="btn yellow";a.href="#request";a.setAttribute("data-rqcat",k==="decoder"?"":k);a.textContent="Tell us what you need";
+    box.appendChild(txt);box.appendChild(a);wrap.appendChild(box);
+    var shop=sec.querySelector(".shop");
+    if(shop&&shop.parentNode&&shop.parentNode.parentNode===sec)sec.insertBefore(wrap,shop.parentNode);else sec.appendChild(wrap);
+  });
+  // The one shared form
+  var rqBox=$id("rq-box"),rqBack=$id("rq-back");
+  var f=document.createElement("form");f.noValidate=true;
+  var g=document.createElement("div");g.className="fgrid";
+  function field(id,label,hint,tag,full){
+    var d=document.createElement("div");d.className="field"+(full?" full":"");
+    var l=document.createElement("label");l.htmlFor=id;l.textContent=label;
+    var i=document.createElement(tag||"input");i.id=id;
+    if(!tag){i.type=id==="rq-email"?"email":"text";i.autocomplete="off";}else if(tag==="textarea"){i.rows=3;}
+    d.appendChild(l);d.appendChild(i);
+    if(hint){var hh=document.createElement("span");hh.className="hint";hh.textContent=hint;d.appendChild(hh);}
+    g.appendChild(d);return i;
+  }
+  var rqCat=field("rq-cat","What kind of tire?","","select");
+  var o0=document.createElement("option");o0.value="";o0.textContent="Not sure";rqCat.appendChild(o0);
+  CATS.forEach(function(c){if(!c.live)return;var o=document.createElement("option");o.value=c.id;o.textContent=c.n;rqCat.appendChild(o);});
+  var rqEq=field("rq-eq","Vehicle or equipment","Year, make and model, like 2015 Honda Pioneer 700");
+  var rqSize=field("rq-size","Tire size, if you know it","From the sidewall");
+  var rqEmail=field("rq-email","Email (optional)","Only used to tell you if we add your tire");
+  var rqNotes=field("rq-notes","Anything else?","","textarea",true);
+  var hp=document.createElement("input");hp.type="text";hp.name="website";hp.tabIndex=-1;hp.autocomplete="off";hp.className="hp";hp.setAttribute("aria-hidden","true");
+  var err=document.createElement("p");err.className="note";err.setAttribute("role","alert");
+  var btn=document.createElement("button");btn.className="btn yellow";btn.type="submit";
+  var out=document.createElement("div");out.className="rqout";out.setAttribute("aria-live","polite");
+  f.appendChild(g);f.appendChild(hp);f.appendChild(err);f.appendChild(btn);
+  rqBox.appendChild(f);rqBox.appendChild(out);
+  function rqSync(){btn.textContent="Show me options";}
+  rqCat.addEventListener("change",rqSync);rqSync();
+  function openRequest(cat,size){
+    rqCat.value=RQ_TERM.hasOwnProperty(cat)?cat:"";rqSync();
+    if(size)rqSize.value=size;
+    out.textContent="";err.textContent="";
+    var nm=catName(cat);
+    if(nm){rqBack.href=pageHref(cat);rqBack.textContent="Back to "+nm;}else{rqBack.href=pageHref("home");rqBack.textContent="Back to all tires";}
+  }
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest("[data-rqcat]");
+    if(!a)return;
+    openRequest(a.getAttribute("data-rqcat")||"",a.getAttribute("data-rqsize")||"");
+  });
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var k=rqCat.value,E=rqEq.value.trim(),S=rqSize.value.trim(),N=rqNotes.value.trim(),M=rqEmail.value.trim();
+    out.textContent="";
+    if(!E&&!S){err.textContent="Tell us the vehicle or equipment, or the tire size.";return;}
+    if(M&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(M)){err.textContent="That email doesn't look right. Fix it, or leave it blank.";return;}
+    err.textContent="";btn.disabled=true;
+    var term=RQ_TERM[k],qs=[];
+    if(term){
+      if(S&&k!=="aviation")qs.push([S+" "+term,"Search Amazon for "+S]);
+      if(E&&k!=="aviation")qs.push([E+" "+term,"Search Amazon for "+E+" tires"]);
+      if(S&&E&&k!=="aviation")qs.push([E+" "+S,"Search Amazon for both"]);
+      if(S&&/^(lawn|atv|trailer|mobility)$/.test(k))qs.push([S+" tire and wheel assembly","Search Amazon for "+S+" mounted on a wheel"]);
+    }
+    if(k==="aviation"){
+      var at=document.createElement("b");at.textContent="Shopping options";out.appendChild(at);
+      var arw=document.createElement("div");arw.className="chips";arw.appendChild(airQuote(S?"Get quotes for "+S:"Get aircraft tire quotes",S));out.appendChild(arw);
+      var anote=document.createElement("p");anote.className="note";anote.textContent="Tires for FAA-certificated aircraft aren't sold on Amazon. The quote form sends your request to aviation tire suppliers.";out.appendChild(anote);
+    }
+    if(qs.length){
+      var t=document.createElement("b");t.textContent="Shopping options";out.appendChild(t);
+      var row=document.createElement("div");row.className="chips";
+      qs.forEach(function(q){row.appendChild(amzLink(q[1],q[0].slice(0,120)));});
+      out.appendChild(row);
+      var d=document.createElement("p");d.className="note";d.textContent="As an Amazon Associate I earn from qualifying purchases. These are search results, so confirm the size before you buy.";out.appendChild(d);
+      if(k==="aviation"){var av=document.createElement("p");av.className="note";av.textContent="Aircraft tires must be approved for your aircraft. Buy only a TSO-approved tire (or one labeled for experimental and light-sport use, if that's what you fly) that matches the size and ply rating in your parts catalog.";out.appendChild(av);}
+      if(k==="vintage"){var v=document.createElement("p");v.className="note";var va=document.createElement("a");va.href=pageHref("vintage");va.textContent="the vintage specialists";v.appendChild(document.createTextNode("Looking for a period-correct size? Try "));v.appendChild(va);v.appendChild(document.createTextNode(". They carry sizes Amazon doesn't."));out.appendChild(v);}
+    }else if(k==="aviation"){
+      var ap=document.createElement("p");ap.textContent="Aircraft tires have to match your aircraft's approved parts, so we don't link to general shopping sites. Check your parts catalog, and talk with your mechanic or an aviation supplier.";out.appendChild(ap);
+    }
+    var st=document.createElement("p");st.className="note";st.textContent="Sending your request...";out.appendChild(st);
+    fetch("/api/request",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({page:k||"not sure",equipment:E,size:S,notes:N,email:M,website:hp.value})})
+      .then(function(r){return r.json();}).catch(function(){return {saved:false};})
+      .then(function(res){
+        st.textContent=res&&res.saved?"Thanks. We've saved your request and will look at adding it to the site.":"Thanks. We couldn't save your request just now, but the shopping options above still work.";
+        btn.disabled=false;
+      });
+  });
+
+  /* ---------- trailer tire age check ---------- */
+  var MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var dotIn=$id("dot-code"),dotOut=$id("dot-out");
+  function dotRun(){
+    var v=(dotIn.value||"").replace(/\D/g,"");
+    if(v.length!==4){dotOut.textContent="Enter the last four digits of the DOT code, like 2324.";return;}
+    var wk=+v.slice(0,2),yr=2000+(+v.slice(2));
+    if(wk<1||wk>53){dotOut.textContent="The first two digits are the week, from 01 to 53. Check the code and try again.";return;}
+    var made=new Date(Date.UTC(yr,0,1+(wk-1)*7)),yrs=(Date.now()-made.getTime())/(365.25*864e5);
+    if(yrs<0){dotOut.textContent="That date is in the future. Check the code and try again.";return;}
+    dotOut.textContent="Made in week "+wk+" of "+yr+", around "+MONTHS[made.getUTCMonth()]+". That makes the tire about "+yrs.toFixed(1)+" years old."+(yrs>=5?" Many tire makers suggest a close inspection or replacement at this age, even if the tread looks good. Check your tire maker's guidance.":"");
+  }
+  $id("dot-go").addEventListener("click",dotRun);
+  dotIn.addEventListener("keydown",function(e){if(e.key==="Enter")dotRun();});
+  dotRun();
+
+  var VIEWS=Object.keys(PAGES);
+  function route(){
+    var h=(location.hash||"").replace("#","");
+    // An old link like /#forklift goes to the real forklift page.
+    if(h&&!TOOLS[h]&&PAGES[h]&&h!==PAGE_VIEW&&!document.getElementById("v-"+h)){location.replace(PAGES[h]);return;}
+    if(!document.getElementById("v-"+h))h=PAGE_VIEW;
+    VIEWS.forEach(function(v){var el=document.getElementById("v-"+v);if(el)el.hidden=(v!==h);});
+    var here=TOOLS[h]?PAGES[h]:location.pathname;
+    document.querySelectorAll(".nav a, .catbar a").forEach(function(a){
+      var href=a.getAttribute("href");
+      if(href===here||href==="#"+h||(TOOLS[h]&&href===PAGES[h]))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
+    });
+    var cur=document.querySelector(".catbar a[aria-current]"),bar=document.getElementById("catbar");
+    if(cur&&bar)bar.scrollLeft=Math.max(0,cur.offsetLeft-bar.clientWidth/2+cur.offsetWidth/2);
+    if(location.hash)window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange",route);route();
+})();
+</script>
+</body>
+</html>
