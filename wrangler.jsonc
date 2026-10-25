@@ -5,5 +5,11 @@
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"
-  }
+  },
+  "kv_namespaces": [
+    {
+      "binding": "REQUESTS",
+      "id": "706738c041bf482cb81a213867811e43"
+    }
+  ]
 }
