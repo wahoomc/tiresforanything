@@ -1668,6 +1668,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 (function(){
   var PREVIEW=true;
   var SHOPQ={forklift:"forklift tire service",farm:"tractor tire service",construction:"skid steer tire service",atv:"ATV tire shop",aviation:"aircraft maintenance shop",military:"truck tire shop",motorcycle:"motorcycle tire shop",vintage:"classic car tire shop",trailer:"trailer tire shop",rv:"RV tire service",racing:"performance tire shop"};
+  // Aircraft sizes like 6.00-6 are also lawn and cart sizes, so aircraft searches name aircraft-only tire lines.
+  function airQ(s){s=String(s).trim();return (/^(5\.00-5|5\.00-4|6\.00-6|7\.00-6|8\.00-6|8\.50-6|15x6\.00-6)$/i.test(s)?"Goodyear Flight Custom III "+s:s)+" aircraft tire TSO";}
   var QCAT={forklift:"Forklift",farm:"Farm",construction:"Construction",semi:"Commercial",military:"Military",rv:"RV",aviation:"Aviation"};
   /* ---------- categories ---------- */
   var GROUPS=[["small","Small wheels"],["power","Powersports & racing"],["road","On the road"],["heavy","Heavy duty"],["air","Aircraft"]];
@@ -2067,7 +2069,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       var sh=document.createElement("div");sh.className="row";sh.style.alignItems="center";
       var lb=document.createElement("span");lb.className="note";lb.textContent="Shop on Amazon:";sh.appendChild(lb);
       var rz=raw.trim(),small=/^(lawn|atv|trailer|mobility)$/.test(lk);
-      sh.appendChild(amzLink(small?"Tire only":"This size",rz+" "+term));
+      sh.appendChild(amzLink(small?"Tire only":"This size",lk==="aviation"?airQ(rz):rz+" "+term));
       if(small)sh.appendChild(amzLink("Mounted on a wheel",rz+" tire and wheel assembly"));
       host.appendChild(sh);
       var lvl=/^(lawn|mobility|bicycles|motorsport)$/.test(lk)||(lk==="atv"&&/golf/i.test(r.kind))?"diy":(lk==="semi"||/OTR|Farm tractor rear|Commercial|military|Older truck/i.test(r.kind))?"pro":"shop";
@@ -2154,7 +2156,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     motorsport:[["Go-kart tires","go kart tires 10x4.50-5"],["Low-pressure tire gauge","low pressure tire gauge 0-15 psi"],["Tire pyrometer","tire pyrometer"],["Kart stand","go kart stand"]],
     forklift:[["Press-on forklift tires","press on forklift tire"],["Pneumatic forklift tires","pneumatic forklift tire"],["Solid flat-proof forklift tires","solid forklift tire"],["Tread depth gauge","tire tread depth gauge"]],
     farm:[["Compact tractor tires","compact tractor tires"],["Row-crop tractor tires","tractor tire 18.4-38"],["Front tractor tires (F-2)","front tractor tire 3 rib"],["Tractor tire inner tubes","tractor tire inner tube"],["Tractor valve stems","tractor tire valve stem"]],
-    aviation:[["6.00-6 aircraft tires","6.00-6 aircraft tire"],["Aircraft inner tubes","aircraft tire inner tube"],["Tire pressure gauge","dial tire pressure gauge"]],
+    aviation:[["6.00-6 aircraft tires",airQ("6.00-6")],["Aircraft inner tubes","Michelin Air Stop aircraft inner tube"],["Tire pressure gauge","dial tire pressure gauge"]],
     semi:[["11R22.5 steer tires","11R22.5 steer tire"],["11R22.5 drive tires","11R22.5 drive tire"],["Dual-foot truck tire gauge","dual foot truck tire pressure gauge"],["Tread depth gauge","truck tire tread depth gauge"],["Valve stem extenders","truck dual wheel valve stem extenders"]],
     construction:[["Skid steer tires","skid steer tires 12-16.5"],["Backhoe tires","backhoe tires"],["Loader tires","loader tire 20.5-25"],["Heavy-duty tire inflator","heavy duty tire inflator"]]
   };
@@ -2199,7 +2201,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(k==="farm")return r[0]+(/skid/i.test(r[2])&&!/tractor/i.test(r[2])?" tire":" tractor tire");
     if(k==="construction")return r[0]+(/skid/i.test(r[2])?" skid steer tire":/backhoe/i.test(r[2])?" backhoe tire":/loader/i.test(r[2])?" loader tire":/grader/i.test(r[2])?" grader tire":" tire");
     if(k==="semi")return r[0]+" truck tire";
-    if(k==="aviation")return r[0]+" aircraft tire";
+    if(k==="aviation")return airQ(r[0]);
     if(k==="lawn")return r[0]+(/hand truck|wheelbarrow/i.test(r[2])?" tire":" lawn mower tire");
     if(/^20 to/.test(r[0]))return "lifted golf cart tires";
     if(k==="atv")return r[0]+(/golf|EZGO|Club Car/i.test(r[2])?" golf cart tire":/UTV|RZR/i.test(r[2])?" UTV tire":" ATV tire");
@@ -2409,7 +2411,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     err.textContent="";btn.disabled=true;
     var term=RQ_TERM[k],qs=[];
     if(term){
-      if(S)qs.push([S+" "+term,"Search Amazon for "+S]);
+      if(S)qs.push([k==="aviation"?airQ(S):S+" "+term,"Search Amazon for "+S]);
       if(E)qs.push([E+" "+term,"Search Amazon for "+E+" tires"]);
       if(S&&E)qs.push([E+" "+S,"Search Amazon for both"]);
       if(S&&/^(lawn|atv|trailer|mobility)$/.test(k))qs.push([S+" tire and wheel assembly","Search Amazon for "+S+" mounted on a wheel"]);
