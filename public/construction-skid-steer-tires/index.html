@@ -291,7 +291,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     </nav>
   </div>
 </header>
-<nav class="catbar" aria-label="Tire categories"><div class="wrap" id="catbar"><div class="cg"><span class="cgl">Small wheels</span><a href="/bike-tires/">Bicycles &amp; e-bikes</a><a href="/wheelchair-mobility-scooter-tires/">Mobility &amp; medical</a><a href="/rc-toy-ride-on-tires/">Toys, RC &amp; ride-ons</a><a href="/lawn-garden-tires/">Lawn &amp; garden</a><a href="/go-kart-tires/">Go-karts &amp; karting</a></div><div class="cg"><span class="cgl">Powersports &amp; racing</span><a href="/motorcycle-tires/">Motorcycles</a><a href="/race-car-tires/">Race cars</a><a href="/atv-utv-golf-cart-tires/">ATV, UTV &amp; golf</a></div><div class="cg"><span class="cgl">On the road</span><a href="/passenger-car-tires/">Passenger cars</a><a href="/light-truck-suv-tires/">Light trucks &amp; SUVs</a><a href="/trailer-tires/">Trailers</a><a href="/rv-motorhome-tires/">RV &amp; motorhome</a><a href="/vintage-antique-tires/">Vintage &amp; antique</a></div><div class="cg"><span class="cgl">Heavy duty</span><a href="/forklift-tires/">Forklift &amp; industrial</a><a href="/semi-truck-tires/">Semi &amp; commercial</a><a href="/farm-tractor-tires/">Farm &amp; ag</a><a href="/construction-skid-steer-tires/">Construction &amp; OTR</a><a href="/military-truck-tires/">Military &amp; specialty</a></div><div class="cg"><span class="cgl">Aircraft</span><a href="/aircraft-tires/">Aviation</a></div></div></nav>
+<nav class="catbar" aria-label="Tire categories"><div class="wrap" id="catbar"><div class="cg"><span class="cgl">Small wheels</span><a href="/bike-tires/">Bicycles &amp; e-bikes</a><a href="/wheelchair-mobility-scooter-tires/">Mobility &amp; medical</a><a href="/caster-wheels/">Casters &amp; carts</a><a href="/rc-toy-ride-on-tires/">Toys, RC &amp; ride-ons</a><a href="/lawn-garden-tires/">Lawn &amp; garden</a><a href="/go-kart-tires/">Go-karts &amp; karting</a></div><div class="cg"><span class="cgl">Powersports &amp; racing</span><a href="/motorcycle-tires/">Motorcycles</a><a href="/race-car-tires/">Race cars</a><a href="/atv-utv-golf-cart-tires/">ATV, UTV &amp; golf</a></div><div class="cg"><span class="cgl">On the road</span><a href="/passenger-car-tires/">Passenger cars</a><a href="/light-truck-suv-tires/">Light trucks &amp; SUVs</a><a href="/trailer-tires/">Trailers</a><a href="/rv-motorhome-tires/">RV &amp; motorhome</a><a href="/vintage-antique-tires/">Vintage &amp; antique</a></div><div class="cg"><span class="cgl">Heavy duty</span><a href="/forklift-tires/">Forklift &amp; industrial</a><a href="/semi-truck-tires/">Semi &amp; commercial</a><a href="/farm-tractor-tires/">Farm &amp; ag</a><a href="/construction-skid-steer-tires/">Construction &amp; OTR</a><a href="/military-truck-tires/">Military &amp; specialty</a></div><div class="cg"><span class="cgl">Aircraft</span><a href="/aircraft-tires/">Aviation</a></div></div></nav>
 <div class="proto"><div class="wrap">Early preview. New guides and tire sizes are being added every week.</div></div>
 
 <main>
@@ -485,7 +485,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 <script>
 (function(){
   // Each view has its own real page. Tool views (decoder, quote, request) also live on every page so in-page links work.
-  var PAGES={home:"/",cars:"/passenger-car-tires/",trucks:"/light-truck-suv-tires/",forklift:"/forklift-tires/",aviation:"/aircraft-tires/",motorcycle:"/motorcycle-tires/",farm:"/farm-tractor-tires/",semi:"/semi-truck-tires/",trailer:"/trailer-tires/",construction:"/construction-skid-steer-tires/",lawn:"/lawn-garden-tires/",atv:"/atv-utv-golf-cart-tires/",rv:"/rv-motorhome-tires/",mobility:"/wheelchair-mobility-scooter-tires/",toys:"/rc-toy-ride-on-tires/",motorsport:"/go-kart-tires/",racing:"/race-car-tires/",bicycles:"/bike-tires/",vintage:"/vintage-antique-tires/",military:"/military-truck-tires/",decoder:"/tire-size-decoder/",quote:"/tire-quotes/",request:"/find-my-tire/",partners:"/for-dealers/",legal:"/terms/",about:"/about/",privacy:"/privacy/"};
+  var PAGES={home:"/",cars:"/passenger-car-tires/",trucks:"/light-truck-suv-tires/",forklift:"/forklift-tires/",aviation:"/aircraft-tires/",motorcycle:"/motorcycle-tires/",farm:"/farm-tractor-tires/",semi:"/semi-truck-tires/",trailer:"/trailer-tires/",construction:"/construction-skid-steer-tires/",lawn:"/lawn-garden-tires/",atv:"/atv-utv-golf-cart-tires/",rv:"/rv-motorhome-tires/",mobility:"/wheelchair-mobility-scooter-tires/",casters:"/caster-wheels/",toys:"/rc-toy-ride-on-tires/",motorsport:"/go-kart-tires/",racing:"/race-car-tires/",bicycles:"/bike-tires/",vintage:"/vintage-antique-tires/",military:"/military-truck-tires/",decoder:"/tire-size-decoder/",quote:"/tire-quotes/",request:"/find-my-tire/",partners:"/for-dealers/",legal:"/terms/",about:"/about/",privacy:"/privacy/"};
   var TOOLS={decoder:1,quote:1,request:1};
   function pageHref(v){return TOOLS[v]?"#"+v:(PAGES[v]||"/");}
   var PAGE_VIEW=document.body.getAttribute("data-page")||"home";
@@ -501,6 +501,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   var CATS=[
     {g:"small",id:"bicycles",n:"Bicycles & e-bikes",d:"Road, gravel, mountain, BMX, fat, kids",live:true,m:"shop"},
     {g:"small",id:"mobility",n:"Mobility & medical",d:"Wheelchairs, mobility scooters, carts",live:true,m:"shop"},
+    {g:"small",id:"casters",n:"Casters & carts",d:"Office chairs, utility carts, shelving, tool chests",live:true,m:"shop"},
     {g:"small",id:"toys",n:"Toys, RC & ride-ons",d:"RC cars and planes, ride-on cars, scooters, skateboards",live:true,m:"shop"},
     {g:"small",id:"lawn",n:"Lawn & garden",d:"Riding mower, zero-turn, wheelbarrow, flat-free",live:true,m:"shop"},
     {g:"small",id:"motorsport",n:"Go-karts & karting",d:"Sprint, cadet and rental karts",live:true,m:"shop"},
@@ -986,6 +987,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     motorsport:[["Go-kart tires","go kart tires 10x4.50-5"],["Low-pressure tire gauge","low pressure tire gauge 0-15 psi"],["Tire pyrometer","tire pyrometer"],["Kart stand","go kart stand"]],
     forklift:[["Press-on forklift tires","press on forklift tire"],["Pneumatic forklift tires","pneumatic forklift tire"],["Solid flat-proof forklift tires","solid forklift tire"],["Tread depth gauge","tire tread depth gauge"]],
     farm:[["Compact tractor tires","compact tractor tires"],["Row-crop tractor tires","tractor tire 18.4-38"],["Front tractor tires (F-2)","front tractor tire 3 rib"],["Tractor tire inner tubes","tractor tire inner tube"],["Tractor valve stems","tractor tire valve stem"]],
+    casters:[["Office chair casters","office chair casters 7/16 grip ring"],["Locking plate casters","swivel plate casters with brake set of 4"],["Heavy-duty casters","heavy duty casters polyurethane"],["Caster wheel replacements","replacement caster wheel only"]],
     toys:[["RC tire glue","RC tire CA glue"],["RC tire foam inserts","RC tire foam inserts"],["RC beadlock wheels","RC crawler beadlock wheels 1.9"],["608 skate and scooter bearings","608 bearings skateboard scooter"],["Ride-on car rubber tires","ride on car rubber tires"]],
     aviation:[["Tire pressure gauge","dial tire pressure gauge"],["Tire changing tools","tire spoons bead breaker"]],
     semi:[["11R22.5 steer tires","11R22.5 steer tire"],["11R22.5 drive tires","11R22.5 drive tire"],["Dual-foot truck tire gauge","dual foot truck tire pressure gauge"],["Tread depth gauge","truck tire tread depth gauge"],["Valve stem extenders","truck dual wheel valve stem extenders"]],
@@ -1009,7 +1011,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   });
   function mapsUrl(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q+" near me");}
   function installLevel(k,r){
-    if(/^(lawn|mobility|bicycles|motorsport|toys)$/.test(k))return "diy";
+    if(/^(lawn|mobility|bicycles|motorsport|toys|casters)$/.test(k))return "diy";
     if(k==="atv")return /golf|EZGO|Club Car/i.test(r[2])?"diy":"shop";
     if(k==="semi")return "pro";
     if(k==="farm")return /^(18\.4-38|520\/85R38)$/.test(r[0])?"pro":"shop";
@@ -1035,7 +1037,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     return null;
   }
   function finderQuery(k,r){
-    if(k==="toys")return r[5];
+    if(k==="toys"||k==="casters")return r[5];
     if(k==="forklift")return r[0]+" forklift tire";
     if(k==="farm")return r[0]+(/skid/i.test(r[2])&&!/tractor/i.test(r[2])?" tire":" tractor tire");
     if(k==="construction")return r[0]+(/skid/i.test(r[2])?" skid steer tire":/backhoe/i.test(r[2])?" backhoe tire":/loader/i.test(r[2])?" loader tire":/grader/i.test(r[2])?" grader tire":" tire");
@@ -1154,6 +1156,22 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       ["10x4.00-5","4.00/10.0-5","Kid karts (Cadet, Micro, Mini), front","Check your class rules"],
       ["11x5.00-5","5.00/11.0-5","Kid karts (Cadet, Micro, Mini), rear","Check your class rules"]
     ],
+    casters:[
+      ["2 in, 7/16 x 7/8 stem","11 x 22 mm","Most office and gaming chairs","Grip ring stem; pull the old one straight out","","office chair casters 7/16 x 7/8 grip ring stem"],
+      ["3 in, 7/16 x 7/8 stem","11 x 22 mm","Big office chairs and drafting stools","Rollerblade-style wheels roll smoother","","3 inch office chair casters rollerblade style"],
+      ["Soft chair wheel","","Office chairs on hardwood, tile or laminate","Polyurethane or rubber; won't scratch","","office chair casters for hardwood floors"],
+      ["10 mm stem","","Some chairs, often flat-pack brands","Measure before ordering","","office chair casters 10mm stem"],
+      ["2 in plate","","Light carts, plant stands, small furniture","Four-screw top plate","","2 inch swivel plate casters with brake"],
+      ["3 in plate","","Utility carts, rolling shelves, workbenches","Two with brakes, two without","","3 inch swivel plate casters with brake"],
+      ["4 in plate","","Tool chests, workbenches, loaded shop carts","Check the load per caster","","4 inch heavy duty swivel plate casters with brake"],
+      ["5 x 2 in plate","","Rolling tool chests and mechanic carts","Common tool chest size","","5 x 2 tool box casters"],
+      ["6 in plate","","Heavy equipment carts and dollies","Polyurethane on steel","","6 inch heavy duty plate casters"],
+      ["Threaded stem","1/2-13 or 3/8-16","Wire shelving, some carts and stands","Match the thread size","","threaded stem casters 1/2-13"],
+      ["Wire shelving caster","","Rolling wire shelving units","Match the shelf brand's post","","wire shelving casters"],
+      ["Expanding stem","","Tube-frame carts, stools and walkers","Sized to the inside of the tube","","expanding stem casters"],
+      ["Low-profile furniture","","Beds, dressers, couches","Short, so the furniture sits low","","low profile furniture casters"],
+      ["Appliance rollers","","Moving a washer, dryer or fridge","Slide under, then roll","","appliance rollers"]
+    ],
     toys:[
       ["1.9 in","","1/10 scale rock crawlers","The most common crawler size; usually 12 mm hex","","1.9 RC crawler tires"],
       ["2.2 in","","1/10 buggies, stadium trucks and crawlers","Fronts and rears often differ on buggies","","2.2 RC tires 12mm hex"],
@@ -1194,7 +1212,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       FINDERS[k].forEach(function(r){
         if(q&&r.slice(0,4).join(" ").toLowerCase().indexOf(q)<0)return;n++;
         var tr=document.createElement("tr"),td0=document.createElement("td"),b=document.createElement("button");
-        if(k==="toys"){b=document.createElement("b");b.textContent=r[0];b.style.fontFamily="var(--mono)";}else{
+        if(k==="toys"||k==="casters"){b=document.createElement("b");b.textContent=r[0];b.style.fontFamily="var(--mono)";}else{
         b.type="button";b.className="chip";b.textContent=r[0];b.title="Decode this size";
         b.addEventListener("click",function(){decIn.value=r[4]||r[0];location.hash="decoder";goDecode();});}
         td0.appendChild(b);tr.appendChild(td0);
@@ -1207,14 +1225,14 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
         tr.appendChild(installCell(k,installLevel(k,r),r[4]||r[0]));
         body.appendChild(tr);
       });
-      note.textContent=n?n+" size"+(n===1?"":"s")+" shown."+(k==="toys"?"":" Tap a size to decode it."):"No match. Try a shorter search, or ";
+      note.textContent=n?n+" size"+(n===1?"":"s")+" shown."+(k==="toys"||k==="casters"?"":" Tap a size to decode it."):"No match. Try a shorter search, or ";
       if(!n){var na=document.createElement("a");na.href="#request";na.setAttribute("data-rqcat",k);na.setAttribute("data-rqsize",inp.value.trim());na.textContent="tell us what you need";note.appendChild(na);note.appendChild(document.createTextNode("."));}
     }
     inp.addEventListener("input",draw);draw();
   });
 
   /* ---------- can't find your tire? request form ---------- */
-  var RQ_TERM={toys:"RC tire",bicycles:"bike tire",mobility:"mobility scooter tire",lawn:"lawn mower tire",motorsport:"go kart tire",motorcycle:"motorcycle tire",racing:"racing tire",atv:"ATV tire",cars:"tire",trucks:"truck tire",trailer:"trailer tire",rv:"RV tire",vintage:"tire",forklift:"forklift tire",semi:"truck tire",farm:"tractor tire",construction:"skid steer tire",military:"military truck tire",aviation:"aircraft tire","":"tire"};
+  var RQ_TERM={casters:"caster wheel",toys:"RC tire",bicycles:"bike tire",mobility:"mobility scooter tire",lawn:"lawn mower tire",motorsport:"go kart tire",motorcycle:"motorcycle tire",racing:"racing tire",atv:"ATV tire",cars:"tire",trucks:"truck tire",trailer:"trailer tire",rv:"RV tire",vintage:"tire",forklift:"forklift tire",semi:"truck tire",farm:"tractor tire",construction:"skid steer tire",military:"military truck tire",aviation:"aircraft tire","":"tire"};
   function catName(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id)return CATS[i].n;}return "";}
   // Short call-to-action on every category page and the decoder
   Object.keys(RQ_TERM).concat(["decoder"]).forEach(function(k){

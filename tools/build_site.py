@@ -48,6 +48,8 @@ PAGES = {
            "Class A, B and C motorhome tire sizes, how old is too old, load and pressure, and where to get them installed."),
     "mobility": ("/wheelchair-mobility-scooter-tires/", "Wheelchair and Mobility Scooter Tires",
                  "Wheelchair, power chair and mobility scooter tire sizes, solid vs pneumatic, and caster wheels."),
+    "casters": ("/caster-wheels/", "Caster Wheels: Office Chair, Cart, Shelving and Tool Chest Casters",
+                "How to pick replacement casters for office chairs, utility carts, rolling shelves, tool chests and furniture: stem vs plate, load, wheel size and floor type."),
     "toys": ("/rc-toy-ride-on-tires/", "RC Car, RC Plane, Ride-On and Scooter Tires and Wheels",
              "Tire and wheel sizes for RC cars and trucks, RC airplanes, kids' ride-on cars, kick and electric scooters, hoverboards and skateboards."),
     "motorsport": ("/go-kart-tires/", "Go-Kart Tires: Sizes and Compounds",
@@ -149,7 +151,7 @@ def build_site():
 
 # ---------- blog ----------
 GROUPS = [("small", "Small wheels"), ("power", "Powersports & racing"), ("road", "On the road"), ("heavy", "Heavy duty"), ("air", "Aircraft")]
-CATS = [("small", "bicycles", "Bicycles & e-bikes"), ("small", "mobility", "Mobility & medical"), ("small", "toys", "Toys, RC & ride-ons"),
+CATS = [("small", "bicycles", "Bicycles & e-bikes"), ("small", "mobility", "Mobility & medical"), ("small", "casters", "Casters & carts"), ("small", "toys", "Toys, RC & ride-ons"),
         ("small", "lawn", "Lawn & garden"), ("small", "motorsport", "Go-karts & karting"), ("power", "motorcycle", "Motorcycles"),
         ("power", "racing", "Race cars"), ("power", "atv", "ATV, UTV & golf"), ("road", "cars", "Passenger cars"),
         ("road", "trucks", "Light trucks & SUVs"), ("road", "trailer", "Trailers"), ("road", "rv", "RV & motorhome"),
@@ -209,6 +211,8 @@ def blog_page(body, title, desc, path, jsonld="", img="/og/default.png", og_type
 """
 
 BLOG = [  # slug, tab title, Google description
+    ("how-to-replace-office-chair-casters", "How to Replace Office Chair Casters (and Pick Cart and Shelf Casters) | Tires for Anything",
+     "Swap office chair casters in minutes, pick wheels that won't scratch hardwood, and choose plate, stem or threaded casters with the right load for carts, shelves and tool chests."),
     ("tire-balancing-beads-vs-wheel-weights", "Balance Beads vs. Wheel Weights: What to Use and When | Tires for Anything",
      "When does tire balancing matter? Balance beads vs. stick-on vs. clip-on wheel weights for motorcycles, cars, trucks, semis, RVs and trailers."),
     ("tire-wheel-rim-definitions", "Tire vs. Wheel vs. Rim (Plus Casters & Flat-Proof Tires) | Tires for Anything",
