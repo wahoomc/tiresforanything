@@ -193,6 +193,23 @@ form.quote{display:grid;gap:14px;background:var(--surface);border:1px solid var(
 footer{border-top:1px solid var(--line);padding-block:24px 40px;color:var(--muted);font-size:.86rem}
 footer .wrap{display:grid;gap:10px}
 
+/* category bar */
+.catbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.catbar .wrap{display:flex;flex-wrap:wrap;gap:4px 22px;padding-block:8px}
+.cg{display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.cgl{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-right:4px;white-space:nowrap}
+.catbar a,.catbar .soon{font-size:.85rem;font-weight:600;padding:4px 8px;border-radius:999px;white-space:nowrap;text-decoration:none}
+.catbar a{color:var(--ink)}
+.catbar a:hover{background:var(--surface-2)}
+.catbar a[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
+.catbar .soon{color:var(--muted);font-weight:400;opacity:.75;cursor:default}
+.cgh{grid-column:1/-1;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;padding-top:10px;border-top:1px solid var(--line);margin-top:4px}
+.cgh:first-child{border-top:0;margin-top:0;padding-top:0}
+@media (max-width:760px){
+  .catbar .wrap{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .catbar .wrap::-webkit-scrollbar{display:none}
+  .cg{flex-wrap:nowrap}
+}
 /* amazon shop */
 .shop{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:16px;display:grid;gap:10px}
 .shop h3{font-size:1.25rem}
@@ -242,28 +259,15 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       </svg>
       <b>Tires for <span>Anything</span></b>
     </a>
-    <nav class="nav" aria-label="Sections">
+    <nav class="nav" aria-label="Site">
       <a href="#home">All tires</a>
-      <a href="#cars">Cars</a>
-      <a href="#trucks">Trucks &amp; SUVs</a>
-      <a href="#forklift">Forklift</a>
-      <a href="#aviation">Aviation</a>
-      <a href="#motorcycle">Motorcycle</a>
-      <a href="#farm">Farm</a>
-      <a href="#semi">Semi</a>
-      <a href="#trailer">Trailer</a>
-      <a href="#construction">Construction</a>
-      <a href="#lawn">Lawn</a>
-      <a href="#atv">ATV &amp; golf</a>
-      <a href="#rv">RV</a>
-      <a href="#mobility">Mobility</a>
-      <a href="#motorsport">Motorsport</a>
       <a href="#decoder">Size decoder</a>
       <a href="#quote">Get quotes</a>
       <a href="#partners">For dealers</a>
     </nav>
   </div>
 </header>
+<nav class="catbar" aria-label="Tire categories"><div class="wrap" id="catbar"></div></nav>
 <div class="proto"><div class="wrap">Early preview. Guides are being added, and quote requests open soon.</div></div>
 
 <main>
@@ -296,7 +300,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     <div class="tread" aria-hidden="true"></div>
     <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap">
       <div class="stack" style="gap:6px">
-        <span class="eyebrow">17 categories · 14 open now</span>
+        <span class="eyebrow">18 categories · 15 open now</span>
         <h2>Pick your machine</h2>
       </div>
       <p class="note" style="max-width:34ch"><span class="pill quote">Quotes</span> means dealers compete for your order. <span class="pill">Shop</span> means we point you to retailers.</p>
@@ -856,13 +860,62 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   </div>
 </section>
 
+<!-- RACING -->
+<section class="view" id="v-racing" data-view="racing" hidden>
+  <div class="wrap pagehead">
+    <div class="crumb"><a href="#home">All tires</a> / Race cars</div>
+    <span class="eyebrow">Autocross · track days · road racing · drag · dirt oval</span>
+    <h1>Race car tires</h1>
+    <p class="lede">The right race tire depends on where you run, what your class allows, and how many weekends you need it to last. Start with the rules, then choose grip versus life.</p>
+  </div>
+
+  <div class="wrap stack">
+    <div class="callout"><b>Check your class rules first</b><p>Most sanctioning bodies specify approved tires, sizes or a minimum treadwear rating. Many autocross street classes, for example, require a treadwear rating of 200 or higher. A faster tire that isn't legal for your class won't help you.</p></div>
+  </div>
+
+  <div class="wrap stack">
+    <h2>From street-legal to slicks</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Tire</th><th>Street legal?</th><th>Best for</th><th>Trade-off</th></tr></thead>
+        <tbody>
+          <tr><td><b>Extreme performance summer</b><br><span class="note">often 200 treadwear</span></td><td>Yes</td><td>Autocross street classes, first track days, driving to the event</td><td>Less grip than track tires, but lasts much longer</td></tr>
+          <tr><td><b>R-compound</b><br><span class="note">DOT-marked track tire</span></td><td>Technically, with limits</td><td>Time attack, autocross, club racing</td><td>Short life, heat-sensitive, poor in the wet</td></tr>
+          <tr><td><b>Racing slick</b></td><td>No</td><td>Road racing and dedicated track cars</td><td>Maximum dry grip, no wet grip, competition only</td></tr>
+          <tr><td><b>Rain tire</b></td><td>No</td><td>Wet sessions in classes that allow them</td><td>Overheats and wears fast once the track dries</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="wrap stack">
+    <h2>Drag and dirt</h2>
+    <div class="grid2">
+      <div class="card"><h3>Drag racing</h3><p class="use">Drag radials work on street cars and many are DOT-marked. Slicks hook harder but are for the strip only. Up front, tall, skinny front-runners cut weight and rolling resistance.</p></div>
+      <div class="card"><h3>Dirt oval</h3><p class="use">Track-specific compounds, often grooved or siped by hand for the night's conditions. Your track or series usually names the approved tire.</p></div>
+    </div>
+  </div>
+
+  <div class="wrap stack">
+    <h2>Getting the most from race tires</h2>
+    <ul class="clean">
+      <li><b>Set pressure hot, not cold.</b> Check right after a session and adjust toward your target hot pressure.</li>
+      <li><b>Read the temperatures.</b> A pyrometer reading across the inside, middle and outside of the tread tells you if pressure and camber are right.</li>
+      <li><b>Mind heat cycles.</b> Each heat-up and cool-down costs a little grip, even with tread left.</li>
+      <li><b>Competition-only tires stay on the trailer.</b> If the sidewall says "for competition use only," it isn't legal on public roads.</li>
+      <li><b>Store them cool and dark,</b> in bags, away from electric motors that give off ozone.</li>
+    </ul>
+  </div>
+  <div class="wrap stack"><div class="shop" data-shop="racing"></div></div>
+</section>
+
 <!-- MOTORSPORT -->
 <section class="view" id="v-motorsport" data-view="motorsport" hidden>
   <div class="wrap pagehead">
-    <div class="crumb"><a href="#home">All tires</a> / Motorsport &amp; karting</div>
-    <span class="eyebrow">Karting · autocross · track days · drag</span>
-    <h1>Motorsport and karting tires</h1>
-    <p class="lede">In racing, the tire often comes down to your class rules. Start with what your sanctioning body allows, then pick the compound for your track and budget.</p>
+    <div class="crumb"><a href="#home">All tires</a> / Go-karts &amp; karting</div>
+    <span class="eyebrow">Sprint · cadet · rental karts</span>
+    <h1>Go-kart tires</h1>
+    <p class="lede">In karting, the tire often comes down to your class rules. Start with what your sanctioning body allows, then pick the compound for your track and budget. Racing a car instead? See <a href="#racing">race car tires</a>.</p>
   </div>
 
   <div class="wrap stack">
@@ -885,15 +938,6 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-motorsport"></tbody></table></div>
     <p class="note" id="sfn-motorsport" aria-live="polite"></p>
     <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://flowracers.com/blog/read-go-kart-tire-size/" target="_blank" rel="noopener">Flow Racers kart tire size guide</a></p>
-  </div>
-
-  <div class="wrap stack">
-    <h2>Cars on track</h2>
-    <div class="grid3">
-      <div class="card"><h3>Autocross and track day</h3><p class="use">Extreme performance summer tires, often with a 200 treadwear rating, are the street-legal starting point. Many classes are built around them.</p></div>
-      <div class="card"><h3>R-compound</h3><p class="use">DOT-marked but built for the track. Maximum grip with short life and poor wet performance.</p></div>
-      <div class="card"><h3>Drag racing</h3><p class="use">Drag radials and slicks for the rear, with tall, skinny front-runners to cut weight and rolling resistance.</p></div>
-    </div>
   </div>
 
   <div class="wrap stack">
@@ -1330,27 +1374,43 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 (function(){
   var PREVIEW=true;
   /* ---------- categories ---------- */
+  var GROUPS=[["small","Small wheels"],["power","Powersports & racing"],["road","On the road"],["heavy","Heavy duty"],["air","Aircraft"]];
   var CATS=[
-    {id:"forklift",n:"Forklift & industrial",d:"Press-on, pneumatic, solid, foam-filled, non-marking",live:true,m:"quote"},
-    {id:"aviation",n:"Aviation",d:"Type III, three-part and Type VII; retreads, tundra",live:true,m:"quote"},
-    {id:"cars",n:"Passenger cars",d:"All-season, winter, performance, EV, run-flat",live:true,m:"shop"},
-    {id:"trucks",n:"Light trucks & SUVs",d:"Highway, all-terrain, mud-terrain, LT load ranges",live:true,m:"shop"},
-    {id:"semi",n:"Semi & commercial",d:"Steer, drive, trailer, wide-base, retreads",live:true,m:"quote"},
-    {id:"trailer",n:"Trailers",d:"ST tires for boat, utility, horse and camper",live:true,m:"shop"},
-    {id:"motorcycle",n:"Motorcycles",d:"Touring, cruiser, sport; stock sizes and darkside cautions",live:true,m:"shop"},
-    {id:"atv",n:"ATV, UTV & golf",d:"Four-wheelers, side-by-sides, golf carts",live:true,m:"shop"},
-    {id:"",n:"Bicycles & e-bikes",d:"Road, gravel, mountain, BMX, fat, kids",m:"shop"},
-    {id:"farm",n:"Farm & ag",d:"R-1 to R-4, IF/VF, implement, sprayer, combine",live:true,m:"quote"},
-    {id:"construction",n:"Construction & OTR",d:"Loader, grader, haul truck, skid steer",live:true,m:"quote"},
-    {id:"lawn",n:"Lawn & garden",d:"Riding mower, zero-turn, wheelbarrow, flat-free",live:true,m:"shop"},
-    {id:"rv",n:"RV & motorhome",d:"Class A, B and C coaches",live:true,m:"shop"},
-    {id:"mobility",n:"Mobility & medical",d:"Wheelchairs, mobility scooters, carts",live:true,m:"shop"},
-    {id:"motorsport",n:"Motorsport & karting",d:"Karting, autocross, track days, drag",live:true,m:"shop"},
-    {id:"",n:"Vintage & antique",d:"Bias-ply, whitewall, beaded-edge, wagon",m:"shop"},
-    {id:"",n:"Military & specialty",d:"Run-flat, CTIS, transit, novelty",m:"quote"}
+    {g:"small",id:"",n:"Bicycles & e-bikes",d:"Road, gravel, mountain, BMX, fat, kids",m:"shop"},
+    {g:"small",id:"mobility",n:"Mobility & medical",d:"Wheelchairs, mobility scooters, carts",live:true,m:"shop"},
+    {g:"small",id:"lawn",n:"Lawn & garden",d:"Riding mower, zero-turn, wheelbarrow, flat-free",live:true,m:"shop"},
+    {g:"small",id:"motorsport",n:"Go-karts & karting",d:"Sprint, cadet and rental karts",live:true,m:"shop"},
+    {g:"power",id:"motorcycle",n:"Motorcycles",d:"Touring, cruiser, sport; stock sizes and darkside cautions",live:true,m:"shop"},
+    {g:"power",id:"racing",n:"Race cars",d:"Autocross, track days, road racing, drag, dirt oval",live:true,m:"shop"},
+    {g:"power",id:"atv",n:"ATV, UTV & golf",d:"Four-wheelers, side-by-sides, golf carts",live:true,m:"shop"},
+    {g:"road",id:"cars",n:"Passenger cars",d:"All-season, winter, performance, EV, run-flat",live:true,m:"shop"},
+    {g:"road",id:"trucks",n:"Light trucks & SUVs",d:"Highway, all-terrain, mud-terrain, LT load ranges",live:true,m:"shop"},
+    {g:"road",id:"trailer",n:"Trailers",d:"ST tires for boat, utility, horse and camper",live:true,m:"shop"},
+    {g:"road",id:"rv",n:"RV & motorhome",d:"Class A, B and C coaches",live:true,m:"shop"},
+    {g:"road",id:"",n:"Vintage & antique",d:"Bias-ply, whitewall, beaded-edge, wagon",m:"shop"},
+    {g:"heavy",id:"forklift",n:"Forklift & industrial",d:"Press-on, pneumatic, solid, foam-filled, non-marking",live:true,m:"quote"},
+    {g:"heavy",id:"semi",n:"Semi & commercial",d:"Steer, drive, trailer, wide-base, retreads",live:true,m:"quote"},
+    {g:"heavy",id:"farm",n:"Farm & ag",d:"R-1 to R-4, IF/VF, implement, sprayer, combine",live:true,m:"quote"},
+    {g:"heavy",id:"construction",n:"Construction & OTR",d:"Loader, grader, haul truck, skid steer",live:true,m:"quote"},
+    {g:"heavy",id:"",n:"Military & specialty",d:"Run-flat, CTIS, transit, novelty",m:"quote"},
+    {g:"air",id:"aviation",n:"Aviation",d:"Type III, three-part and Type VII; retreads, tundra",live:true,m:"quote"}
   ];
-  var catsEl=document.getElementById("cats");
+  var catbar=document.getElementById("catbar");
+  GROUPS.forEach(function(gr){
+    var wrap=document.createElement("div");wrap.className="cg";
+    var lab=document.createElement("span");lab.className="cgl";lab.textContent=gr[1];wrap.appendChild(lab);
+    CATS.forEach(function(c){
+      if(c.g!==gr[0])return;
+      var el=document.createElement(c.live?"a":"span");
+      el.textContent=c.n;
+      if(c.live){el.href="#"+c.id;}else{el.className="soon";el.title="Coming soon";}
+      wrap.appendChild(el);
+    });
+    catbar.appendChild(wrap);
+  });
+  var catsEl=document.getElementById("cats"),lastG="";
   CATS.forEach(function(c){
+    if(c.g!==lastG){lastG=c.g;var gh=document.createElement("div");gh.className="cgh";GROUPS.forEach(function(gr){if(gr[0]===c.g)gh.textContent=gr[1];});catsEl.appendChild(gh);}
     var a=document.createElement(c.live?"a":"div");
     a.className="cat"+(c.live?" live":"");
     if(c.live)a.href="#"+c.id;
@@ -1531,11 +1591,11 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       var isAir=/^Aircraft/.test(guess),isAtv=/^ATV|^Golf/.test(guess),isKart=/^Kart/.test(guess);
       var lawn=!isAir&&!isAtv&&!isKart&&wd/od>=0.45;
       if(lawn)guess="Lawn & garden (three-part)";
-      var cat=isAir?"Aviation":isAtv?"ATV, UTV & golf":isKart?"Motorsport & karting":lawn?"Lawn & garden":"Forklift & industrial";
+      var cat=isAir?"Aviation":isAtv?"ATV, UTV & golf":isKart?"Go-karts & karting":lawn?"Lawn & garden":"Forklift & industrial";
       var p3=[];
       if(m[1])p3.push(["H","High-speed aircraft tire"]);
       p3.push([m[2],"Outside diameter "+m[2]+" in"],[m[3],"Section width "+m[3]+" in"],[m[4],m[4]==="R"?"Radial construction":"Bias-ply construction"],[m[5],"Fits a "+m[5]+" in wheel"]);
-      return {kind:guess,parts:p3,extra:"This format shows up on aircraft (15x6.0-6), forklifts (18x7-8), mowers (20x10-8) and ATVs (25x8-12). The equipment it came off tells you which.",cat:cat,link:cat==="Aviation"?"aviation":cat==="Forklift & industrial"?"forklift":cat==="Lawn & garden"?"lawn":cat==="ATV, UTV & golf"?"atv":cat==="Motorsport & karting"?"motorsport":""};
+      return {kind:guess,parts:p3,extra:"This format shows up on aircraft (15x6.0-6), forklifts (18x7-8), mowers (20x10-8) and ATVs (25x8-12). The equipment it came off tells you which.",cat:cat,link:cat==="Aviation"?"aviation":cat==="Forklift & industrial"?"forklift":cat==="Lawn & garden"?"lawn":cat==="ATV, UTV & golf"?"atv":cat==="Go-karts & karting"?"motorsport":""};
     }
     // Small wheel, inches: 8x2, 14x3
     m=s.match(/^([4-9]|1[0-6])X([1-4])$/);
@@ -1657,6 +1717,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     lawn:[["Riding mower front tires 15x6.00-6","15x6.00-6 lawn mower tire"],["Riding mower rear tires 20x10.00-8","20x10.00-8 lawn mower tire"],["Flat-free wheelbarrow tires","flat free wheelbarrow tire 4.10/3.50-4"],["Tire sealant","tire sealant lawn mower"]],
     atv:[["ATV tire plug kit","ATV tire plug kit"],["Low-pressure tire gauge","low pressure tire gauge ATV"],["Golf cart wheel and tire sets","golf cart wheel and tire set 18x8.50-8"],["Bead breaker","ATV tire bead breaker"]],
     motorcycle:[["Motorcycle tire pressure gauge","motorcycle tire pressure gauge"],["Motorcycle tire plug kit","motorcycle tubeless tire plug kit"],["Tire irons","motorcycle tire irons"],["Wheel balancer","motorcycle wheel balancer"]],
+    racing:[["Racing tire pressure gauge","racing tire pressure gauge bleed valve"],["Tire pyrometer","tire pyrometer"],["Tire storage bags","racing tire storage bags"],["Low-profile aluminum floor jack","low profile aluminum floor jack"],["Tread depth gauge","tire tread depth gauge"]],
     motorsport:[["Go-kart tires","go kart tires 10x4.50-5"],["Low-pressure tire gauge","low pressure tire gauge 0-15 psi"],["Tire pyrometer","tire pyrometer"],["Kart stand","go kart stand"]],
     forklift:[["Forklift tires","forklift tire"],["Tread depth gauge","tire tread depth gauge"]],
     semi:[["Dual-foot truck tire gauge","dual foot truck tire pressure gauge"],["Tread depth gauge","truck tire tread depth gauge"],["Valve stem extenders","truck dual wheel valve stem extenders"]],
@@ -1749,14 +1810,16 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   dotIn.addEventListener("keydown",function(e){if(e.key==="Enter")dotRun();});
   dotRun();
 
-  var VIEWS=["home","cars","trucks","forklift","aviation","motorcycle","farm","semi","trailer","construction","lawn","atv","rv","mobility","motorsport","decoder","quote","partners","legal","about","privacy"];
+  var VIEWS=["home","cars","trucks","forklift","aviation","motorcycle","farm","semi","trailer","construction","lawn","atv","rv","mobility","motorsport","racing","decoder","quote","partners","legal","about","privacy"];
   function route(){
     var h=(location.hash||"").replace("#","");
     if(VIEWS.indexOf(h)<0)h="home";
     VIEWS.forEach(function(v){document.getElementById("v-"+v).hidden=(v!==h);});
-    document.querySelectorAll(".nav a").forEach(function(a){
+    document.querySelectorAll(".nav a, .catbar a").forEach(function(a){
       if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
     });
+    var cur=document.querySelector(".catbar a[aria-current]"),bar=document.getElementById("catbar");
+    if(cur&&bar)bar.scrollLeft=Math.max(0,cur.offsetLeft-bar.clientWidth/2+cur.offsetWidth/2);
     window.scrollTo(0,0);
   }
   window.addEventListener("hashchange",route);route();
