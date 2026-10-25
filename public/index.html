@@ -421,6 +421,16 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     <div class="grid2" id="dealers-forklift"></div>
     <div class="aff"><span><b>Need just one or two?</b> <span class="note">Online retailers ship forklift tires direct.</span></span><span class="sample">Partner link goes here</span></div>
   </div>
+  <div class="wrap stack">
+    <h2>Size finder</h2>
+    <div class="quick">
+      <label for="sf-forklift">Search by size or use</label>
+      <input type="text" id="sf-forklift" placeholder="e.g. 18x7x12-1/8, press-on, pneumatic" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-forklift"></tbody></table></div>
+    <p class="note" id="sfn-forklift" aria-live="polite"></p>
+    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
+  </div>
   <div class="wrap stack"><div class="shop" data-shop="forklift"></div></div>
 </section>
 
@@ -487,6 +497,17 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     </div>
     <div class="grid2" id="dealers-aviation"></div>
   </div>
+  <div class="wrap stack">
+    <h2>Size finder</h2>
+    <div class="quick">
+      <label for="sf-aviation">Search by size or use</label>
+      <input type="text" id="sf-aviation" placeholder="e.g. 6.00-6" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-aviation"></tbody></table></div>
+    <p class="note" id="sfn-aviation" aria-live="polite"></p>
+    <p class="note">Only buy a tire that is TSO-approved for certificated aircraft, or labeled for experimental and light-sport use if that's what you fly, and that matches the size and ply rating in your parts catalog. Have the work done and logged as federal aviation regulations require.</p>
+  </div>
+  <div class="wrap stack"><div class="shop" data-shop="aviation"></div></div>
 </section>
 
 <!-- DECODER -->
@@ -1186,6 +1207,17 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     </div>
     <div class="grid2" id="dealers-farm"></div>
   </div>
+  <div class="wrap stack">
+    <h2>Size finder</h2>
+    <div class="quick">
+      <label for="sf-farm">Search by size or use</label>
+      <input type="text" id="sf-farm" placeholder="e.g. 18.4-38, compact tractor, front" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-farm"></tbody></table></div>
+    <p class="note" id="sfn-farm" aria-live="polite"></p>
+    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
+  </div>
+  <div class="wrap stack"><div class="shop" data-shop="farm"></div></div>
 </section>
 
 <!-- SEMI -->
@@ -1248,6 +1280,16 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <a class="btn yellow" href="#quote" data-cat="Commercial">Get truck tire quotes</a>
     </div>
     <div class="grid2" id="dealers-semi"></div>
+  </div>
+  <div class="wrap stack">
+    <h2>Size finder</h2>
+    <div class="quick">
+      <label for="sf-semi">Search by size or use</label>
+      <input type="text" id="sf-semi" placeholder="e.g. 11R22.5, steer, drive" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-semi"></tbody></table></div>
+    <p class="note" id="sfn-semi" aria-live="polite"></p>
+    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
   </div>
   <div class="wrap stack"><div class="shop" data-shop="semi"></div></div>
 </section>
@@ -1382,6 +1424,16 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <a class="btn yellow" href="#quote" data-cat="Construction">Get OTR tire quotes</a>
     </div>
     <div class="grid2" id="dealers-construction"></div>
+  </div>
+  <div class="wrap stack">
+    <h2>Size finder</h2>
+    <div class="quick">
+      <label for="sf-construction">Search by size or use</label>
+      <input type="text" id="sf-construction" placeholder="e.g. skid steer, backhoe, 20.5-25" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th></tr></thead><tbody id="sft-construction"></tbody></table></div>
+    <p class="note" id="sfn-construction" aria-live="polite"></p>
+    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
   </div>
   <div class="wrap stack"><div class="shop" data-shop="construction"></div></div>
 </section>
@@ -1982,13 +2034,15 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     else{var sp=document.createElement("span");sp.className="note";sp.textContent="Category: "+r.cat+" (guide coming soon)";sp.style.alignSelf="center";foot.appendChild(sp);}
     var q=document.createElement("a");q.className="btn yellow";q.href="#quote";q.textContent="Find this tire";q.setAttribute("data-size",raw.trim().toUpperCase());
     foot.appendChild(q);host.appendChild(foot);
-    if(/^(lawn|atv|trailer|mobility)$/.test(r.link||"")){
+    var lk=r.link||"",term=(typeof RQ_TERM!=="undefined"&&RQ_TERM.hasOwnProperty(lk))?RQ_TERM[lk]:"tire";
+    if(term&&!(lk==="vintage"&&/clincher|balloon|alpha/i.test(r.kind))){
       var sh=document.createElement("div");sh.className="row";sh.style.alignItems="center";
       var lb=document.createElement("span");lb.className="note";lb.textContent="Shop on Amazon:";sh.appendChild(lb);
-      var rz=raw.trim();
-      sh.appendChild(amzLink("Tire only",rz+" tire"));sh.appendChild(amzLink("Mounted on a wheel",rz+" tire and wheel assembly"));
+      var rz=raw.trim(),small=/^(lawn|atv|trailer|mobility)$/.test(lk);
+      sh.appendChild(amzLink(small?"Tire only":"This size",rz+" "+term));
+      if(small)sh.appendChild(amzLink("Mounted on a wheel",rz+" tire and wheel assembly"));
       host.appendChild(sh);
-      var dn=document.createElement("p");dn.className="note";dn.textContent="As an Amazon Associate I earn from qualifying purchases.";host.appendChild(dn);
+      var dn=document.createElement("p");dn.className="note";dn.textContent="As an Amazon Associate I earn from qualifying purchases."+(lk==="aviation"?" Aircraft tires must be TSO-approved, or labeled for experimental and light-sport use, and match your parts catalog.":"");host.appendChild(dn);
     }
   }
   var decIn=document.getElementById("dec-code"),decOut=document.getElementById("dec-out");
@@ -2056,9 +2110,11 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     military:[["Truck tire pressure gauge","truck tire pressure gauge 160 psi"],["Valve core tool","valve core removal tool"],["Heavy-duty tire inflator","heavy duty tire inflator"],["Tread depth gauge","truck tire tread depth gauge"]],
     racing:[["Racing tire pressure gauge","racing tire pressure gauge bleed valve"],["Tire pyrometer","tire pyrometer"],["Tire storage bags","racing tire storage bags"],["Low-profile aluminum floor jack","low profile aluminum floor jack"],["Tread depth gauge","tire tread depth gauge"]],
     motorsport:[["Go-kart tires","go kart tires 10x4.50-5"],["Low-pressure tire gauge","low pressure tire gauge 0-15 psi"],["Tire pyrometer","tire pyrometer"],["Kart stand","go kart stand"]],
-    forklift:[["Forklift tires","forklift tire"],["Tread depth gauge","tire tread depth gauge"]],
-    semi:[["Dual-foot truck tire gauge","dual foot truck tire pressure gauge"],["Tread depth gauge","truck tire tread depth gauge"],["Valve stem extenders","truck dual wheel valve stem extenders"]],
-    construction:[["Skid steer tires","skid steer tires 12-16.5"],["Heavy-duty tire inflator","heavy duty tire inflator"]]
+    forklift:[["Press-on forklift tires","press on forklift tire"],["Pneumatic forklift tires","pneumatic forklift tire"],["Solid flat-proof forklift tires","solid forklift tire"],["Tread depth gauge","tire tread depth gauge"]],
+    farm:[["Compact tractor tires","compact tractor tires"],["Row-crop tractor tires","tractor tire 18.4-38"],["Front tractor tires (F-2)","front tractor tire 3 rib"],["Tractor tire inner tubes","tractor tire inner tube"],["Tractor valve stems","tractor tire valve stem"]],
+    aviation:[["6.00-6 aircraft tires","6.00-6 aircraft tire"],["Aircraft inner tubes","aircraft tire inner tube"],["Tire pressure gauge","dial tire pressure gauge"]],
+    semi:[["11R22.5 steer tires","11R22.5 steer tire"],["11R22.5 drive tires","11R22.5 drive tire"],["Dual-foot truck tire gauge","dual foot truck tire pressure gauge"],["Tread depth gauge","truck tire tread depth gauge"],["Valve stem extenders","truck dual wheel valve stem extenders"]],
+    construction:[["Skid steer tires","skid steer tires 12-16.5"],["Backhoe tires","backhoe tires"],["Loader tires","loader tire 20.5-25"],["Heavy-duty tire inflator","heavy duty tire inflator"]]
   };
   document.querySelectorAll(".shop").forEach(function(el){
     var items=SHOP[el.getAttribute("data-shop")]||[];
@@ -2080,12 +2136,17 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     return null;
   }
   function finderQuery(k,r){
+    if(k==="forklift")return r[0]+" forklift tire";
+    if(k==="farm")return r[0]+(/skid/i.test(r[2])&&!/tractor/i.test(r[2])?" tire":" tractor tire");
+    if(k==="construction")return r[0]+(/skid/i.test(r[2])?" skid steer tire":/backhoe/i.test(r[2])?" backhoe tire":/loader/i.test(r[2])?" loader tire":/grader/i.test(r[2])?" grader tire":" tire");
+    if(k==="semi")return r[0]+" truck tire";
+    if(k==="aviation")return r[0]+" aircraft tire";
     if(k==="lawn")return r[0]+(/hand truck|wheelbarrow/i.test(r[2])?" tire":" lawn mower tire");
     if(/^20 to/.test(r[0]))return "lifted golf cart tires";
     if(k==="atv")return r[0]+(/golf|EZGO|Club Car/i.test(r[2])?" golf cart tire":/UTV|RZR/i.test(r[2])?" UTV tire":" ATV tire");
     if(k==="motorsport")return r[0]+" go kart tire";
     if(k==="bicycles")return r[0]+" bike tire";
-    if(k==="military")return r[0]+" military tire";
+    if(k==="military")return r[0]+" tire";
     if(k==="vintage")return r[1].replace(/^about /,"")+" tire";
     return r[0]+(/wheelchair, rear/i.test(r[2])?" wheelchair tire":/caster/i.test(r[2])?" caster wheel":" mobility scooter tire");
   }
@@ -2105,6 +2166,37 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       ["205/50-10","","Golf carts on 10 in custom wheels","Low profile; no lift needed"],
       ["205/30-12","","Golf carts on 12 in custom wheels","Low profile; no lift needed"],
       ["20 to 23 in","","Lifted golf carts","All-terrain and street; needs a lift kit","22x11-10"]
+    ],
+    forklift:[
+      ["18x7x12-1/8","","Cushion forklifts, press-on","One of the most common press-on sizes; needs a tire press"],
+      ["21x8x15","","Larger cushion forklifts, press-on","Needs a tire press"],
+      ["18x7-8","","Pneumatic forklifts, front","Sold in air and solid (flat-proof) versions"],
+      ["6.50-10","","Pneumatic forklifts","Tube type; usually sold with tube and flap"],
+      ["7.00-12","","Pneumatic forklifts, drive tires","Tube type; usually sold with tube and flap"]
+    ],
+    farm:[
+      ["23x8.50-12","","Sub-compact tractors (R-4); also skid steers","Industrial tread"],
+      ["11.2-24","","Compact and utility tractor rears","Bias, R-1 or turf"],
+      ["18.4-38","","Row-crop tractor rears","Big and heavy; usually dealer-mounted"],
+      ["520/85R38","","Row-crop tractor rears, radial","Radial version of the 18.4-38 class"],
+      ["7.50-16","","Two-wheel-drive tractor fronts (F-2)","Three-rib front tire"],
+      ["6.50-16","","Smaller tractor fronts (F-2)","Three-rib front tire"]
+    ],
+    construction:[
+      ["10-16.5","","Skid steer loaders","Smaller skid steers"],
+      ["12-16.5","","Skid steer loaders","The most common skid steer size"],
+      ["12.5/80-18","","Backhoe loader fronts (R-4)","Also some skid steers"],
+      ["19.5L-24","","Backhoe loader rears (R-4)","Heavy; usually dealer-mounted"],
+      ["17.5-25","","Wheel loaders (L-3)","Heavy; usually dealer-mounted"],
+      ["20.5-25","","Wheel loaders (L-3)","Heavy; usually dealer-mounted"],
+      ["14.00-24","","Motor graders (G-2)","Heavy; usually dealer-mounted"]
+    ],
+    semi:[
+      ["11R22.5","","Class 8 tractors, trailers and buses","Sold as steer, drive or trailer tires"],
+      ["295/75R22.5","","Class 8 tractors and trailers, low profile","Sold as steer, drive or trailer tires"]
+    ],
+    aviation:[
+      ["6.00-6","","Main gear on many light singles, like the Cessna 172","Check ply rating and TSO before you buy"]
     ],
     lawn:[
       ["13x5.00-6","","Riding mower and lawn tractor fronts","Common front size"],
@@ -2191,7 +2283,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   });
 
   /* ---------- can't find your tire? request form ---------- */
-  var RQ_TERM={bicycles:"bike tire",mobility:"mobility scooter tire",lawn:"lawn mower tire",motorsport:"go kart tire",motorcycle:"motorcycle tire",racing:"racing tire",atv:"ATV tire",cars:"tire",trucks:"truck tire",trailer:"trailer tire",rv:"RV tire",vintage:"tire",forklift:"forklift tire",semi:"truck tire",farm:"tractor tire",construction:"skid steer tire",military:"military truck tire",aviation:"","":"tire"};
+  var RQ_TERM={bicycles:"bike tire",mobility:"mobility scooter tire",lawn:"lawn mower tire",motorsport:"go kart tire",motorcycle:"motorcycle tire",racing:"racing tire",atv:"ATV tire",cars:"tire",trucks:"truck tire",trailer:"trailer tire",rv:"RV tire",vintage:"tire",forklift:"forklift tire",semi:"truck tire",farm:"tractor tire",construction:"skid steer tire",military:"military truck tire",aviation:"aircraft tire","":"tire"};
   function catName(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id)return CATS[i].n;}return "";}
   // Short call-to-action on every category page and the decoder
   Object.keys(RQ_TERM).concat(["decoder"]).forEach(function(k){
@@ -2234,7 +2326,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   var out=document.createElement("div");out.className="rqout";out.setAttribute("aria-live","polite");
   f.appendChild(g);f.appendChild(hp);f.appendChild(err);f.appendChild(btn);
   rqBox.appendChild(f);rqBox.appendChild(out);
-  function rqSync(){btn.textContent=rqCat.value==="aviation"?"Send request":"Show me options";}
+  function rqSync(){btn.textContent="Show me options";}
   rqCat.addEventListener("change",rqSync);rqSync();
   function openRequest(cat,size){
     rqCat.value=RQ_TERM.hasOwnProperty(cat)?cat:"";rqSync();
@@ -2268,6 +2360,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       qs.forEach(function(q){row.appendChild(amzLink(q[1],q[0].slice(0,120)));});
       out.appendChild(row);
       var d=document.createElement("p");d.className="note";d.textContent="As an Amazon Associate I earn from qualifying purchases. These are search results, so confirm the size before you buy.";out.appendChild(d);
+      if(k==="aviation"){var av=document.createElement("p");av.className="note";av.textContent="Aircraft tires must be approved for your aircraft. Buy only a TSO-approved tire (or one labeled for experimental and light-sport use, if that's what you fly) that matches the size and ply rating in your parts catalog.";out.appendChild(av);}
       if(k==="vintage"){var v=document.createElement("p");v.className="note";var va=document.createElement("a");va.href="#vintage";va.textContent="the vintage specialists";v.appendChild(document.createTextNode("Looking for a period-correct size? Try "));v.appendChild(va);v.appendChild(document.createTextNode(". They carry sizes Amazon doesn't."));out.appendChild(v);}
     }else if(k==="aviation"){
       var ap=document.createElement("p");ap.textContent="Aircraft tires have to match your aircraft's approved parts, so we don't link to general shopping sites. Check your parts catalog, and talk with your mechanic or an aviation supplier.";out.appendChild(ap);
