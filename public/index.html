@@ -1915,7 +1915,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   /* ---------- size decoder ---------- */
   var LI={70:335,71:345,72:355,73:365,74:375,75:387,76:400,77:412,78:425,79:437,80:450,81:462,82:475,83:487,84:500,85:515,86:530,87:545,88:560,89:580,90:600,91:615,92:630,93:650,94:670,95:690,96:710,97:730,98:750,99:775,100:800,101:825,102:850,103:875,104:900,105:925,106:950,107:975,108:1000,109:1030,110:1060,111:1090,112:1120,113:1150,114:1180,115:1215,116:1250,117:1285,118:1320,119:1360,120:1400,121:1450,122:1500,123:1550,124:1600,125:1650,126:1700,127:1750,128:1800,129:1850,130:1900};
   var SR={L:75,M:81,N:87,P:93,Q:99,R:106,S:112,T:118,U:124,H:130,V:149,W:168,Y:186};
-  var BSD={590:"26 x 1-3/8 (older 3-speed)",622:"700c / 29 inch",584:"650b / 27.5 inch",559:"26 inch mountain",571:"650c",507:"24 inch",406:"20 inch (BMX / kids)",305:"16 inch",203:"12 inch"};
+  var BSD={590:"26 x 1-3/8 (older 3-speed)",540:"24 x 1-3/8 (fraction size)",451:"20 x 1-3/8 (fraction size)",349:"16 x 1-3/8 (fraction size)",254:"14 inch",622:"700c / 29 inch",584:"650b / 27.5 inch",559:"26 inch mountain",571:"650c",507:"24 inch",406:"20 inch (BMX / kids)",305:"16 inch",203:"12 inch"};
   function lbs(kg){return Math.round(kg*2.20462).toLocaleString();}
   function frac(s){var m=s.match(/^(\d+)[-\s](\d+)\/(\d+)$/);if(m)return (+m[1]+ m[2]/m[3]);return parseFloat(s);}
 
@@ -1997,11 +1997,14 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     // Small wheel, metric: 200x50, 260x85
     m=s.match(/^(\d{3})X(\d{2,3})$/);
     if(m)return {kind:"Small wheel (metric, mm)",parts:[[m[1],"Overall diameter "+m[1]+" mm ("+(m[1]/25.4).toFixed(1)+" in)"],[m[2],"Width "+m[2]+" mm ("+(m[2]/25.4).toFixed(1)+" in)"]],extra:"A metric way of listing scooter and caster wheels. 260x85 is the same tire as 3.00-4.",cat:"Mobility & medical",link:"mobility"};
-    // Two-part: 26x6.6 (Type VII) or 29x2.4 (bike)
-    m=s.match(/^(\d{2}(?:\.\d)?)X(\d{1,2}\.\d{1,2})$/);
+    // Bicycle fraction sizes: 20 x 1-3/8, 26 x 1-3/8, 12-1/2 x 2-1/4
+    var FR={"16X1-3/8":349,"20X1-3/8":451,"24X1-3/8":540,"26X1-3/8":590,"27X1-1/4":630,"28X1-1/2":635,"12-1/2X2-1/4":203};
+    if(FR[s]){var fw=s.split("X");return {kind:"Bicycle (fraction sizing)",parts:[[fw[0],"Nominal "+fw[0].replace("-"," ")+" in wheel"],[fw[1],"Tire width "+fw[1].replace("-"," ")+" in"],[String(FR[s]),"Fits a "+FR[s]+" mm bead-seat wheel"]],extra:FR[s]===203?"Same wheel as a 12x2.125 decimal tire.":"Fraction sizes don't fit decimal wheels with the same first number. Match the "+FR[s]+" in the ETRTO size on the sidewall.",cat:"Bicycles & e-bikes",link:"bicycles"};}
+    // Two-part: 26x6.6 (Type VII) or 29x2.4 / 20x2.125 (bike)
+    m=s.match(/^(\d{2}(?:\.\d)?)X(\d{1,2}\.\d{1,3})$/);
     if(m){
-      var a=+m[1],b2=+m[2];
-      if(b2<5&&[12,16,20,24,26,27.5,29].indexOf(a)>=0)return {kind:"Bicycle (inch sizing)",parts:[[m[1],a+" inch wheel"],[m[2],"Tire width "+m[2]+" in"]],extra:"Inch bike sizes can be vague. Check the ETRTO number on the same sidewall for an exact match.",cat:"Bicycles & e-bikes",link:"bicycles"};
+      var a=+m[1],b2=+m[2],BW={12:203,14:254,16:305,20:406,24:507,26:559,27.5:584,29:622};
+      if(b2<5&&BW[a])return {kind:"Bicycle (inch sizing)",parts:[[m[1],a+" inch wheel ("+BW[a]+" mm bead seat)"],[m[2],"Tire width "+m[2]+" in"]],extra:"Inch bike sizes can be vague. Check the ETRTO number on the same sidewall; it should end in "+BW[a]+".",cat:"Bicycles & e-bikes",link:"bicycles"};
       return {kind:"Aircraft Type VII",parts:[[m[1],"Outside diameter "+m[1]+" in"],[m[2],"Section width "+m[2]+" in"]],extra:"Type VII tires run at high pressure and are used on jets and larger turboprops. The wheel size isn't in the name; check the parts catalog.",cat:"Aviation",link:"aviation"};
     }
     // Width-rim: 6.00-6, 7.00-12, 18.4-38, 11.00-20
@@ -2278,9 +2281,18 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       ["26x2.1","about 54-559","Older mountain bikes and cruisers","Classic 26 in size"],
       ["26x4.0","about 100-559","Fat bikes","Low pressure for snow and sand"],
       ["24x1.95","about 50-507","Youth mountain bikes","Kids around 8 to 12"],
+      ["24x2.125","57-507","Youth bikes and cruisers","Kids around 8 to 12"],
       ["20x1.75","47-406","BMX, kids and folding bikes","The BMX standard wheel"],
+      ["20x2.125","57-406","Kids and BMX bikes","Kids around 6 to 9; fits any 20 in decimal wheel"],
       ["16x1.75","47-305","Kids bikes","Younger riders"],
-      ["26 x 1-3/8","37-590","Older 3-speeds and vintage bikes","Not the same as 26 x 1.375","37-590"]
+      ["16x2.125","57-305","Kids bikes","Kids around 4 to 6"],
+      ["14x2.125","57-254","Kids bikes","Kids around 3 to 5"],
+      ["12-1/2 x 2-1/4","57-203","Kids bikes and balance bikes","Kids around 2 to 4; same wheel as 12x2.125","57-203"],
+      ["12x2.125","57-203","Kids bikes and balance bikes","Kids around 2 to 4"],
+      ["26 x 1-3/8","37-590","Older 3-speeds and vintage bikes","Not the same as 26 x 1.375","37-590"],
+      ["24 x 1-3/8","37-540","Wheelchairs and some older kids bikes","Fraction size; won't fit a 24x1.95 wheel","37-540"],
+      ["20 x 1-3/8","37-451","Folding bikes and older kids bikes","Fraction size; won't fit a 20x1.95 wheel","37-451"],
+      ["16 x 1-3/8","37-349","Folding bikes","Fraction size; won't fit a 16x2.125 wheel","37-349"]
     ],
     vintage:[
       ["30x3","","Ford Model T front, 1908 to 1927 (early cars)","Beaded-edge clincher; needs a tube"],
