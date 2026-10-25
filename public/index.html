@@ -1513,10 +1513,27 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   </div>
 
   <div class="wrap stack">
-    <h2>Stock sizes for common touring bikes</h2>
-    <div class="tablewrap"><table><thead><tr><th>Motorcycle</th><th>Front</th><th>Rear</th></tr></thead><tbody id="moto-stock"></tbody></table></div>
-    <p class="note">Sample data from published spec sheets and owner forums. GL1500 and Valkyrie sizes haven't been checked against the owner's manuals yet. Always confirm with your manual or the bike's tire label.</p>
-    <div class="aff"><span><b>Shopping for manufacturer-specified tires?</b> <span class="note">Retail partner links appear only for stock sizes.</span></span><span class="sample">Partner link goes here</span></div>
+    <h2>Find tires for your motorcycle</h2>
+    <p>Pick your make, model and year to see the factory front and rear tire sizes, then shop for that exact size.</p>
+    <div class="quick">
+      <div class="fgrid">
+        <div class="field"><label for="mc-make">Make</label><select id="mc-make"></select></div>
+        <div class="field"><label for="mc-model">Model</label><select id="mc-model"></select></div>
+        <div class="field"><label for="mc-year">Year</label><select id="mc-year"></select></div>
+      </div>
+      <div id="mc-out" class="stack" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="wrap stack">
+    <h2>All motorcycle fitments</h2>
+    <div class="quick">
+      <label for="mc-filter">Search by make, model or size</label>
+      <input type="text" id="mc-filter" placeholder="e.g. Harley, Ninja, 180/55ZR17" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Motorcycle</th><th>Years checked</th><th>Front</th><th>Rear</th><th>Shop</th></tr></thead><tbody id="mc-rows"></tbody></table></div>
+    <p class="note" id="mc-note" aria-live="polite"></p>
+    <p class="note">Factory sizes from Michelin's fitment listings and spec sheets, checked for the years shown. Sizes usually carry across a model generation, but trims and years can differ. Always confirm with your owner's manual or the tire label on the bike before you buy.</p>
   </div>
 
   <div class="wrap stack" id="darkside-guide">
@@ -1719,10 +1736,98 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   function bikeOf(k){for(var i=0;i<MOTO.length;i++){if(MOTO[i].k===k)return MOTO[i];}return null;}
   function nz(s){var m=String(s).toUpperCase().replace(/\s+/g,"").match(/(\d{3})\/(\d{2})(?:ZR|R|-|B|D)?(\d{2})/);return m?(+m[1])+"/"+(+m[2])+"-"+(+m[3]):"";}
   function cell(tr,txt,cls){var c=document.createElement("td");if(cls){var s=document.createElement("span");s.className=cls;s.textContent=txt;c.appendChild(s);}else{c.textContent=txt;}tr.appendChild(c);return c;}
-  var stockBody=document.getElementById("moto-stock");
-  MOTO.forEach(function(b){var tr=document.createElement("tr");cell(tr,b.n);cell(tr,b.f,"stamp");cell(tr,b.r,"stamp");stockBody.appendChild(tr);});
+  var MSRC={
+    mich:"https://www.michelinman.com/motorcycle/manufacturers",
+    gwd:"https://goldwingdocs.com/forum/viewtopic.php?p=147640",
+    mcom:"https://www.motorcycle.com/specs/honda/touring/2018/gold-wing/base/detail.html",
+    vf:"https://www.valkyrieforum.com/bbs/index.php?msg=92557"
+  };
+  var MC=[
+    {mk:"Harley-Davidson",md:"Street Glide (FLHX)",y:[2016,2018],f:"130/60B19",r:"180/65B16",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/harley-davidson/flhx-street-glide/2018/1584/130---60-B-19-M---C-61H-F-TL---TT_180---65-B-16-M---C-81H-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Road Glide (FLTR)",y:[2012],f:"130/80B17",r:"180/65B16",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/harley-davidson/fltr-road-glide/2012/1584/130---80-B-17-M---C-65H-F-TL---TT_180---65-B-16-M---C-81H-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Fat Boy (FLSTF / FLFBS)",y:[2008,2015,2020],f:"140/75R17",r:"200/55R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2020/harley-davidson/flstfbs-fat-boy/1801/140---75-R-17-67V-F-TL_200---55-R-17-78V-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Sportster Iron 883 (XL883N)",y:[2010,2022],f:"100/90B19",r:"150/80B16",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2022/harley-davidson/xl-883-n-sportster-iron/883/100---90-B-19-M---C-57H-F-TL---TT_150---80-B-16-M---C-77H-REINF-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Sportster Forty-Eight (XL1200X)",y:[2020,2025],f:"130/90B16",r:"150/80B16",s:"https://en.michelin.co.th/motorbike/browse-tyres/by-vehicle/harley-davidson/xl-1200x-forty-eight/2020/1202/130---90-B-16-73H-F_150---80-B-16-77H-R"},
+    {mk:"Harley-Davidson",md:"Sportster 1200 Custom (XL1200C)",y:[2014,2023],f:"130/90B16",r:"150/80B16",s:"https://www.michelin.ca/en/motorcycle/browse-tires/by-vehicle/harley-davidson/xl1200c-sportster-custom-cb/2014/1202/130---90-B-16-73H-REINF-F-TL---TT_150---80-B-16-77H-REINF-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"Nightster (RH975)",y:[2022],f:"100/90B19",r:"150/80B16",s:"https://en.michelin.co.th/motorbike/browse-tyres/by-vehicle/harley-davidson/rh-975-nightster/2022/975/100---90-B-19-M---C-57H-F-TL_150---80-B-16-M---C-77H-R-TL"},
+    {mk:"Harley-Davidson",md:"Dyna Super Glide Custom (FXDC)",y:[2009],f:"100/90B19",r:"160/70B17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/harley-davidson/fxdc-dyna-super-glide-custom/2009/1690/100---90-B-19-M---C-57H-F-TL---TT_160---70-B-17-M---C-73V-R-TL---TT"},
+    {mk:"Harley-Davidson",md:"CVO Breakout",y:[2013],f:"130/60B21",r:"240/40R18",s:"https://en.michelin.co.th/motorbike/browse-tyres/by-vehicle/harley-davidson/cvo-breakout/2013/1803/130---60-B-21-M---C-63H-F-TL_240---40-R-18-M---C-79V-R-TL"},
+    {mk:"Honda",md:"Gold Wing GL1500",y:[],f:"130/70-18",r:"160/80-16",s:"",note:"Not yet checked against the owner's manual"},
+    {mk:"Honda",md:"Gold Wing GL1800",y:[2001,2017],f:"130/70R18",r:"180/60R16",s:MSRC.gwd},
+    {mk:"Honda",md:"Gold Wing (new generation)",y:[2018],f:"130/70R18",r:"200/55R16",s:MSRC.mcom},
+    {mk:"Honda",md:"Africa Twin 1100",y:[2023],f:"90/90-21",r:"150/70R18",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/honda/africa-twin-1100/2023/1100/90---90-21-M---C-54H-F-TL_150---70-R-18-M---C-70H-R-TL"},
+    {mk:"Honda",md:"Grom",y:[2014,2023],f:"120/70-12",r:"130/70-12",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/honda/grom/2023/124/120---70-12-M---C-51L-F-TL_130---70-12-M---C-56L-R-TL"},
+    {mk:"Honda",md:"Valkyrie GL1500C",y:[],f:"150/80-17",r:"180/70-16",s:MSRC.vf,note:"Front size not yet checked against the owner's manual"},
+    {mk:"Yamaha",md:"MT-07",y:[2019,2022],f:"120/70ZR17",r:"180/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/yamaha/mt-07/2022/689/120---70-ZR-17-M---C-(58W)-F-TL_180---55-ZR-17-M---C-(73W)-R-TL"},
+    {mk:"Yamaha",md:"MT-09",y:[2024],f:"120/70ZR17",r:"180/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2024/yamaha/mt-09/890/120---70-ZR-17-M---C-(58W)-F-TL_180---55-ZR-17-M---C-(73W)-R-TL"},
+    {mk:"Yamaha",md:"Tracer 900 GT",y:[2020,2021],f:"120/70ZR17",r:"180/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/yamaha/tracer-900-gt/2021/847/120---70-ZR-17-(58W)-F_180---55-ZR-17-(73W)-R"},
+    {mk:"Yamaha",md:"YZF-R6",y:[2020],f:"120/70ZR17",r:"180/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2020/yamaha/yzf-r6/599/120---70-ZR-17-(58W)-F-TL_180---55-ZR-17-(73W)-R-TL"},
+    {mk:"Yamaha",md:"YZF-R1",y:[2025],f:"120/70ZR17",r:"190/55ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2025/yamaha/yzf-r1-abs/998/120---70-ZR-17-M---C-(58W)-F-TL_190---55-ZR-17-M---C-(75W)-R-TL"},
+    {mk:"Kawasaki",md:"Ninja 500 SE",y:[2025],f:"110/70R17",r:"150/60R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/kawasaki/ninja-500-se/2025/451/110---70-R-17-M---C-54H-F-TL_150---60-R-17-M---C-66H-R-TL"},
+    {mk:"Kawasaki",md:"Ninja 650",y:[2020,2025],f:"120/70ZR17",r:"160/60ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2025/kawasaki/ninja-650/649/120---70-ZR-17-M---C-(58W)-F-TL_160---60-ZR-17-M---C-(69W)-R-TL"},
+    {mk:"Kawasaki",md:"Vulcan S",y:[2023],f:"120/70R18",r:"160/60R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/kawasaki/vulcan-s/2023/650/120---70-R-18-M---C-59H-F_160---60-R-17-M---C-69H-R"},
+    {mk:"Kawasaki",md:"KLR 650",y:[2000,2018,2022,2025],f:"90/90-21",r:"130/80-17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/kawasaki/klr-650/2022/650/90---90-21-54S-F-TT_130---80-17-65S-R-TT",note:"Tube type"},
+    {mk:"Suzuki",md:"Hayabusa (GSX1300R)",y:[2002,2007],f:"120/70ZR17",r:"190/50ZR17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/suzuki/gsx-r1300-hayabusa/2007/1300/120---70-ZR-17-M---C-(58W)-F-TL_190---50-ZR-17-M---C-(73W)-R-TL"},
+    {mk:"Suzuki",md:"V-Strom 650 (DL650)",y:[2025],f:"110/80R19",r:"150/70R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/suzuki/v-strom-dl650/2025/650/110---80-R-19-M---C-59H-F-TL---TT_150---70-R-17-M---C-69H-R-TL---TT"},
+    {mk:"BMW",md:"R 1250 GS",y:[2022,2023],f:"120/70R19",r:"170/60R17",s:"https://www.michelinman.com/motorcycle/browse-tires/by-vehicle/2022/bmw/r-1250-gs/1254/120---70-R-19-M---C-60V-F-TL---TT_170---60-R-17-M---C-72V-R-TL---TT"}
+  ];
+  function mcQ(size,pos){return size+" motorcycle tire "+pos;}
+  function mcShop(td,b){td.appendChild(amzLink("Front",mcQ(b.f,"front")));td.appendChild(document.createTextNode(" "));td.appendChild(amzLink("Rear",mcQ(b.r,"rear")));}
+  var mcMake=document.getElementById("mc-make"),mcModel=document.getElementById("mc-model"),mcYear=document.getElementById("mc-year"),mcOut=document.getElementById("mc-out");
+  function opt(sel,v,t){var o=document.createElement("option");o.value=v;o.textContent=t;sel.appendChild(o);}
+  var makes=[];MC.forEach(function(b){if(makes.indexOf(b.mk)<0)makes.push(b.mk);});makes.sort();
+  opt(mcMake,"","Choose a make");makes.forEach(function(m){opt(mcMake,m,m);});
+  function fillModels(){
+    mcModel.textContent="";opt(mcModel,"","Choose a model");
+    MC.forEach(function(b,i){if(b.mk===mcMake.value)opt(mcModel,String(i),b.md);});
+    mcModel.disabled=!mcMake.value;fillYears();
+  }
+  function fillYears(){
+    mcYear.textContent="";var b=MC[+mcModel.value];
+    if(!mcModel.value||!b){opt(mcYear,"","Choose a year");mcYear.disabled=true;showMc();return;}
+    mcYear.disabled=false;opt(mcYear,"","Any year");
+    var now=new Date().getFullYear()+1;for(var y=now;y>=1980;y--)opt(mcYear,String(y),String(y));
+    showMc();
+  }
+  function showMc(){
+    mcOut.textContent="";var b=mcModel.value?MC[+mcModel.value]:null;if(!b)return;
+    var yr=mcYear.value?+mcYear.value:0;
+    var h=document.createElement("h3");h.textContent=(yr?yr+" ":"")+b.mk+" "+b.md;mcOut.appendChild(h);
+    var g=document.createElement("div");g.className="grid2";
+    [["Front",b.f,"front"],["Rear",b.r,"rear"]].forEach(function(t){
+      var c=document.createElement("div");c.className="card";
+      var e=document.createElement("span");e.className="eyebrow";e.textContent=t[0]+" tire";
+      var z=document.createElement("span");z.className="stamp";z.style.fontSize="1.3rem";z.style.justifySelf="start";z.textContent=t[1];
+      var r=document.createElement("div");r.className="row";r.appendChild(amzLink("Shop "+t[2]+" tires on Amazon",mcQ(t[1],t[2])));
+      var d=document.createElement("button");d.type="button";d.className="btn ghost";d.textContent="Decode size";d.addEventListener("click",function(){decIn.value=t[1];location.hash="decoder";goDecode();});r.appendChild(d);
+      c.appendChild(e);c.appendChild(z);c.appendChild(r);g.appendChild(c);
+    });
+    mcOut.appendChild(g);
+    var n=document.createElement("p");n.className="note";
+    var checked=b.y.length?"Checked for "+b.y.join(", ")+".":"Not yet checked for a specific year.";
+    var warn=yr&&b.y.length&&b.y.indexOf(yr)<0?" We haven't checked "+yr+" yet. Sizes usually match across a generation, but confirm on your bike.":"";
+    n.textContent=checked+warn+(b.note?" "+b.note+".":"")+" As an Amazon Associate I earn from qualifying purchases.";
+    mcOut.appendChild(n);
+    if(b.s){var sp=document.createElement("p");sp.className="note";var sa=document.createElement("a");sa.href=b.s;sa.target="_blank";sa.rel="noopener";sa.textContent="Source";sp.appendChild(sa);mcOut.appendChild(sp);}
+  }
+  mcMake.addEventListener("change",fillModels);mcModel.addEventListener("change",fillYears);mcYear.addEventListener("change",showMc);
+  fillModels();
+  var mcRows=document.getElementById("mc-rows"),mcFilter=document.getElementById("mc-filter"),mcNote=document.getElementById("mc-note");
+  function drawMc(){
+    var q=(mcFilter.value||"").toLowerCase().replace(/\s+/g,""),n=0;mcRows.textContent="";
+    MC.forEach(function(b){
+      var hay=(b.mk+b.md+b.f+b.r).toLowerCase().replace(/\s+/g,"");
+      if(q&&hay.indexOf(q)<0)return;n++;
+      var tr=document.createElement("tr");
+      cell(tr,b.mk+" "+b.md);cell(tr,b.y.length?b.y.join(", "):"Not yet checked");cell(tr,b.f,"stamp");cell(tr,b.r,"stamp");
+      var td=document.createElement("td");mcShop(td,b);tr.appendChild(td);mcRows.appendChild(tr);
+    });
+    mcNote.textContent=n?n+" motorcycle"+(n===1?"":"s")+" shown.":"No match. ";
+    if(!n){var na=document.createElement("a");na.href="#request";na.setAttribute("data-rqcat","motorcycle");na.textContent="Tell us your bike and we'll add it";mcNote.appendChild(na);mcNote.appendChild(document.createTextNode("."));}
+  }
+  mcFilter.addEventListener("input",drawMc);drawMc();
   var STOCK_IDX={},ALT_IDX={};
-  MOTO.forEach(function(b){[["Front",b.f],["Rear",b.r]].forEach(function(p){var k=nz(p[1]);(STOCK_IDX[k]=STOCK_IDX[k]||[]).push({n:b.n,p:p[0]});});});
+  MC.forEach(function(b){[["Front",b.f],["Rear",b.r]].forEach(function(p){var k=nz(p[1]);if(k)(STOCK_IDX[k]=STOCK_IDX[k]||[]).push({n:b.mk+" "+b.md,p:p[0]});});});
   [["195/55-16",["gl1800a","valk"]],["195/60-16",["gl1500"]],["185/75-16",["gl1500"]],["205/60-16",["valk"]],["205/65-16",["valk"]]].forEach(function(a){ALT_IDX[a[0]]=a[1].map(function(k){return bikeOf(k).n;});});
 
   /* ---------- size decoder ---------- */
@@ -1842,8 +1947,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       var el=document.createElement("p");var ea=document.createElement("a");ea.href="#request";ea.setAttribute("data-rqcat","");ea.setAttribute("data-rqsize",String(raw).trim());ea.textContent="Still stuck? Tell us what you need";el.appendChild(ea);e.appendChild(el);
       host.appendChild(e);return;
     }
-    var st=(r.norm&&STOCK_IDX[r.norm])||[],al=(r.norm&&ALT_IDX[r.norm])||[];
-    if(st.length){r.kind="Motorcycle (metric)";r.cat="Motorcycles";r.link="motorcycle";r.extra=null;}
+    var stk=(r.norm&&STOCK_IDX[r.norm])||[],al=(r.norm&&ALT_IDX[r.norm])||[];
+    if(stk.length){r.kind="Motorcycle (metric)";r.cat="Motorcycles";r.link="motorcycle";r.extra=null;}
     var head=document.createElement("div");head.className="head";
     var st=document.createElement("span");st.className="stamp";st.textContent=raw.trim().toUpperCase();
     var h=document.createElement("h3");h.textContent=r.kind;
@@ -1858,7 +1963,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     host.appendChild(d);
     if(r.extra){var x=document.createElement("p");x.className="note";x.textContent=r.extra;host.appendChild(x);}
     function xbox(title,body,linkText,href){var bx=document.createElement("div");bx.className="xref";var t=document.createElement("b");t.textContent=title;var p=document.createElement("p");p.textContent=body;var a=document.createElement("a");a.href=href||"#motorcycle";if(href){a.target="_blank";a.rel="noopener";}a.textContent=linkText;bx.appendChild(t);bx.appendChild(p);bx.appendChild(a);host.appendChild(bx);}
-    if(st.length)xbox("Stock size on: "+st.map(function(s){return s.n+", "+s.p.toLowerCase();}).join("; "),"Some riders replace stock motorcycle tires with non-standard alternatives that tire and motorcycle makers don't approve. Our sister site, Darkside Tires, covers those alternatives and their risks.","Open the motorcycle guide");
+    if(stk.length){var names=stk.slice(0,4).map(function(x){return x.n+", "+x.p.toLowerCase();});xbox("Factory size on: "+names.join("; ")+(stk.length>4?"; and "+(stk.length-4)+" more":""),"Find your exact bike, with front and rear sizes, in the motorcycle tire finder.","Open the motorcycle tire finder");}
     if(al.length)xbox("Riders report running this car tire on the rear of: "+al.join("; "),"That's a darkside fitment. Tire and motorcycle makers don't approve car tires on motorcycles, and Tires for Anything doesn't recommend it.","Read more on Darkside Tires","https://darksidetires.com");
     if(typeof FINDERS!=="undefined"&&FINDERS){
       var key=String(raw).toUpperCase().replace(/\s+/g,""),seen={};
