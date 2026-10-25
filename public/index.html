@@ -1706,10 +1706,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 (function(){
   var PREVIEW=true;
   var SHOPQ={forklift:"forklift tire service",farm:"tractor tire service",construction:"skid steer tire service",atv:"ATV tire shop",aviation:"aircraft maintenance shop",military:"truck tire shop",motorcycle:"motorcycle tire shop",vintage:"classic car tire shop",trailer:"trailer tire shop",rv:"RV tire service",racing:"performance tire shop"};
-  // Amazon doesn't really carry aircraft tires (6.00-6 searches return lawn and ag tires), so aircraft tires go to Aircraft Spruce.
-  var SPRUCE={"6.00-6":"https://www.aircraftspruce.com/catalog/lgpages/600-6.php","5.00-5":"https://www.aircraftspruce.com/catalog/lgpages/500-5.php"};
-  var SPRUCE_ALL="https://www.aircraftspruce.com/menus/lg/tirestubes_0size.html";
-  function spruceLink(label,size){var a=document.createElement("a");a.className="shoplink";a.href=SPRUCE[String(size||"").trim()]||SPRUCE_ALL;a.target="_blank";a.rel="nofollow noopener";a.textContent=label;return a;}
+  // Tires for FAA-certificated aircraft aren't sold on Amazon, so aircraft tire buttons open the quote form.
+  function airQuote(label,size){var a=document.createElement("a");a.className="shoplink";a.href="#quote";a.setAttribute("data-cat","Aviation");if(size)a.setAttribute("data-size",String(size).trim());a.textContent=label;return a;}
   var QCAT={forklift:"Forklift",farm:"Farm",construction:"Construction",semi:"Commercial",military:"Military",rv:"RV",aviation:"Aviation"};
   /* ---------- categories ---------- */
   var GROUPS=[["small","Small wheels"],["power","Powersports & racing"],["road","On the road"],["heavy","Heavy duty"],["air","Aircraft"]];
@@ -2113,7 +2111,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       var sh=document.createElement("div");sh.className="row";sh.style.alignItems="center";
       var lb=document.createElement("span");lb.className="note";lb.textContent="Shop on Amazon:";sh.appendChild(lb);
       var rz=raw.trim(),small=/^(lawn|atv|trailer|mobility)$/.test(lk);
-      if(lk==="aviation"){lb.textContent="Shop:";sh.appendChild(spruceLink("This size at Aircraft Spruce",rz));}
+      if(lk==="aviation"){lb.textContent="Aircraft tires:";sh.appendChild(airQuote("Get a quote for this size",rz));}
       else sh.appendChild(amzLink(small?"Tire only":"This size",rz+" "+term));
       if(small)sh.appendChild(amzLink("Mounted on a wheel",rz+" tire and wheel assembly"));
       host.appendChild(sh);
@@ -2210,10 +2208,10 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     var items=SHOP[el.getAttribute("data-shop")]||[];
     if(!items.length){el.parentNode.hidden=true;return;}
     if(el.getAttribute("data-shop")==="aviation"){
-      var ah=document.createElement("h3");ah.textContent="Shop aircraft tires";
+      var ah=document.createElement("h3");ah.textContent="Aircraft tires and tubes";
       var ar=document.createElement("div");ar.className="chips";
-      ar.appendChild(spruceLink("6.00-6 tires","6.00-6"));ar.appendChild(spruceLink("5.00-5 tires","5.00-5"));ar.appendChild(spruceLink("All sizes, tires and tubes",""));
-      var an=document.createElement("p");an.className="note";an.textContent="Aircraft tires and tubes link to Aircraft Spruce, an aviation parts supplier. We don't earn a commission on these. Confirm the TSO, ply rating and part number for your aircraft.";
+      ar.appendChild(airQuote("Get aircraft tire quotes",""));
+      var an=document.createElement("p");an.className="note";an.textContent="Tires and tubes for FAA-certificated aircraft aren't sold on Amazon. Request a quote and we'll connect you with aviation tire suppliers. Confirm the TSO, ply rating and part number for your aircraft with your A&P.";
       el.appendChild(ah);el.appendChild(ar);el.appendChild(an);
     }
     var h=document.createElement("h3");h.textContent="Shop on Amazon";
@@ -2416,7 +2414,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
         for(var i=1;i<4;i++){var td=document.createElement("td");td.textContent=r[i]||"—";tr.appendChild(td);}
         var ts=document.createElement("td");
         if(k==="vintage"&&!r[1]){var sb=document.createElement("button");sb.type="button";sb.className="shoplink";sb.style.background="none";sb.style.cursor="pointer";sb.textContent="Specialists";sb.addEventListener("click",function(){var d=document.getElementById("vintage-dealers");if(d)d.scrollIntoView({behavior:"smooth",block:"start"});});ts.appendChild(sb);}
-        else if(k==="aviation"){ts.appendChild(spruceLink("Aircraft Spruce",r[0]));}
+        else if(k==="aviation"){ts.appendChild(airQuote("Get a quote",r[0]));}
         else{var mq=mountQuery(k,r);ts.appendChild(amzLink(mq?"Tire only":"Amazon",finderQuery(k,r)));if(mq){ts.appendChild(document.createTextNode(" "));ts.appendChild(amzLink("Mounted",mq));}}
         tr.appendChild(ts);
         tr.appendChild(installCell(k,installLevel(k,r),r[4]||r[0]));
@@ -2502,8 +2500,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     }
     if(k==="aviation"){
       var at=document.createElement("b");at.textContent="Shopping options";out.appendChild(at);
-      var arw=document.createElement("div");arw.className="chips";arw.appendChild(spruceLink(S?"Look up "+S+" at Aircraft Spruce":"Aircraft tires by size at Aircraft Spruce",S));out.appendChild(arw);
-      var anote=document.createElement("p");anote.className="note";anote.textContent="Aircraft Spruce is an aviation parts supplier. Confirm the TSO, ply rating and part number for your aircraft.";out.appendChild(anote);
+      var arw=document.createElement("div");arw.className="chips";arw.appendChild(airQuote(S?"Get quotes for "+S:"Get aircraft tire quotes",S));out.appendChild(arw);
+      var anote=document.createElement("p");anote.className="note";anote.textContent="Tires for FAA-certificated aircraft aren't sold on Amazon. The quote form sends your request to aviation tire suppliers.";out.appendChild(anote);
     }
     if(qs.length){
       var t=document.createElement("b");t.textContent="Shopping options";out.appendChild(t);
