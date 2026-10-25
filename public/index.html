@@ -730,6 +730,16 @@ footer .wrap{display:grid;gap:10px}
       <div class="card"><span class="eyebrow">Golf cart</span><div class="parts"><span class="hl">18</span><span>x</span><span>8.50</span><span>-</span><span>8</span></div><p>The standard non-lifted golf cart size. Low-profile metric sizes like <span class="stamp">205/50-10</span> are common on custom wheels.</p></div>
     </div>
   </div>
+  <div class="wrap stack">
+    <h2>Size finder</h2>
+    <div class="quick">
+      <label for="sf-atv">Search by size, model or use</label>
+      <input type="text" id="sf-atv" placeholder="e.g. Rancher, 25x10-12, golf" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th></tr></thead><tbody id="sft-atv"></tbody></table></div>
+    <p class="note" id="sfn-atv" aria-live="polite"></p>
+    <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://www.atv.com/specs/honda/utility/2022/fourtrax-rancher/base/detail.html" target="_blank" rel="noopener">Honda Rancher specs</a> · <a href="https://www.polaris.com/en-us/off-road/sportsman/2020/1-seat/sportsman-570/sportsman-570-eps-titanium-metallic-2020-atv/" target="_blank" rel="noopener">Polaris Sportsman 570</a> · <a href="https://utvactionmag.com/2021-polaris-rzr-xp-1000-trails-rocks" target="_blank" rel="noopener">UTV Action, RZR XP 1000</a> · <a href="https://www.golfcarttiresupply.com/ezgo-golf-cart-tires/" target="_blank" rel="noopener">Golf Cart Tire Supply</a></p>
+  </div>
 
   <div class="wrap stack">
     <h2>Pick the tread</h2>
@@ -812,6 +822,16 @@ footer .wrap{display:grid;gap:10px}
       <div class="card"><span class="eyebrow">Scooter</span><div class="parts"><span class="hl">3.00</span><span>-</span><span>4</span></div><p>A <b>3 in</b> wide tire on a <b>4 in</b> rim, also listed as <span class="stamp">260x85</span>. One of the most common scooter sizes.</p></div>
     </div>
   </div>
+  <div class="wrap stack">
+    <h2>Size finder</h2>
+    <div class="quick">
+      <label for="sf-mobility">Search by size, model or use</label>
+      <input type="text" id="sf-mobility" placeholder="e.g. 24, scooter, 260x85" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th></tr></thead><tbody id="sft-mobility"></tbody></table></div>
+    <p class="note" id="sfn-mobility" aria-live="polite"></p>
+    <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://hollandbikeshop.com/en-gb/bicycle-tires-and-inner-tubes/schwalbe-bicycle-tires/schwalbe-wheelchair-tire/schwalbe-tire-24x1-00-25-540-gray-slick-wheelchair/" target="_blank" rel="noopener">Schwalbe wheelchair tires</a> · <a href="https://www.pu-tire.com/mobility-scooter-tires-and-wheels/polyurethane-tires-and-wheels/pu-mobility-scooter-wheels-and-tyres-9x3.html" target="_blank" rel="noopener">PU Tire scooter sizes</a> · <a href="https://sites.google.com/view/mobility-scooter-tire-c901db3d/mobility-scooter-tire-size-guide-for-different-models" target="_blank" rel="noopener">Scooter tire size guide</a></p>
+  </div>
 
   <div class="wrap stack">
     <h2>Air, solid or flat-free?</h2>
@@ -843,6 +863,16 @@ footer .wrap{display:grid;gap:10px}
       <div class="card"><span class="eyebrow">Sprint kart sizes</span><div class="parts"><span class="hl">10</span><span>x</span><span>4.50</span><span>-</span><span>5</span></div><p>A common front size. Rears are wider, like <span class="stamp">11x7.10-5</span>, both on <b>5 in</b> wheels.</p></div>
       <div class="card"><span class="eyebrow">Compounds</span><h3>Hard to soft</h3><p class="use">Harder compounds last longer and suit practice and spec classes. Softer compounds grip harder but wear out fast. Rain tires have their own tread and compound.</p></div>
     </div>
+  </div>
+  <div class="wrap stack">
+    <h2>Size finder</h2>
+    <div class="quick">
+      <label for="sf-motorsport">Search by size, model or use</label>
+      <input type="text" id="sf-motorsport" placeholder="e.g. cadet, rear, 11x7.10-5" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th></tr></thead><tbody id="sft-motorsport"></tbody></table></div>
+    <p class="note" id="sfn-motorsport" aria-live="polite"></p>
+    <p class="note">Always confirm against the size molded on your current tire or in your owner's manual. Sources: <a href="https://flowracers.com/blog/read-go-kart-tire-size/" target="_blank" rel="noopener">Flow Racers kart tire size guide</a></p>
   </div>
 
   <div class="wrap stack">
@@ -1489,6 +1519,12 @@ footer .wrap{display:grid;gap:10px}
       p3.push([m[2],"Outside diameter "+m[2]+" in"],[m[3],"Section width "+m[3]+" in"],[m[4],m[4]==="R"?"Radial construction":"Bias-ply construction"],[m[5],"Fits a "+m[5]+" in wheel"]);
       return {kind:guess,parts:p3,extra:"This format shows up on aircraft (15x6.0-6), forklifts (18x7-8), mowers (20x10-8) and ATVs (25x8-12). The equipment it came off tells you which.",cat:cat,link:cat==="Aviation"?"aviation":cat==="Forklift & industrial"?"forklift":cat==="Lawn & garden"?"lawn":cat==="ATV, UTV & golf"?"atv":cat==="Motorsport & karting"?"motorsport":""};
     }
+    // Small wheel, inches: 8x2, 14x3
+    m=s.match(/^([4-9]|1[0-6])X([1-4])$/);
+    if(m)return {kind:"Small wheel or caster (inches)",parts:[[m[1],"Overall diameter about "+m[1]+" in"],[m[2],"Width about "+m[2]+" in"]],extra:"Common on wheelchair casters, mobility scooters and carts. Match the axle or bearing size too.",cat:"Mobility & medical",link:"mobility"};
+    // Small wheel, metric: 200x50, 260x85
+    m=s.match(/^(\d{3})X(\d{2,3})$/);
+    if(m)return {kind:"Small wheel (metric, mm)",parts:[[m[1],"Overall diameter "+m[1]+" mm ("+(m[1]/25.4).toFixed(1)+" in)"],[m[2],"Width "+m[2]+" mm ("+(m[2]/25.4).toFixed(1)+" in)"]],extra:"A metric way of listing scooter and caster wheels. 260x85 is the same tire as 3.00-4.",cat:"Mobility & medical",link:"mobility"};
     // Two-part: 26x6.6 (Type VII) or 29x2.4 (bike)
     m=s.match(/^(\d{2}(?:\.\d)?)X(\d{1,2}\.\d{1,2})$/);
     if(m){
@@ -1500,7 +1536,7 @@ footer .wrap{display:grid;gap:10px}
     m=s.match(/^(\d{1,2}\.\d{1,2})-(\d{1,2}(?:\.\d)?)$/);
     if(m){
       var ww=+m[1],r2=+m[2],k,c,ln="";
-      if(r2<=5&&ww<=4.1){k="Mobility scooter or small equipment";c="Mobility & medical";ln="mobility";}
+      if(r2<=10&&ww<=4.1){k="Mobility scooter, power chair or small equipment";c="Mobility & medical";ln="mobility";}
       else if([25,29,33,35,39,49,51,57,63].indexOf(r2)>=0){k="Construction / OTR (bias)";c="Construction & OTR";ln="construction";}
       else if(r2>=24){k="Farm tractor rear (bias)";c="Farm & ag";ln="farm";}
       else if(r2>=20){k="Older truck or farm (bias)";c="Farm & ag";ln="farm";}
@@ -1591,6 +1627,60 @@ footer .wrap{display:grid;gap:10px}
   });
 
   /* ---------- router ---------- */
+  /* ---------- size finders ---------- */
+  var FINDERS={
+    atv:[
+      ["24x8-12","","Honda FourTrax Rancher (2022), front","Utility ATV"],
+      ["24x10-11","","Honda FourTrax Rancher (2022), rear","Rear rides on an 11 in wheel"],
+      ["25x8-12","","Polaris Sportsman 570 (2020), front; many utility 4x4 ATVs","The most common utility ATV front size"],
+      ["25x10-12","","Polaris Sportsman 570 (2020), rear; many utility 4x4 ATVs","Common utility ATV rear size"],
+      ["30x9-14","","Polaris RZR XP 1000 Trails & Rocks (2021), front","Sport UTV"],
+      ["30x12-14","","Polaris RZR XP 1000 Trails & Rocks (2021), rear","Sport UTV"],
+      ["27x9R14","","Many UTVs, front","Radial; rides smoother at speed"],
+      ["27x11R14","","Many UTVs, rear","Radial"],
+      ["18x8.50-8","","EZGO and Club Car carts, no lift","The standard golf cart size; all four corners"],
+      ["205/50-10","","Golf carts on 10 in custom wheels","Low profile; no lift needed"],
+      ["205/30-12","","Golf carts on 12 in custom wheels","Low profile; no lift needed"],
+      ["20 to 23 in","","Lifted golf carts","All-terrain and street; needs a lift kit","22x11-10"]
+    ],
+    motorsport:[
+      ["10x4.50-5","4.50/10.0-5","Sprint kart front; rental karts","Most common kart front size"],
+      ["11x7.10-5","7.10/11.0-5","Sprint kart rear","Most common kart rear size"],
+      ["11x6.00-5","6.00/11.0-5","Sprint kart rear","Narrower rear used in some classes"],
+      ["10x4.00-5","4.00/10.0-5","Kid karts (Cadet, Micro, Mini), front","Check your class rules"],
+      ["11x5.00-5","5.00/11.0-5","Kid karts (Cadet, Micro, Mini), rear","Check your class rules"]
+    ],
+    mobility:[
+      ["24 x 1-3/8","37-540","Manual wheelchair, rear","Standard everyday size","37-540"],
+      ["24 x 1","25-540","Manual wheelchair, rear","Narrower; sport and lightweight chairs","25-540"],
+      ["8 x 2","","Wheelchair and scooter casters","Check the axle size before ordering","8x2"],
+      ["3.00-4","260x85","Mobility scooters","One of the most common scooter sizes"],
+      ["2.80/2.50-4","9x3","Smaller scooters and power chairs","Often sold under either size"],
+      ["4.10/3.50-4","","Mid-size scooters","Also fits wheelbarrows and hand trucks"],
+      ["200x50","","Compact scooter and power chair casters","Usually solid","200x50"],
+      ["3.00-8","14x3","Larger scooters; some power chair drive wheels","Pneumatic or solid"],
+      ["4.00-8","","Some Pride Jazzy power chairs","Usually solid"],
+      ["3.50-10","","Larger outdoor scooters","For rough or uneven ground"]
+    ]
+  };
+  Object.keys(FINDERS).forEach(function(k){
+    var body=document.getElementById("sft-"+k),inp=document.getElementById("sf-"+k),note=document.getElementById("sfn-"+k);
+    function draw(){
+      var q=(inp.value||"").toLowerCase().trim(),n=0;body.textContent="";
+      FINDERS[k].forEach(function(r){
+        if(q&&r.slice(0,4).join(" ").toLowerCase().indexOf(q)<0)return;n++;
+        var tr=document.createElement("tr"),td0=document.createElement("td"),b=document.createElement("button");
+        b.type="button";b.className="chip";b.textContent=r[0];b.title="Decode this size";
+        b.addEventListener("click",function(){decIn.value=r[4]||r[0];location.hash="decoder";goDecode();});
+        td0.appendChild(b);tr.appendChild(td0);
+        for(var i=1;i<4;i++){var td=document.createElement("td");td.textContent=r[i]||"—";tr.appendChild(td);}
+        body.appendChild(tr);
+      });
+      note.textContent=n?n+" size"+(n===1?"":"s")+" shown. Tap a size to decode it.":"No match. Try a shorter search, or read the size off your sidewall and use the decoder.";
+    }
+    inp.addEventListener("input",draw);draw();
+  });
+
   /* ---------- trailer tire age check ---------- */
   var MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
   var dotIn=document.getElementById("dot-code"),dotOut=document.getElementById("dot-out");
