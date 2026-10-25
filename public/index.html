@@ -49,7 +49,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16p
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--stamp-bg)}
 a{color:var(--link)}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.wrap{max-width:68rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{width:100%;max-width:68rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);line-height:1.02;text-wrap:balance;margin:0;letter-spacing:.005em}
 h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:900;text-transform:uppercase}
 h2{font-size:clamp(1.9rem,4.2vw,2.7rem);font-weight:800;text-transform:uppercase}
@@ -217,6 +217,10 @@ footer .wrap{display:grid;gap:10px}
 .rqout{display:grid;gap:10px}
 .rqout:empty{display:none}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.rqcta{display:flex;justify-content:space-between;align-items:center;gap:12px 20px;flex-wrap:wrap;border:2px dashed var(--line);border-radius:10px;background:var(--surface);padding:16px 18px}
+.rqcta > div{display:grid;gap:4px;min-width:0;flex:1 1 18rem}
+.rqcta b{font-family:var(--display);text-transform:uppercase;font-size:1.3rem;letter-spacing:.01em}
+.rqcta p{color:var(--muted);font-size:.95rem}
 /* amazon shop */
 .shop{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:16px;display:grid;gap:10px}
 .shop h3{font-size:1.25rem}
@@ -1474,6 +1478,18 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   </div>
 </section>
 
+<!-- REQUEST -->
+<section class="view" id="v-request" data-view="request" hidden>
+  <div class="wrap pagehead">
+    <div class="crumb"><a href="#home">All tires</a> / Can't find your tire?</div>
+    <span class="eyebrow">Tell us what you need</span>
+    <h1>Can't find your tire?</h1>
+    <p class="lede">Tell us what you're running. We'll show you shopping options right away, and look at adding it to the site.</p>
+    <p><a href="#home" id="rq-back">Back to all tires</a></p>
+  </div>
+  <div class="wrap stack"><div class="rqbox" id="rq-box"></div></div>
+</section>
+
 <!-- MOTORCYCLE -->
 <section class="view" id="v-motorcycle" data-view="motorcycle" hidden>
   <div class="wrap pagehead">
@@ -1547,7 +1563,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 <footer>
   <div class="wrap">
     <div><b style="font-family:var(--display);text-transform:uppercase;font-size:1.1rem;color:var(--ink)">Tires for Anything</b> · tiresforanything.com</div>
-    <div class="row" style="gap:16px"><a href="#about">About</a><a href="#privacy">Privacy policy</a><a href="#legal">Terms and disclaimers</a><a href="#partners">For dealers</a></div>
+    <div class="row" style="gap:16px"><a href="#about">About</a><a href="#privacy">Privacy policy</a><a href="#legal">Terms and disclaimers</a><a href="#partners">For dealers</a><a href="#request">Can't find your tire?</a></div>
     <p><b>Safety notice:</b> Information on this site is general and educational. It is not professional, mechanical or aviation advice, and it doesn't replace your manufacturer's specifications or a qualified technician. You are responsible for verifying any tire before you buy, install or use it. <a href="#legal">Read the full terms and disclaimers</a>.</p>
     <p>Some links on this site are affiliate links. If you buy through them, we may earn a commission at no extra cost to you. Featured dealers pay for placement, and they're always labeled. We never earn commissions on non-standard fitments. As an Amazon Associate I earn from qualifying purchases.</p>
     <p>Product and company names are trademarks of their owners, used for identification only. Tires for Anything is not affiliated with any manufacturer named on this site.</p>
@@ -1823,6 +1839,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(!r){
       var e=document.createElement("div");e.className="err";
       e.textContent="We couldn't read that size. Copy it exactly as it's molded on the sidewall, like 225/60R16, 6.00-6 or 18x7x12-1/8. Ignore extra codes like DOT numbers.";
+      var el=document.createElement("p");var ea=document.createElement("a");ea.href="#request";ea.setAttribute("data-rqcat","");ea.setAttribute("data-rqsize",String(raw).trim());ea.textContent="Still stuck? Tell us what you need";el.appendChild(ea);e.appendChild(el);
       host.appendChild(e);return;
     }
     var st=(r.norm&&STOCK_IDX[r.norm])||[],al=(r.norm&&ALT_IDX[r.norm])||[];
@@ -2062,74 +2079,101 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
         tr.appendChild(ts);
         body.appendChild(tr);
       });
-      note.textContent=n?n+" size"+(n===1?"":"s")+" shown. Tap a size to decode it.":"No match. Try a shorter search, or read the size off your sidewall and use the decoder.";
+      note.textContent=n?n+" size"+(n===1?"":"s")+" shown. Tap a size to decode it.":"No match. Try a shorter search, or ";
+      if(!n){var na=document.createElement("a");na.href="#request";na.setAttribute("data-rqcat",k);na.setAttribute("data-rqsize",inp.value.trim());na.textContent="tell us what you need";note.appendChild(na);note.appendChild(document.createTextNode("."));}
     }
     inp.addEventListener("input",draw);draw();
   });
 
   /* ---------- can't find your tire? request form ---------- */
-  var RQ_TERM={bicycles:"bike tire",mobility:"mobility scooter tire",lawn:"lawn mower tire",motorsport:"go kart tire",motorcycle:"motorcycle tire",racing:"racing tire",atv:"ATV tire",cars:"tire",trucks:"truck tire",trailer:"trailer tire",rv:"RV tire",vintage:"tire",forklift:"forklift tire",semi:"truck tire",farm:"tractor tire",construction:"skid steer tire",military:"military truck tire",aviation:"",decoder:"tire"};
-  Object.keys(RQ_TERM).forEach(function(k){
+  var RQ_TERM={bicycles:"bike tire",mobility:"mobility scooter tire",lawn:"lawn mower tire",motorsport:"go kart tire",motorcycle:"motorcycle tire",racing:"racing tire",atv:"ATV tire",cars:"tire",trucks:"truck tire",trailer:"trailer tire",rv:"RV tire",vintage:"tire",forklift:"forklift tire",semi:"truck tire",farm:"tractor tire",construction:"skid steer tire",military:"military truck tire",aviation:"","":"tire"};
+  function catName(id){for(var i=0;i<CATS.length;i++){if(CATS[i].id===id)return CATS[i].n;}return "";}
+  // Short call-to-action on every category page and the decoder
+  Object.keys(RQ_TERM).concat(["decoder"]).forEach(function(k){
+    if(!k)return;
     var sec=document.getElementById("v-"+k);if(!sec)return;
     var wrap=document.createElement("div");wrap.className="wrap stack";
-    var box=document.createElement("div");box.className="rqbox";
+    var box=document.createElement("div");box.className="rqcta";
+    var txt=document.createElement("div");
     var h=document.createElement("b");h.textContent="Can't find your tire?";
-    var intro=document.createElement("p");intro.textContent=k==="aviation"?"Tell us your aircraft and the tire you need. We'll research it and look at adding it to the site.":"Tell us what you're running. We'll show you shopping options right now, and look at adding it to the site.";
-    var f=document.createElement("form");f.noValidate=true;
-    var g=document.createElement("div");g.className="fgrid";
-    function field(id,label,hint,tag,full){
-      var d=document.createElement("div");d.className="field"+(full?" full":"");
-      var l=document.createElement("label");l.htmlFor=id;l.textContent=label;
-      var i=document.createElement(tag||"input");i.id=id;if(!tag){i.type=id.indexOf("email")>=0?"email":"text";i.autocomplete="off";}else{i.rows=2;}
-      d.appendChild(l);d.appendChild(i);
-      if(hint){var hh=document.createElement("span");hh.className="hint";hh.textContent=hint;d.appendChild(hh);}
-      g.appendChild(d);return i;
-    }
-    var eq=field("rq-"+k+"-eq","Vehicle or equipment","Year, make and model, like 2015 Honda Pioneer 700");
-    var sz=field("rq-"+k+"-size","Tire size, if you know it","From the sidewall");
-    var nt=field("rq-"+k+"-notes","Anything else?","","textarea",true);
-    var em=field("rq-"+k+"-email","Email (optional)","Only used to tell you if we add your tire");
-    var hp=document.createElement("input");hp.type="text";hp.name="website";hp.tabIndex=-1;hp.autocomplete="off";hp.className="hp";hp.setAttribute("aria-hidden","true");
-    var err=document.createElement("p");err.className="note";err.setAttribute("role","alert");
-    var btn=document.createElement("button");btn.className="btn yellow";btn.type="submit";btn.textContent=k==="aviation"?"Send request":"Show me options";
-    var out=document.createElement("div");out.className="rqout";out.setAttribute("aria-live","polite");
-    f.appendChild(g);f.appendChild(hp);f.appendChild(err);f.appendChild(btn);
-    box.appendChild(h);box.appendChild(intro);box.appendChild(f);box.appendChild(out);wrap.appendChild(box);
+    var p=document.createElement("p");p.textContent=k==="aviation"?"Tell us your aircraft and the tire you need, and we'll research it.":"Tell us what you need. We'll show you shopping options right away and look at adding it.";
+    txt.appendChild(h);txt.appendChild(p);
+    var a=document.createElement("a");a.className="btn yellow";a.href="#request";a.setAttribute("data-rqcat",k==="decoder"?"":k);a.textContent="Tell us what you need";
+    box.appendChild(txt);box.appendChild(a);wrap.appendChild(box);
     var shop=sec.querySelector(".shop");
     if(shop&&shop.parentNode&&shop.parentNode.parentNode===sec)sec.insertBefore(wrap,shop.parentNode);else sec.appendChild(wrap);
-    f.addEventListener("submit",function(e){
-      e.preventDefault();
-      var E=eq.value.trim(),S=sz.value.trim(),N=nt.value.trim(),M=em.value.trim();
-      out.textContent="";
-      if(!E&&!S){err.textContent="Tell us the vehicle or equipment, or the tire size.";return;}
-      if(M&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(M)){err.textContent="That email doesn't look right. Fix it, or leave it blank.";return;}
-      err.textContent="";btn.disabled=true;
-      var term=RQ_TERM[k],qs=[];
-      if(term){
-        if(S)qs.push([S+" "+term,"Search Amazon for "+S]);
-        if(E)qs.push([E+" "+term,"Search Amazon for "+E+" tires"]);
-        if(S&&E)qs.push([E+" "+S,"Search Amazon for both"]);
-        if(S&&/^(lawn|atv|trailer|mobility)$/.test(k))qs.push([S+" tire and wheel assembly","Search Amazon for "+S+" mounted on a wheel"]);
-      }
-      var t=document.createElement("b");
-      if(qs.length){
-        t.textContent="Shopping options";out.appendChild(t);
-        var row=document.createElement("div");row.className="chips";
-        qs.forEach(function(q){row.appendChild(amzLink(q[1],q[0].slice(0,120)));});
-        out.appendChild(row);
-        var d=document.createElement("p");d.className="note";d.textContent="As an Amazon Associate I earn from qualifying purchases. These are search results, so confirm the size before you buy.";out.appendChild(d);
-        if(k==="vintage"){var v=document.createElement("p");v.className="note";v.textContent="Looking for a period-correct size? The vintage specialists listed on this page carry sizes Amazon doesn't.";out.appendChild(v);}
-      }else if(k==="aviation"){
-        var a=document.createElement("p");a.textContent="Aircraft tires have to match your aircraft's approved parts, so we don't link to general shopping sites. Check your parts catalog, and talk with your mechanic or an aviation supplier.";out.appendChild(a);
-      }
-      var st=document.createElement("p");st.className="note";st.textContent="Sending your request...";out.appendChild(st);
-      fetch("/api/request",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({page:k,equipment:E,size:S,notes:N,email:M,website:hp.value})})
-        .then(function(r){return r.json();}).catch(function(){return {saved:false};})
-        .then(function(res){
-          st.textContent=res&&res.saved?"Thanks. We've saved your request and will look at adding it to the site.":"Thanks. We couldn't save your request just now, but the shopping options above still work.";
-          btn.disabled=false;
-        });
-    });
+  });
+  // The one shared form
+  var rqBox=document.getElementById("rq-box"),rqBack=document.getElementById("rq-back");
+  var f=document.createElement("form");f.noValidate=true;
+  var g=document.createElement("div");g.className="fgrid";
+  function field(id,label,hint,tag,full){
+    var d=document.createElement("div");d.className="field"+(full?" full":"");
+    var l=document.createElement("label");l.htmlFor=id;l.textContent=label;
+    var i=document.createElement(tag||"input");i.id=id;
+    if(!tag){i.type=id==="rq-email"?"email":"text";i.autocomplete="off";}else if(tag==="textarea"){i.rows=3;}
+    d.appendChild(l);d.appendChild(i);
+    if(hint){var hh=document.createElement("span");hh.className="hint";hh.textContent=hint;d.appendChild(hh);}
+    g.appendChild(d);return i;
+  }
+  var rqCat=field("rq-cat","What kind of tire?","","select");
+  var o0=document.createElement("option");o0.value="";o0.textContent="Not sure";rqCat.appendChild(o0);
+  CATS.forEach(function(c){if(!c.live)return;var o=document.createElement("option");o.value=c.id;o.textContent=c.n;rqCat.appendChild(o);});
+  var rqEq=field("rq-eq","Vehicle or equipment","Year, make and model, like 2015 Honda Pioneer 700");
+  var rqSize=field("rq-size","Tire size, if you know it","From the sidewall");
+  var rqEmail=field("rq-email","Email (optional)","Only used to tell you if we add your tire");
+  var rqNotes=field("rq-notes","Anything else?","","textarea",true);
+  var hp=document.createElement("input");hp.type="text";hp.name="website";hp.tabIndex=-1;hp.autocomplete="off";hp.className="hp";hp.setAttribute("aria-hidden","true");
+  var err=document.createElement("p");err.className="note";err.setAttribute("role","alert");
+  var btn=document.createElement("button");btn.className="btn yellow";btn.type="submit";
+  var out=document.createElement("div");out.className="rqout";out.setAttribute("aria-live","polite");
+  f.appendChild(g);f.appendChild(hp);f.appendChild(err);f.appendChild(btn);
+  rqBox.appendChild(f);rqBox.appendChild(out);
+  function rqSync(){btn.textContent=rqCat.value==="aviation"?"Send request":"Show me options";}
+  rqCat.addEventListener("change",rqSync);rqSync();
+  function openRequest(cat,size){
+    rqCat.value=RQ_TERM.hasOwnProperty(cat)?cat:"";rqSync();
+    if(size)rqSize.value=size;
+    out.textContent="";err.textContent="";
+    var nm=catName(cat);
+    if(nm){rqBack.href="#"+cat;rqBack.textContent="Back to "+nm;}else{rqBack.href="#home";rqBack.textContent="Back to all tires";}
+  }
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest("[data-rqcat]");
+    if(!a)return;
+    openRequest(a.getAttribute("data-rqcat")||"",a.getAttribute("data-rqsize")||"");
+  });
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var k=rqCat.value,E=rqEq.value.trim(),S=rqSize.value.trim(),N=rqNotes.value.trim(),M=rqEmail.value.trim();
+    out.textContent="";
+    if(!E&&!S){err.textContent="Tell us the vehicle or equipment, or the tire size.";return;}
+    if(M&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(M)){err.textContent="That email doesn't look right. Fix it, or leave it blank.";return;}
+    err.textContent="";btn.disabled=true;
+    var term=RQ_TERM[k],qs=[];
+    if(term){
+      if(S)qs.push([S+" "+term,"Search Amazon for "+S]);
+      if(E)qs.push([E+" "+term,"Search Amazon for "+E+" tires"]);
+      if(S&&E)qs.push([E+" "+S,"Search Amazon for both"]);
+      if(S&&/^(lawn|atv|trailer|mobility)$/.test(k))qs.push([S+" tire and wheel assembly","Search Amazon for "+S+" mounted on a wheel"]);
+    }
+    if(qs.length){
+      var t=document.createElement("b");t.textContent="Shopping options";out.appendChild(t);
+      var row=document.createElement("div");row.className="chips";
+      qs.forEach(function(q){row.appendChild(amzLink(q[1],q[0].slice(0,120)));});
+      out.appendChild(row);
+      var d=document.createElement("p");d.className="note";d.textContent="As an Amazon Associate I earn from qualifying purchases. These are search results, so confirm the size before you buy.";out.appendChild(d);
+      if(k==="vintage"){var v=document.createElement("p");v.className="note";var va=document.createElement("a");va.href="#vintage";va.textContent="the vintage specialists";v.appendChild(document.createTextNode("Looking for a period-correct size? Try "));v.appendChild(va);v.appendChild(document.createTextNode(". They carry sizes Amazon doesn't."));out.appendChild(v);}
+    }else if(k==="aviation"){
+      var ap=document.createElement("p");ap.textContent="Aircraft tires have to match your aircraft's approved parts, so we don't link to general shopping sites. Check your parts catalog, and talk with your mechanic or an aviation supplier.";out.appendChild(ap);
+    }
+    var st=document.createElement("p");st.className="note";st.textContent="Sending your request...";out.appendChild(st);
+    fetch("/api/request",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({page:k||"not sure",equipment:E,size:S,notes:N,email:M,website:hp.value})})
+      .then(function(r){return r.json();}).catch(function(){return {saved:false};})
+      .then(function(res){
+        st.textContent=res&&res.saved?"Thanks. We've saved your request and will look at adding it to the site.":"Thanks. We couldn't save your request just now, but the shopping options above still work.";
+        btn.disabled=false;
+      });
   });
 
   /* ---------- trailer tire age check ---------- */
@@ -2148,7 +2192,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   dotIn.addEventListener("keydown",function(e){if(e.key==="Enter")dotRun();});
   dotRun();
 
-  var VIEWS=["home","cars","trucks","forklift","aviation","motorcycle","farm","semi","trailer","construction","lawn","atv","rv","mobility","motorsport","racing","bicycles","vintage","military","decoder","quote","partners","legal","about","privacy"];
+  var VIEWS=["home","cars","trucks","forklift","aviation","motorcycle","farm","semi","trailer","construction","lawn","atv","rv","mobility","motorsport","racing","bicycles","vintage","military","request","decoder","quote","partners","legal","about","privacy"];
   function route(){
     var h=(location.hash||"").replace("#","");
     if(VIEWS.indexOf(h)<0)h="home";
