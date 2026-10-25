@@ -712,8 +712,9 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <div class="card"><span class="eyebrow">Built to order, USA</span><h3>Diamond Back Classics</h3><p class="use">Adds custom whitewall, redline, goldline and blueline sidewalls to new radials.</p><a class="btn ghost" href="https://www.dbtires.com/" target="_blank" rel="noopener">dbtires.com</a></div>
       <div class="card"><span class="eyebrow">United Kingdom, ships worldwide</span><h3>Longstone Tyres</h3><p class="use">Vintage and beaded-edge tires, with size guides by make and model, including the Model T.</p><a class="btn ghost" href="https://www.longstonetyres.co.uk/" target="_blank" rel="noopener">longstonetyres.co.uk</a></div>
     </div>
-    <p class="note">Independent businesses listed for your convenience. Tires for Anything is not affiliated with them and earns nothing from these links. Sources: <a href="https://www.performanceplustire.com/Blog/who-makes-vintage-car-tires" target="_blank" rel="noopener">Performance Plus Tire</a> · <a href="https://wilsonauto.com/where-to-buy-tires-for-classic-cars" target="_blank" rel="noopener">Wilson Auto</a></p>
+    <p class="note">Independent businesses listed for your convenience. Tires for Anything is not affiliated with them and earns nothing from these specialist links. Sources: <a href="https://www.performanceplustire.com/Blog/who-makes-vintage-car-tires" target="_blank" rel="noopener">Performance Plus Tire</a> · <a href="https://wilsonauto.com/where-to-buy-tires-for-classic-cars" target="_blank" rel="noopener">Wilson Auto</a></p>
   </div>
+  <div class="wrap stack"><div class="shop" data-shop="vintage"></div></div>
 </section>
 
 <!-- MILITARY -->
@@ -1904,6 +1905,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     atv:[["ATV tire plug kit","ATV tire plug kit"],["Low-pressure tire gauge","low pressure tire gauge ATV"],["Golf cart wheel and tire sets","golf cart wheel and tire set 18x8.50-8"],["Bead breaker","ATV tire bead breaker"]],
     motorcycle:[["Motorcycle tire pressure gauge","motorcycle tire pressure gauge"],["Motorcycle tire plug kit","motorcycle tubeless tire plug kit"],["Tire irons","motorcycle tire irons"],["Wheel balancer","motorcycle wheel balancer"]],
     bicycles:[["Inner tubes","bike inner tube"],["Floor pump with gauge","bike floor pump with gauge"],["Tire levers","bike tire levers"],["Patch kit","bike tube patch kit"],["Tubeless sealant","tubeless tire sealant bike"],["CO2 inflator","bike CO2 inflator"]],
+    vintage:[["Whitewall tire cleaner","whitewall tire cleaner"],["Dial tire pressure gauge","dial tire pressure gauge"],["Tire covers","car tire covers storage"]],
     military:[["Truck tire pressure gauge","truck tire pressure gauge 160 psi"],["Valve core tool","valve core removal tool"],["Heavy-duty tire inflator","heavy duty tire inflator"],["Tread depth gauge","truck tire tread depth gauge"]],
     racing:[["Racing tire pressure gauge","racing tire pressure gauge bleed valve"],["Tire pyrometer","tire pyrometer"],["Tire storage bags","racing tire storage bags"],["Low-profile aluminum floor jack","low profile aluminum floor jack"],["Tread depth gauge","tire tread depth gauge"]],
     motorsport:[["Go-kart tires","go kart tires 10x4.50-5"],["Low-pressure tire gauge","low pressure tire gauge 0-15 psi"],["Tire pyrometer","tire pyrometer"],["Kart stand","go kart stand"]],
@@ -1926,6 +1928,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(k==="motorsport")return r[0]+" go kart tire";
     if(k==="bicycles")return r[0]+" bike tire";
     if(k==="military")return r[0]+" military tire";
+    if(k==="vintage")return r[1].replace(/^about /,"")+" tire";
     return r[0]+(/wheelchair, rear/i.test(r[2])?" wheelchair tire":/caster/i.test(r[2])?" caster wheel":" mobility scooter tire");
   }
 
@@ -2009,7 +2012,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
         td0.appendChild(b);tr.appendChild(td0);
         for(var i=1;i<4;i++){var td=document.createElement("td");td.textContent=r[i]||"—";tr.appendChild(td);}
         var ts=document.createElement("td");
-        if(k==="vintage"){var sb=document.createElement("button");sb.type="button";sb.className="shoplink";sb.style.background="none";sb.style.cursor="pointer";sb.textContent="Specialists";sb.addEventListener("click",function(){var d=document.getElementById("vintage-dealers");if(d)d.scrollIntoView({behavior:"smooth",block:"start"});});ts.appendChild(sb);}
+        if(k==="vintage"&&!r[1]){var sb=document.createElement("button");sb.type="button";sb.className="shoplink";sb.style.background="none";sb.style.cursor="pointer";sb.textContent="Specialists";sb.addEventListener("click",function(){var d=document.getElementById("vintage-dealers");if(d)d.scrollIntoView({behavior:"smooth",block:"start"});});ts.appendChild(sb);}
         else{ts.appendChild(amzLink("Amazon",finderQuery(k,r)));}
         tr.appendChild(ts);
         body.appendChild(tr);
