@@ -8,14 +8,14 @@ Output (generated, committed, served by Cloudflare):
   public/index.html, public/<page>/index.html, public/blog/*.html, public/sitemap.xml
 
 Run:  python3 tools/build_site.py          (then: node tools/prerender.mjs)
-PREVIEW = True keeps every page out of Google (noindex). Flip to False at launch,
+PREVIEW = False keeps every page out of Google (noindex). Flip to False at launch,
 together with public/robots.txt and public/_headers.
 """
 import html, json, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://tiresforanything.com"
-PREVIEW = True
+PREVIEW = False
 TODAY = "2026-10-25"
 
 # view id: (path, browser-tab title, Google description)
@@ -193,7 +193,6 @@ def blog_page(body, title, desc, path, jsonld="", img="/og/default.png", og_type
   </div>
 </header>
 <nav class="catbar" aria-label="Tire categories"><div class="wrap" id="catbar">{catbar()}</div></nav>
-<div class="proto"><div class="wrap">Early preview. New guides and tire sizes are being added every week.</div></div>
 <main>
 {fix_links(body)}
 </main>

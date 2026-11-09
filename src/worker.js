@@ -10,7 +10,14 @@ export default {
     if (url.pathname === "/api/event") {
       return handleEvent(request, env);
     }
-    return env.ASSETS.fetch(request);
+    const res = await env.ASSETS.fetch(request);
+    // The preview copy on workers.dev must never show up in Google; only tiresforanything.com should.
+    if (url.hostname.endsWith(".workers.dev")) {
+      const out = new Response(res.body, res);
+      out.headers.set("X-Robots-Tag", "noindex, nofollow");
+      return out;
+    }
+    return res;
   },
 };
 

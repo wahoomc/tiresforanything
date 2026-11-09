@@ -18,6 +18,6 @@ Rebuild:
 
 Daily totals are saved in KV as `stats:YYYY-MM-DD`. Each entry is a label like `amazon | trailer-tires` with a count. Clicks on the preview site are saved as `test-stats:`. Form submissions are counted as `quote_submit` and `request_submit`.
 
-## Preview mode
+## Search engines
 
-`PREVIEW = True` in `tools/build_site.py` adds noindex to every page. `public/robots.txt` and `public/_headers` also block search engines. At launch, change all three, rebuild, and submit the sitemap in Google Search Console.
+The site went live to Google on November 9, 2026 (`PREVIEW = False` in `tools/build_site.py`). The worker adds `X-Robots-Tag: noindex` to anything served on workers.dev, so the preview branch stays hidden. The dealer quote page is always noindexed until quotes launch.
