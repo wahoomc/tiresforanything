@@ -21,7 +21,7 @@ TODAY = "2026-10-25"
 # view id: (path, browser-tab title, Google description)
 PAGES = {
     "home": ("/", "Tires for Anything: The Right Tire for Anything That Rolls",
-             "Plain-English tire guides, a size decoder and dealer quotes for anything that rolls: cars, trucks, trailers, mowers, forklifts, tractors, bikes and more."),
+             "Plain-English tire guides, a size decoder and shopping links for anything that rolls: cars, trucks, trailers, mowers, forklifts, tractors, bikes and more."),
     "cars": ("/passenger-car-tires/", "Passenger Car Tires: Sizes, Types and How to Choose",
              "How to read a car tire size, pick all-season, all-weather, winter or performance tires, and shop the right size."),
     "trucks": ("/light-truck-suv-tires/", "Light Truck and SUV Tires: LT vs P, Load Range and Tread Types",
@@ -64,8 +64,8 @@ PAGES = {
                  "Tire sizes for surplus military trucks like the Humvee and M35, run-flat inserts, and where to find them."),
     "decoder": ("/tire-size-decoder/", "Tire Size Decoder: Read Any Sidewall Size",
                 "Type the size from your sidewall and see what every number means, for cars, trucks, trailers, mowers, forklifts, tractors, bikes and aircraft."),
-    "quote": ("/tire-quotes/", "Get Tire Quotes from Dealers",
-              "Request quotes for forklift, farm, construction, commercial truck, RV and aircraft tires from dealers who carry and install them."),
+    "quote": ("/tire-quotes/", "Tire Dealer Quotes: Coming Soon",
+              "Dealer quotes for forklift, farm, construction, semi and aircraft tires are coming soon. Until then, find your size and shop it online."),
     "request": ("/find-my-tire/", "Can't Find Your Tire? We'll Help",
                 "Tell us what your tire goes on, and we'll show shopping options right away and help track it down."),
     "partners": ("/for-dealers/", "For Tire Dealers: Get Listed on Tires for Anything",
@@ -94,13 +94,13 @@ NAV = ('<nav class="nav" aria-label="Site">\n'
        '      <a href="/">All tires</a>\n'
        '      <a href="/tire-size-decoder/">Size decoder</a>\n'
        '      <a href="/blog/">Blog</a>\n'
-       '      <a href="/tire-quotes/">Get quotes</a>\n'
+       '      <a href="/find-my-tire/">Find my tire</a>\n'
        '      <a href="/for-dealers/">For dealers</a>\n'
        '    </nav>')
 
-def meta(title, desc, path, og_type="website", img="/og/default.png", extra=""):
+def meta(title, desc, path, og_type="website", img="/og/default.png", extra="", noindex=False):
     t, d = html.escape(title), html.escape(desc)
-    robots = '<meta name="robots" content="noindex, nofollow">\n' if PREVIEW else ""
+    robots = '<meta name="robots" content="noindex, nofollow">\n' if (PREVIEW or noindex) else ""
     return (f'{robots}<title>{t}</title>\n<meta name="description" content="{d}">\n'
             f'<link rel="canonical" href="{SITE}{path}">\n'
             f'<meta property="og:type" content="{og_type}">\n<meta property="og:site_name" content="Tires for Anything">\n'
@@ -139,13 +139,13 @@ def build_site():
         crumbs = "" if v == "home" else ('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList",
             "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
                                 {"@type": "ListItem", "position": 2, "name": title.split(":")[0].split("|")[0].strip(), "item": SITE + path}]}) + "</script>\n")
-        doc = (head + meta(title, desc, path, extra=(org if v == "home" else crumbs)) + "</head>\n"
+        doc = (head + meta(title, desc, path, extra=(org if v == "home" else crumbs), noindex=(v == "quote")) + "</head>\n"
                + f'<body data-page="{v}">' + top + "<main>\n\n" + "\n\n".join(parts) + "\n\n</main>" + tail)
         doc = fix_links(doc)
         out = os.path.join(ROOT, "public", path.strip("/"), "index.html") if path != "/" else os.path.join(ROOT, "public/index.html")
         os.makedirs(os.path.dirname(out), exist_ok=True)
         open(out, "w").write(doc)
-        if v not in ("request",):
+        if v not in ("request", "quote"):
             urls.append(path)
     return urls
 

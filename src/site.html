@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tires for Anything">
 <meta property="og:title" content="Tires for Anything: the right tire for anything that rolls">
-<meta property="og:description" content="Plain-English tire guides, a size decoder and dealer quotes for anything that rolls, from wheelbarrows to aircraft.">
+<meta property="og:description" content="Plain-English tire guides, a size decoder and shopping links for anything that rolls, from wheelbarrows to aircraft.">
 <meta property="og:url" content="https://tiresforanything.com/">
 <meta property="og:image" content="https://tiresforanything.com/og/default.png">
 <meta property="og:image:width" content="1200">
@@ -118,6 +118,8 @@ input.code{font-family:var(--mono);font-weight:700;letter-spacing:.03em;text-tra
 .pill{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap;border:1px solid var(--line);color:var(--muted)}
 .pill.live{background:var(--good);color:#fff;border-color:var(--good)}
 .pill.quote{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.soonb{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1.5px dashed var(--line);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.soonb.big{font-size:.8rem;padding:9px 14px}
 
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;counter-reset:s}
 .steps > div{display:grid;gap:8px;border-top:3px solid var(--ink);padding-top:12px}
@@ -301,7 +303,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     <div class="stack">
       <span class="eyebrow">From bicycles to Boeings</span>
       <h1>The right tire for <em>anything that rolls.</em></h1>
-      <p class="lede">Cars, semis, forklifts, tractors, airplanes, wheelchairs and wagons. Find out what your machine needs, then buy it from a trusted retailer or get quotes from dealers who carry it.</p>
+      <p class="lede">Cars, semis, forklifts, tractors, airplanes, wheelchairs and wagons. Find out what your machine needs, then buy it from a trusted retailer. Dealer quotes for heavy equipment and aircraft tires are coming soon.</p>
     </div>
     <div class="quick">
       <label for="home-code">Got a size off the sidewall? Decode it.</label>
@@ -326,7 +328,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
         <span class="eyebrow">18 categories, every one open</span>
         <h2>Pick your machine</h2>
       </div>
-      <p class="note" style="max-width:34ch"><span class="pill quote">Quotes</span> means dealers compete for your order. <span class="pill">Shop</span> means we point you to retailers.</p>
+      <p class="note" style="max-width:34ch"><span class="pill">Shop</span> means we point you to retailers. <span class="soonb">Coming soon</span> means we're still lining up a place to buy them.</p>
     </div>
     <div class="cats" id="cats"></div>
   </div>
@@ -336,7 +338,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     <div class="steps">
       <div><h3>Find your category</h3><p>Start with the machine, not the tire. A forklift tire and a tractor tire can share a size and still be nothing alike.</p></div>
       <div><h3>Learn what fits</h3><p>Plain-English guides explain the types, the size codes, and when it's time to replace. No sales pitch.</p></div>
-      <div><h3>Buy or get quotes</h3><p>Everyday tires link to retailers we trust. Heavy equipment and aircraft tires go to dealers who send you a real quote.</p></div>
+      <div><h3>Buy from retailers you trust</h3><p>Every size we list links to a retailer that sells it. Dealer quotes for heavy equipment and aircraft tires are coming soon.</p></div>
     </div>
   </div>
 
@@ -365,7 +367,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     <div class="cta">
       <div class="stack" style="gap:8px">
         <h2 style="color:var(--stamp-ink)">Sell tires for big equipment?</h2>
-        <p>Fleet managers, farmers and aircraft owners are asking for quotes right now. Get your shop in front of them.</p>
+        <p>Dealer listings and quote requests are coming soon. Get on the list early and be first in your area.</p>
       </div>
       <a class="btn yellow" href="#partners">See dealer options</a>
     </div>
@@ -449,7 +451,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   <div class="wrap stack">
     <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap">
       <h2>Forklift tire dealers</h2>
-      <a class="btn yellow" href="#quote" data-cat="Forklift">Get forklift tire quotes</a>
+      <span class="row" style="gap:10px;align-items:center"><a class="btn yellow" href="#sf-forklift">Shop forklift tire sizes</a><span class="soonb">Dealer quotes coming soon</span></span>
     </div>
     <div class="grid2" id="dealers-forklift"></div>
     <div class="aff"><span><b>Need just one or two?</b> <span class="note">Online retailers ship forklift tires direct.</span></span><span class="sample">Partner link goes here</span></div>
@@ -462,7 +464,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     </div>
     <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-forklift"></tbody></table></div>
     <p class="note" id="sfn-forklift" aria-live="polite"></p>
-    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
+    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? Use the "Find an installer" link in each row. Always confirm the size on your current tire.</p>
   </div>
   <div class="wrap stack"><div class="shop" data-shop="forklift"></div></div>
 </section>
@@ -526,7 +528,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   <div class="wrap stack">
     <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap">
       <h2>Aircraft tire suppliers</h2>
-      <a class="btn yellow" href="#quote" data-cat="Aviation">Get aircraft tire quotes</a>
+      <span class="soonb big">Aircraft tire quotes coming soon</span>
     </div>
     <div class="grid2" id="dealers-aviation"></div>
   </div>
@@ -588,13 +590,14 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 <!-- QUOTE -->
 <section class="view" id="v-quote" data-view="quote" hidden>
   <div class="wrap pagehead">
-    <div class="crumb"><a href="#home">All tires</a> / Get quotes</div>
+    <div class="crumb"><a href="#home">All tires</a> / Dealer quotes</div>
     <span class="eyebrow">Free · no obligation</span>
-    <h1>Get tire quotes</h1>
-    <p class="lede">For tires too big to mount yourself. Tell us what you're running and where, and we'll match you with up to three dealers who can supply and install it.</p>
+    <h1>Dealer quotes are coming soon</h1>
+    <p class="lede">Dealer quotes are coming soon. We're lining up tire dealers who can supply and install the big stuff: forklift, farm, construction, semi and aircraft tires.</p>
+    <div class="callout"><b>In the meantime</b><p>Most sizes on this site link straight to a retailer that sells them. Look your tire up in the <a href="#decoder">size decoder</a>, or <a href="#request" data-rqcat="">tell us what you need</a> and we'll show you shopping options right away.</p></div>
   </div>
   <div class="wrap stack">
-    <form class="quote" id="quote-form" novalidate>
+    <form class="quote" id="quote-form" novalidate hidden>
       <div class="fgrid">
         <div class="field"><label for="q-cat">Equipment type</label>
           <select id="q-cat" required>
@@ -827,7 +830,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <div class="card"><h3>Carts, casters and hand trucks</h3><p class="use">See the <a href="#lawn">lawn and garden guide</a> and the <a href="#mobility">mobility guide</a> for small wheel sizes.</p></div>
       <div class="card"><h3>Transit, rides and robots</h3><p class="use">Rubber-tired people movers, amusement rides and robots use maker-specific tires. Start with the equipment manufacturer.</p></div>
     </div>
-    <div class="row"><a class="btn yellow" href="#quote" data-cat="Other">Request a specialty tire quote</a></div>
+    <div class="row"><a class="btn yellow" href="#request" data-rqcat="military">Tell us what you need</a><span class="soonb" style="align-self:center">Specialty quotes coming soon</span></div>
   </div>
   <div class="wrap stack"><div class="shop" data-shop="military"></div></div>
 </section>
@@ -1300,13 +1303,13 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       <li><b>On front-wheel-assist tractors,</b> front and rear tire sizes have to stay in the ratio your tractor's manual calls for. Mixing sizes can strain the drivetrain.</li>
       <li><b>Ballast,</b> whether wheel weights or liquid fill, changes how a tire carries load. Check the tractor manual before adding or removing it.</li>
     </ul>
-    <div class="callout"><b>Service comes to the field</b><p>Big farm tires are usually mounted on-site by a dealer's service truck. That's why this category runs on local quotes instead of online checkout.</p></div>
+    <div class="callout"><b>Service comes to the field</b><p>Big farm tires are usually mounted on-site by a dealer's service truck. So most farmers buy through a local dealer. Many sizes are listed below with online links, and dealer quotes are coming soon.</p></div>
   </div>
 
   <div class="wrap stack">
     <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap">
       <h2>Farm tire dealers</h2>
-      <a class="btn yellow" href="#quote" data-cat="Farm">Get farm tire quotes</a>
+      <span class="row" style="gap:10px;align-items:center"><a class="btn yellow" href="#sf-farm">Shop farm tire sizes</a><span class="soonb">Dealer quotes coming soon</span></span>
     </div>
     <div class="grid2" id="dealers-farm"></div>
   </div>
@@ -1318,7 +1321,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     </div>
     <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-farm"></tbody></table></div>
     <p class="note" id="sfn-farm" aria-live="polite"></p>
-    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
+    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? Use the "Find an installer" link in each row. Always confirm the size on your current tire.</p>
   </div>
   <div class="wrap stack"><div class="shop" data-shop="farm"></div></div>
 </section>
@@ -1380,7 +1383,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   <div class="wrap stack">
     <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap">
       <h2>Commercial tire dealers</h2>
-      <a class="btn yellow" href="#quote" data-cat="Commercial">Get truck tire quotes</a>
+      <span class="row" style="gap:10px;align-items:center"><a class="btn yellow" href="#sf-semi">Shop truck tire sizes</a><span class="soonb">Dealer quotes coming soon</span></span>
     </div>
     <div class="grid2" id="dealers-semi"></div>
   </div>
@@ -1392,7 +1395,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     </div>
     <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-semi"></tbody></table></div>
     <p class="note" id="sfn-semi" aria-live="polite"></p>
-    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
+    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? Use the "Find an installer" link in each row. Always confirm the size on your current tire.</p>
   </div>
   <div class="wrap stack"><div class="shop" data-shop="semi"></div></div>
 </section>
@@ -1524,7 +1527,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   <div class="wrap stack">
     <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap">
       <h2>OTR tire dealers</h2>
-      <a class="btn yellow" href="#quote" data-cat="Construction">Get OTR tire quotes</a>
+      <span class="row" style="gap:10px;align-items:center"><a class="btn yellow" href="#sf-construction">Shop OTR tire sizes</a><span class="soonb">Dealer quotes coming soon</span></span>
     </div>
     <div class="grid2" id="dealers-construction"></div>
   </div>
@@ -1536,7 +1539,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     </div>
     <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-construction"></tbody></table></div>
     <p class="note" id="sfn-construction" aria-live="polite"></p>
-    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? <a href="#quote">Get dealer quotes</a>. Always confirm the size on your current tire.</p>
+    <p class="note">Common sizes we found listed on Amazon in October 2026. Many of these are big, heavy tires: Amazon ships them, but most owners have a local dealer mount them. Need it installed? Use the "Find an installer" link in each row. Always confirm the size on your current tire.</p>
   </div>
   <div class="wrap stack"><div class="shop" data-shop="construction"></div></div>
 </section>
@@ -1759,7 +1762,9 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   var PREVIEW=true;
   var SHOPQ={forklift:"forklift tire service",farm:"tractor tire service",construction:"skid steer tire service",atv:"ATV tire shop",aviation:"aircraft maintenance shop",military:"truck tire shop",motorcycle:"motorcycle tire shop",vintage:"classic car tire shop",trailer:"trailer tire shop",rv:"RV tire service",racing:"performance tire shop"};
   // Tires for FAA-certificated aircraft aren't sold on Amazon, so aircraft tire buttons open the quote form.
-  function airQuote(label,size){var a=document.createElement("a");a.className="shoplink";a.href="#quote";a.setAttribute("data-cat","Aviation");if(size)a.setAttribute("data-size",String(size).trim());a.textContent=label;return a;}
+  // Coming-soon badge for anything we can't link to a retailer yet (aircraft tires, specialist-only sizes).
+  function soonBadge(){var s=document.createElement("span");s.className="soonb";s.textContent="Coming soon";s.title="We're still lining up a place to buy this one.";return s;}
+  function airQuote(){return soonBadge();}
   var QCAT={forklift:"Forklift",farm:"Farm",construction:"Construction",semi:"Commercial",military:"Military",rv:"RV",aviation:"Aviation"};
   /* ---------- categories ---------- */
   var GROUPS=[["small","Small wheels"],["power","Powersports & racing"],["road","On the road"],["heavy","Heavy duty"],["air","Aircraft"]];
@@ -1811,8 +1816,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     t.appendChild(b);t.appendChild(p);
     var s=document.createElement("small");s.textContent=c.d;
     var m=document.createElement("span");
-    m.className="pill"+(c.m==="quote"?" quote":"");m.style.justifySelf="start";
-    m.textContent=c.m==="quote"?"Quotes":"Shop";
+    m.className=c.id==="aviation"?"soonb":"pill";m.style.justifySelf="start";
+    m.textContent=c.id==="aviation"?"Coming soon":"Shop";
     a.appendChild(t);a.appendChild(s);a.appendChild(m);
     catsEl.appendChild(a);
   });
@@ -1843,7 +1848,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   var DCAT={forklift:"Forklift",aviation:"Aviation",farm:"Farm",semi:"Commercial",construction:"Construction"};
   Object.keys(DEALERS).forEach(function(k){
     var host=$id("dealers-"+k);
-    if(PREVIEW){var pn=document.createElement("p");pn.className="note";pn.textContent="We're lining up dealers in this category now. Send a quote request and we'll match you with one.";host.appendChild(pn);return;}
+    if(PREVIEW){var pn=document.createElement("p");pn.className="note";pn.textContent="Local dealer listings are coming soon.";host.appendChild(pn);return;}
     DEALERS[k].forEach(function(d){
       var c=document.createElement("div");c.className="card dealer";
       if(d.f)c.style.border="2px solid var(--ink)";
@@ -1880,7 +1885,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     var e=document.createElement("span");e.className="eyebrow";e.style.color="var(--stamp-ink)";e.style.opacity=".7";e.textContent="Our pick";
     var b=document.createElement("b");b.textContent=t;
     var p=document.createElement("p");p.textContent=why;
-    var a=document.createElement("a");a.className="btn yellow";a.href="#quote";a.setAttribute("data-cat","Forklift");a.textContent="Get quotes for this tire";a.style.justifySelf="start";a.style.marginTop="6px";
+    var a=soonBadge();a.textContent="Dealer quotes coming soon";a.style.justifySelf="start";a.style.marginTop="6px";
     fout.appendChild(e);fout.appendChild(b);fout.appendChild(p);fout.appendChild(a);
   }
   finder.addEventListener("change",runFinder);runFinder();
@@ -2157,7 +2162,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     var foot=document.createElement("div");foot.className="row";
     if(r.link){var a=document.createElement("a");a.className="btn ghost";a.href=pageHref(r.link);a.textContent="Open the "+r.cat+" guide";foot.appendChild(a);}
     else{var sp=document.createElement("span");sp.className="note";sp.textContent="Category: "+r.cat;sp.style.alignSelf="center";foot.appendChild(sp);}
-    var q=document.createElement("a");q.className="btn yellow";q.href="#quote";q.textContent="Find this tire";q.setAttribute("data-size",raw.trim().toUpperCase());
+    var q=document.createElement("a");q.className="btn yellow";q.href="#request";q.textContent="Find this tire";q.setAttribute("data-rqcat",r.link||"");q.setAttribute("data-rqsize",raw.trim().toUpperCase());
     foot.appendChild(q);host.appendChild(foot);
     var lk=r.link||"",term=(typeof RQ_TERM!=="undefined"&&RQ_TERM.hasOwnProperty(lk))?RQ_TERM[lk]:"tire";
     if(term&&!(lk==="vintage"&&/clincher|balloon|alpha/i.test(r.kind))){
@@ -2264,8 +2269,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(el.getAttribute("data-shop")==="aviation"){
       var ah=document.createElement("h3");ah.textContent="Aircraft tires and tubes";
       var ar=document.createElement("div");ar.className="chips";
-      ar.appendChild(airQuote("Get aircraft tire quotes",""));
-      var an=document.createElement("p");an.className="note";an.textContent="Tires and tubes for FAA-certificated aircraft aren't sold on Amazon. Request a quote and we'll connect you with aviation tire suppliers. Confirm the TSO, ply rating and part number for your aircraft with your A&P.";
+      ar.appendChild(soonBadge());
+      var an=document.createElement("p");an.className="note";an.textContent="Tires and tubes for FAA-certificated aircraft aren't sold on Amazon. Aircraft tire quotes are coming soon. In the meantime, buy through an aviation parts supplier and confirm the TSO, ply rating and part number for your aircraft with your A&P.";
       el.appendChild(ah);el.appendChild(ar);el.appendChild(an);
     }
     var h=document.createElement("h3");h.textContent="Shop on Amazon";
@@ -2287,7 +2292,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   function installCell(k,lvl,size){
     var td=document.createElement("td");
     if(lvl==="diy"){var b=document.createElement("span");b.className="pill live";b.textContent="DIY";b.title="Most owners install these at home";td.appendChild(b);}
-    else if(lvl==="pro"){var a=document.createElement("a");a.href="#quote";a.setAttribute("data-cat",QCAT[k]||"Other");if(size)a.setAttribute("data-size",size);a.textContent="Get install quotes";td.appendChild(a);}
+    else if(lvl==="pro"){var a=document.createElement("a");a.href=mapsUrl(SHOPQ[k]||"tire dealer");a.target="_blank";a.rel="noopener";a.textContent="Find an installer";a.title="Too big to mount at home. A local tire dealer can install it.";td.appendChild(a);}
     else{var m=document.createElement("a");m.href=mapsUrl(SHOPQ[k]||"tire shop");m.target="_blank";m.rel="noopener";m.textContent=k==="forklift"&&/press-on/i.test(size||"")?"Find a shop":"Find a shop";td.appendChild(m);}
     return td;
   }
@@ -2483,7 +2488,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
         td0.appendChild(b);tr.appendChild(td0);
         for(var i=1;i<4;i++){var td=document.createElement("td");td.textContent=r[i]||"—";tr.appendChild(td);}
         var ts=document.createElement("td");
-        if(k==="vintage"&&!r[1]){var sb=document.createElement("button");sb.type="button";sb.className="shoplink";sb.style.background="none";sb.style.cursor="pointer";sb.textContent="Specialists";sb.addEventListener("click",function(){var d=$id("vintage-dealers");if(d)d.scrollIntoView({behavior:"smooth",block:"start"});});ts.appendChild(sb);}
+        if(k==="vintage"&&!r[1]){ts.appendChild(soonBadge());}
+        else if(false){var sb=document.createElement("button");sb.type="button";sb.className="shoplink";sb.style.background="none";sb.style.cursor="pointer";sb.textContent="Specialists";sb.addEventListener("click",function(){var d=$id("vintage-dealers");if(d)d.scrollIntoView({behavior:"smooth",block:"start"});});ts.appendChild(sb);}
         else if(k==="aviation"){ts.appendChild(airQuote("Get a quote",r[0]));}
         else{var mq=mountQuery(k,r);ts.appendChild(amzLink(mq?"Tire only":"Amazon",finderQuery(k,r)));if(mq){ts.appendChild(document.createTextNode(" "));ts.appendChild(amzLink("Mounted",mq));}}
         tr.appendChild(ts);
@@ -2571,7 +2577,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(k==="aviation"){
       var at=document.createElement("b");at.textContent="Shopping options";out.appendChild(at);
       var arw=document.createElement("div");arw.className="chips";arw.appendChild(airQuote(S?"Get quotes for "+S:"Get aircraft tire quotes",S));out.appendChild(arw);
-      var anote=document.createElement("p");anote.className="note";anote.textContent="Tires for FAA-certificated aircraft aren't sold on Amazon. The quote form sends your request to aviation tire suppliers.";out.appendChild(anote);
+      var anote=document.createElement("p");anote.className="note";anote.textContent="Tires for FAA-certificated aircraft aren't sold on Amazon. Aircraft tire quotes are coming soon.";out.appendChild(anote);
     }
     if(qs.length){
       var t=document.createElement("b");t.textContent="Shopping options";out.appendChild(t);
@@ -2623,7 +2629,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     });
     var cur=document.querySelector(".catbar a[aria-current]"),bar=document.getElementById("catbar");
     if(cur&&bar)bar.scrollLeft=Math.max(0,cur.offsetLeft-bar.clientWidth/2+cur.offsetWidth/2);
-    if(location.hash)window.scrollTo(0,0);
+    var tgt=location.hash&&!document.getElementById("v-"+location.hash.slice(1))?document.getElementById(location.hash.slice(1)):null;
+    if(tgt)tgt.scrollIntoView({block:"center"});else if(location.hash)window.scrollTo(0,0);
   }
   window.addEventListener("hashchange",route);route();
 })();
