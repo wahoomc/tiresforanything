@@ -64,8 +64,8 @@ PAGES = {
                  "Tire sizes for surplus military trucks like the Humvee and M35, run-flat inserts, and where to find them."),
     "decoder": ("/tire-size-decoder/", "Tire Size Decoder: Read Any Sidewall Size",
                 "Type the size from your sidewall and see what every number means, for cars, trucks, trailers, mowers, forklifts, tractors, bikes and aircraft."),
-    "quote": ("/tire-quotes/", "Tire Dealer Quotes: Coming Soon",
-              "Dealer quotes for forklift, farm, construction, semi and aircraft tires are coming soon. Until then, find your size and shop it online."),
+    "quote": ("/tire-quotes/", "Buying Tires for Big Equipment and Aircraft",
+              "How forklift, farm, construction, semi and aircraft tires are usually bought, and where to start."),
     "request": ("/find-my-tire/", "Can't Find Your Tire? We'll Help",
                 "Tell us what your tire goes on, and we'll show shopping options right away and help track it down."),
     "partners": ("/for-dealers/", "For Tire Dealers: Get Listed on Tires for Anything",
@@ -73,6 +73,8 @@ PAGES = {
     "legal": ("/terms/", "Terms and Disclaimers | Tires for Anything", "Terms of use, safety disclaimers and affiliate disclosures for Tires for Anything."),
     "about": ("/about/", "About Tires for Anything", "Who runs Tires for Anything, how we make money, and how we keep our guides honest."),
     "privacy": ("/privacy/", "Privacy Policy | Tires for Anything", "What Tires for Anything collects, how quote requests are shared, and your choices."),
+    "contact": ("/contact/", "Contact Tires for Anything", "How to reach Tires for Anything about a tire size, a correction, or a dealer listing."),
+    "disclosure": ("/affiliate-disclosure/", "Affiliate Disclosure | Tires for Anything", "How Tires for Anything earns commissions from retailer links, and what that does and doesn't change."),
 }
 TOOLS = ("decoder", "quote", "request")
 
@@ -201,7 +203,7 @@ def blog_page(body, title, desc, path, jsonld="", img="/og/default.png", og_type
 <footer>
   <div class="wrap">
     <div><b style="font-family:var(--display);text-transform:uppercase;font-size:1.1rem;color:var(--ink)">Tires for Anything</b> · tiresforanything.com</div>
-    <div class="row" style="gap:16px"><a href="/blog/">Blog</a><a href="/about/">About</a><a href="/privacy/">Privacy policy</a><a href="/terms/">Terms and disclaimers</a><a href="/for-dealers/">For dealers</a><a href="/find-my-tire/">Can't find your tire?</a></div>
+    <div class="row" style="gap:16px"><a href="/blog/">Blog</a><a href="/about/">About</a><a href="/privacy/">Privacy policy</a><a href="/terms/">Terms and disclaimers</a><a href="/affiliate-disclosure/">Affiliate disclosure</a><a href="/contact/">Contact</a><a href="/for-dealers/">For dealers</a><a href="/find-my-tire/">Can't find your tire?</a></div>
     <p><b>Safety notice:</b> Information on this site is general and educational. It is not professional, mechanical or aviation advice, and it doesn't replace your manufacturer's specifications or a qualified technician. You are responsible for verifying any tire before you buy, install or use it. <a href="/terms/">Read the full terms and disclaimers</a>.</p>
     <p>Some links on this site are affiliate links. If you buy through them, we may earn a commission at no extra cost to you. Featured dealers pay for placement, and they're always labeled. We never earn commissions on non-standard fitments. As an Amazon Associate I earn from qualifying purchases.</p>
     <p>Product and company names are trademarks of their owners, used for identification only. Tires for Anything is not affiliated with any manufacturer named on this site.</p>
