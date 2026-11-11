@@ -1443,6 +1443,18 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   </div>
 
   <div class="wrap stack">
+    <h2>Trailer tire sizes</h2>
+    <div class="quick">
+      <label for="sf-trailer">Search by size or trailer</label>
+      <input type="text" id="sf-trailer" placeholder="e.g. 225/75R15, boat, camper, 4.80-12" autocomplete="off">
+    </div>
+    <div class="tablewrap"><table><thead><tr><th>Size</th><th>Also listed as</th><th>Used on</th><th>Notes</th><th>Shop</th><th>Install</th></tr></thead><tbody id="sft-trailer"></tbody></table></div>
+    <p class="note" id="sfn-trailer" aria-live="polite"></p>
+    <p class="note disclose">Shop links go to retailers, and some are affiliate links. If you buy through one, we may earn a commission at no extra cost to you. <a href="#disclosure">How this works</a>.</p>
+    <p class="note">Match the full size and the load range on your current tire. Small sizes are easiest bought already mounted on a wheel; match the bolt pattern (like 4 or 5 on 4.5 in) before you order.</p>
+  </div>
+
+  <div class="wrap stack">
     <h2>How old are your trailer tires?</h2>
     <p>The last four digits of the DOT code on the sidewall are the week and year the tire was made. <span class="stamp">2324</span> means the 23rd week of 2024.</p>
     <div class="quick">
@@ -2342,6 +2354,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(/^(lawn|mobility|bicycles|motorsport|toys|casters)$/.test(k))return "diy";
     if(k==="atv")return /golf|EZGO|Club Car/i.test(r[2])?"diy":"shop";
     if(k==="semi")return "pro";
+    if(k==="trailer")return /-(8|10|12)$/.test(r[0])?"diy":"shop";
     if(k==="farm")return /^(18\.4-38|520\/85R38)$/.test(r[0])?"pro":"shop";
     if(k==="construction")return /^(19\.5L-24|17\.5-25|20\.5-25|14\.00-24)$/.test(r[0])?"pro":"shop";
     if(k==="military")return r[0]==="37x12.50R16.5"?"shop":"pro";
@@ -2361,6 +2374,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       if(/golf|EZGO|Club Car/i.test(r[2]))return r[0]+" golf cart wheel and tire";
       return r[0]+(/UTV|RZR/i.test(r[2])?" UTV wheel and tire":" ATV tire and wheel");
     }
+    if(k==="trailer")return r[0]+" trailer tire and wheel";
     if(k==="mobility"&&!/wheelchair, rear/i.test(r[2]))return r[0]+(/caster/i.test(r[2])?" caster wheel":" scooter wheel and tire");
     return null;
   }
@@ -2376,6 +2390,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(k==="motorsport")return r[0]+" go kart tire";
     if(k==="bicycles")return r[0]+" bike tire";
     if(k==="military")return r[0]+" tire";
+    if(k==="trailer")return r[0]+(/^ST/.test(r[0])?"":" trailer")+" tire";
     if(k==="vintage")return r[1].replace(/^about /,"")+" tire";
     return r[0]+(/wheelchair, rear/i.test(r[2])?" wheelchair tire":/caster/i.test(r[2])?" caster wheel":" mobility scooter tire");
   }
@@ -2469,6 +2484,21 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       ["G78-15","about 215/75R15","1970s cars","Approximate modern size"],
       ["G60-15","about 235/60R15","Muscle cars","Approximate modern size"],
       ["L60-15","about 275/60R15","Big-block muscle car rears","Approximate modern size"]
+    ],
+    trailer:[
+      ["ST225/75R15","","Travel trailers, car haulers, boat trailers","The most common camper size; load range D or E"],
+      ["ST205/75R15","","Boat, utility and pop-up trailers","Very common; load range C or D"],
+      ["ST205/75R14","","Utility and small boat trailers","Load range C"],
+      ["ST215/75R14","","Boat and utility trailers","Load range C"],
+      ["ST175/80R13","","Pop-up campers, small utility trailers","Load range C or D"],
+      ["ST185/80R13","","Small campers and utility trailers","Load range C or D"],
+      ["ST235/80R16","","Larger travel trailers and fifth wheels","Load range E"],
+      ["ST235/85R16","","Fifth wheels, toy haulers, equipment trailers","Load range E or F"],
+      ["20.5x8.0-10","20.5x8-10","Small boat and jet ski trailers","Bias ply"],
+      ["5.30-12","","Small boat and utility trailers","Often sold mounted on a wheel"],
+      ["4.80-12","","Small utility and boat trailers","Often sold mounted on a wheel"],
+      ["5.70-8","","Small utility trailers","Mounted is easiest"],
+      ["4.80/4.00-8","4.80-8","Small utility trailers and carts","Mounted is easiest"]
     ],
     military:[
       ["37x12.50R16.5","","HMMWV (Humvee)","Usually with run-flat inserts"],
