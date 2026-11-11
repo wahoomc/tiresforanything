@@ -181,6 +181,8 @@ def blog_page(body, title, desc, path, jsonld="", img="/og/default.png", og_type
 <link rel="stylesheet" href="/blog/blog.css">
 {jsonld}
 <script src="/t.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PHZB9G6M10"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag("js",new Date());gtag("config","G-PHZB9G6M10");</script>
 </head>
 <body>
 <header class="top">

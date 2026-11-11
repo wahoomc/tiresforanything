@@ -20,3 +20,6 @@
     else if(a.id==="dec-go"||a.id==="home-go")send("decode");
   },true);
 })();
+/* analytics: affiliate clicks (retailer, product, page). Does nothing if Google Analytics is not loaded. */
+(function(){function cl(t){return String(t||"").replace(/\s+/g," ").trim().slice(0,100);}
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a||typeof window.gtag!=="function")return;var h=a.href||"",r=/amazon\.|amzn\./.test(h)?"amazon":/ebay\./.test(h)?"ebay":/prioritytire|tirerack|simpletire|tires-easy|goodyear|discounttire|walmart/.test(h)?h.split("/")[2].replace(/^www\./,""):null;if(!r)return;var c=a.closest("tr,li,figure,.card,article"),cap=c&&c.querySelector("th,b,strong,h3,h4,figcaption");var s=a.closest("[id]");try{window.gtag("event","affiliate_click",{retailer:r,product:cl(a.getAttribute("data-product")||(cap&&cap.textContent)||a.textContent),link_text:cl(a.textContent),placement:s?s.id:"page",page_path:location.pathname,transport_type:"beacon"});}catch(x){}},true);})();
