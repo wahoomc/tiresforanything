@@ -81,25 +81,27 @@ TOOLS = ("decoder", "quote", "request")
 
 # Blog guides linked from each category page ("Related guides" box). Keep each list to the posts that genuinely help.
 POSTS = {
+    "tire-sealant-vs-plug-vs-patch": "Leak stops: thorn-proofing, Slime, and plug vs. patch",
     "tire-wheel-rim-definitions": "Tire vs. wheel vs. rim, plus casters and flat-proof tires",
     "tire-balancing-beads-vs-wheel-weights": "Balance beads vs. wheel weights: what to use and when",
     "how-to-replace-office-chair-casters": "How to replace office chair casters (and cart casters)",
 }
 RELATED = {
-    "trailer": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
+    "trailer": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions", "tire-sealant-vs-plug-vs-patch"],
     "motorcycle": ["tire-balancing-beads-vs-wheel-weights"],
     "cars": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
     "trucks": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
     "rv": ["tire-balancing-beads-vs-wheel-weights"],
     "semi": ["tire-balancing-beads-vs-wheel-weights"],
-    "atv": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
-    "lawn": ["tire-wheel-rim-definitions", "how-to-replace-office-chair-casters"],
+    "atv": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions", "tire-sealant-vs-plug-vs-patch"],
+    "lawn": ["tire-wheel-rim-definitions", "how-to-replace-office-chair-casters", "tire-sealant-vs-plug-vs-patch"],
     "casters": ["how-to-replace-office-chair-casters", "tire-wheel-rim-definitions"],
-    "mobility": ["tire-wheel-rim-definitions", "how-to-replace-office-chair-casters"],
+    "mobility": ["tire-wheel-rim-definitions", "how-to-replace-office-chair-casters", "tire-sealant-vs-plug-vs-patch"],
     "forklift": ["tire-wheel-rim-definitions"],
     "construction": ["tire-wheel-rim-definitions"],
     "farm": ["tire-wheel-rim-definitions"],
     "military": ["tire-wheel-rim-definitions"],
+    "bicycles": ["tire-sealant-vs-plug-vs-patch"],
     "decoder": ["tire-wheel-rim-definitions", "tire-balancing-beads-vs-wheel-weights"],
 }
 
@@ -263,6 +265,8 @@ def blog_page(body, title, desc, path, jsonld="", img="/og/default.png", og_type
 """
 
 BLOG = [  # slug, tab title, Google description
+    ("tire-sealant-vs-plug-vs-patch", "Tire Sealant vs. Plug vs. Patch: What Actually Fixes a Flat",
+     "Stop thorn flats before they start, know when Slime or Fix-a-Flat makes sense, why tire shops hate them, and whether a sealed tire can still be repaired."),
     ("how-to-replace-office-chair-casters", "How to Replace Office Chair Casters (and Cart Casters)",
      "Swap office chair casters in ten minutes, pick wheels that won't scratch hardwood, and size plate or stem casters for carts, shelves and tool chests."),
     ("tire-balancing-beads-vs-wheel-weights", "Balance Beads vs. Wheel Weights: What to Use and When",
