@@ -81,18 +81,22 @@ TOOLS = ("decoder", "quote", "request")
 
 # Blog guides linked from each category page ("Related guides" box). Keep each list to the posts that genuinely help.
 POSTS = {
+    "tire-date-code": "How old is my tire? Reading the DOT date code",
+    "st-vs-lt-trailer-tires": "Trailer tires: ST vs. LT vs. car tires",
+    "winter-tires-vs-all-season": "Winter tires vs. all-season: do you need them?",
+    "how-to-read-tire-size": "How to read a tire size, any tire, in 5 minutes",
     "tire-sealant-vs-plug-vs-patch": "Leak stops: thorn-proofing, Slime, and plug vs. patch",
     "tire-wheel-rim-definitions": "Tire vs. wheel vs. rim, plus casters and flat-proof tires",
     "tire-balancing-beads-vs-wheel-weights": "Balance beads vs. wheel weights: what to use and when",
     "how-to-replace-office-chair-casters": "How to replace office chair casters (and cart casters)",
 }
 RELATED = {
-    "trailer": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions", "tire-sealant-vs-plug-vs-patch"],
-    "motorcycle": ["tire-balancing-beads-vs-wheel-weights"],
-    "cars": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
-    "trucks": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
-    "rv": ["tire-balancing-beads-vs-wheel-weights"],
-    "semi": ["tire-balancing-beads-vs-wheel-weights"],
+    "trailer": ["st-vs-lt-trailer-tires", "tire-date-code", "tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
+    "motorcycle": ["tire-date-code", "tire-balancing-beads-vs-wheel-weights"],
+    "cars": ["winter-tires-vs-all-season", "how-to-read-tire-size", "tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
+    "trucks": ["winter-tires-vs-all-season", "how-to-read-tire-size", "tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
+    "rv": ["tire-date-code", "tire-balancing-beads-vs-wheel-weights"],
+    "semi": ["how-to-read-tire-size", "tire-balancing-beads-vs-wheel-weights"],
     "atv": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions", "tire-sealant-vs-plug-vs-patch"],
     "lawn": ["tire-wheel-rim-definitions", "how-to-replace-office-chair-casters", "tire-sealant-vs-plug-vs-patch"],
     "casters": ["how-to-replace-office-chair-casters", "tire-wheel-rim-definitions"],
@@ -100,9 +104,9 @@ RELATED = {
     "forklift": ["tire-wheel-rim-definitions"],
     "construction": ["tire-wheel-rim-definitions"],
     "farm": ["tire-wheel-rim-definitions"],
-    "military": ["tire-wheel-rim-definitions"],
+    "military": ["tire-date-code", "tire-wheel-rim-definitions"],
     "bicycles": ["tire-sealant-vs-plug-vs-patch"],
-    "decoder": ["tire-wheel-rim-definitions", "tire-balancing-beads-vs-wheel-weights"],
+    "decoder": ["how-to-read-tire-size", "tire-wheel-rim-definitions", "tire-balancing-beads-vs-wheel-weights"],
 }
 
 def related_box(v):
@@ -265,6 +269,14 @@ def blog_page(body, title, desc, path, jsonld="", img="/og/default.png", og_type
 """
 
 BLOG = [  # slug, tab title, Google description
+    ("tire-date-code", "How Old Is My Tire? How to Read the DOT Date Code",
+     "Find the four-digit date code on any tire, read it in seconds, and learn how old is too old for cars, trailers, RVs and motorcycles."),
+    ("st-vs-lt-trailer-tires", "ST vs. LT vs. Car Tires on a Trailer: What to Use and Why",
+     "Why trailers use ST tires, when LT tires make sense, why car tires are a bad idea, plus speed ratings, load range and the pressure trailer tires need."),
+    ("winter-tires-vs-all-season", "Winter Tires vs. All-Season: Do You Really Need Them?",
+     "All-season, all-weather or winter tires? What the snowflake symbol means, when winter tires are worth it, and how to make switching each season easier."),
+    ("how-to-read-tire-size", "How to Read a Tire Size: Any Tire in 5 Minutes",
+     "Read the numbers on any tire sidewall: cars, trucks, trailers, semis, mowers, ATVs, forklifts, motorcycles and bikes. One page, plain English."),
     ("tire-sealant-vs-plug-vs-patch", "Tire Sealant vs. Plug vs. Patch: What Actually Fixes a Flat",
      "Stop thorn flats before they start, know when Slime or Fix-a-Flat makes sense, why tire shops hate them, and whether a sealed tire can still be repaired."),
     ("how-to-replace-office-chair-casters", "How to Replace Office Chair Casters (and Cart Casters)",
