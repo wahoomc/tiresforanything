@@ -1,6 +1,8 @@
 // Tires for Anything: serves the static site and saves tire requests and quote requests.
 // Records are stored in the REQUESTS KV namespace (bound in wrangler.jsonc).
 
+import SCHEDULE from "./schedule.json";
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -10,16 +12,76 @@ export default {
     if (url.pathname === "/api/event") {
       return handleEvent(request, env);
     }
-    const res = await env.ASSETS.fetch(request);
     // The preview copy on workers.dev must never show up in Google; only tiresforanything.com should.
+    // It also shows every queued blog post, so posts can be checked before their date.
     if (url.hostname.endsWith(".workers.dev")) {
+      const res = await env.ASSETS.fetch(request);
       const out = new Response(res.body, res);
       out.headers.set("X-Robots-Tag", "noindex, nofollow");
       return out;
     }
-    return res;
+    return serveScheduled(request, env, url);
   },
 };
+
+// Blog posts publish on the dates in src/schedule.json (Indiana time). Until a post's date it is a 404,
+// and its cards, related links and sitemap entry are left out of every page.
+function todayIndiana() {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "America/Indiana/Indianapolis" }).format(new Date());
+}
+
+async function serveScheduled(request, env, url) {
+  const today = todayIndiana();
+  const future = new Set(Object.keys(SCHEDULE).filter((k) => !k.startsWith("_") && SCHEDULE[k] > today));
+  if (!future.size) return env.ASSETS.fetch(request);
+
+  const m = url.pathname.match(/^\/blog\/([a-z0-9-]+?)(?:\.html)?\/?$/);
+  if (m && future.has(m[1])) {
+    return new Response(NOT_YET, { status: 404, headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" } });
+  }
+
+  // Ask for a full copy (no "not modified" shortcut), because what we send changes from day to day.
+  const headers = new Headers(request.headers);
+  headers.delete("if-none-match");
+  headers.delete("if-modified-since");
+  const res = await env.ASSETS.fetch(new Request(request, { headers }));
+  const type = res.headers.get("content-type") || "";
+
+  if (url.pathname === "/sitemap.xml" && res.ok) {
+    const xml = (await res.text())
+      .split("\n")
+      .filter((line) => ![...future].some((slug) => line.includes(`/blog/${slug}</loc>`)))
+      .join("\n");
+    const out = new Response(xml, res);
+    out.headers.delete("etag");
+    out.headers.set("cache-control", "no-cache");
+    return out;
+  }
+  if (!type.includes("text/html")) return res;
+
+  const slugOf = (href) => {
+    const h = (href || "").split(/[?#]/)[0].match(/^\/blog\/([a-z0-9-]+?)(?:\.html)?\/?$/);
+    return h ? h[1] : "";
+  };
+  const out = new HTMLRewriter()
+    .on("[data-pub]", {
+      element(el) {
+        if (el.getAttribute("data-pub") > today) el.remove();
+      },
+    })
+    .on('a[href^="/blog/"]', {
+      element(el) {
+        if (future.has(slugOf(el.getAttribute("href")))) el.removeAndKeepContent();
+      },
+    })
+    .transform(res);
+  const final = new Response(out.body, out);
+  final.headers.delete("etag");
+  final.headers.set("cache-control", "no-cache");
+  return final;
+}
+
+const NOT_YET = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Page not found | Tires for Anything</title></head><body style="font-family:system-ui,sans-serif;max-width:560px;margin:60px auto;padding:0 16px;line-height:1.5"><h1>Page not found</h1><p>We couldn't find that page. Try the <a href="/blog/">blog</a> or the <a href="/tire-size-decoder/">tire size decoder</a>, or head back to <a href="/">Tires for Anything</a>.</p></body></html>`;
 
 async function handleRequest(request, env) {
   if (request.method !== "POST") return json({ error: "Use POST" }, 405);

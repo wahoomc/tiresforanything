@@ -17,6 +17,40 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://tiresforanything.com"
 PREVIEW = False
 TODAY = datetime.date.today().isoformat()
+
+# Blog publish dates live in src/schedule.json. The worker (src/worker.js) reads the same file and
+# hides any post whose date hasn't come yet on tiresforanything.com. The preview shows everything.
+SCHEDULE = {k: v for k, v in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../src/schedule.json"))).items() if not k.startswith("_")}
+
+def pub_of(slug):
+    return SCHEDULE.get(slug, "2000-01-01")
+
+def long_date(d):
+    y, m, dd = map(int, d.split("-"))
+    return datetime.date(y, m, dd).strftime("%B ") + str(dd) + f", {y}"
+
+POSTCARD = re.compile(r'    <a class="postcard" href="/blog/([a-z0-9-]+)"[^>]*>.*?</a>\n', re.S)
+
+def sorted_postcards(idx):
+    """Blog index cards, newest publish date first, each tagged with data-pub."""
+    cards = [(m.group(1), m.group(0)) for m in POSTCARD.finditer(idx)]
+    cards.sort(key=lambda c: pub_of(c[0]), reverse=True)
+    return [(slug, re.sub(r'(<a class="postcard" href="/blog/[a-z0-9-]+")[^>]*>', rf'\1 data-pub="{pub_of(slug)}">', block, count=1)) for slug, block in cards]
+
+def home_cards():
+    idx = open(os.path.join(ROOT, "src/blog/index.body.html")).read()
+    out = []
+    for slug, block in sorted_postcards(idx):
+        eb = re.search(r'<span class="eyebrow">(.*?)</span>', block).group(1).split(" · ")[0]
+        t = re.search(r"<b>(.*?)</b>", block, re.S).group(1)
+        d = re.search(r"<p>(.*?)</p>", block, re.S).group(1)
+        out.append(f'\n    <a class="cat live" href="/blog/{slug}" data-pub="{pub_of(slug)}" style="padding:18px">\n'
+                   f'      <span class="eyebrow">{eb}</span>\n      <b style="font-size:1.5rem">{t}</b>\n      <small>{d}</small>\n    </a>')
+    return "".join(out) + "\n    "
+
+def tag_blog_li(s):
+    """Mark list items that only point at one blog post, so the worker can drop them before that post is out."""
+    return re.sub(r'<li>(\s*<a href="/blog/([a-z0-9-]+)")', lambda m: f'<li data-pub="{pub_of(m.group(2))}">{m.group(1)}', s)
 PAGE_HASH = {}  # path -> hash of the page's own content, for sitemap dates
 
 # view id: (path, browser-tab title, Google description)
@@ -113,7 +147,7 @@ def related_box(v):
     slugs = RELATED.get(v)
     if not slugs:
         return ""
-    links = "".join(f'<li><a href="/blog/{s}">{html.escape(POSTS[s])}</a></li>' for s in slugs)
+    links = "".join(f'<li data-pub="{pub_of(s)}"><a href="/blog/{s}">{html.escape(POSTS[s])}</a></li>' for s in slugs)
     return ('\n  <div class="wrap stack"><div class="callout"><b>Related guides</b>'
             f'<ul class="clean" style="margin-top:8px">{links}</ul></div></div>\n')
 
@@ -151,7 +185,7 @@ def meta(title, desc, path, og_type="website", img="/og/default.png", extra="", 
             f'<meta name="twitter:card" content="summary_large_image">\n{extra}')
 
 def build_site():
-    src = open(os.path.join(ROOT, "src/site.html")).read()
+    src = open(os.path.join(ROOT, "src/site.html")).read().replace("<!--BLOGCARDS-->", home_cards())
     head_end = src.index("</head>")
     head = src[:head_end]
     # strip the source's own SEO tags; each page gets its own
@@ -198,7 +232,7 @@ def build_site():
                                 {"@type": "ListItem", "position": 2, "name": title.split(":")[0].split("|")[0].strip(), "item": SITE + path}]}) + "</script>\n")
         doc = (head + meta(title, desc, path, extra=(org if v == "home" else crumbs + page_ld), noindex=(v == "quote")) + "</head>\n"
                + f'<body data-page="{v}">' + top + "<main>\n\n" + "\n\n".join(parts) + "\n\n</main>" + tail)
-        doc = fix_links(doc)
+        doc = tag_blog_li(fix_links(doc))
         out = os.path.join(ROOT, "public", path.strip("/"), "index.html") if path != "/" else os.path.join(ROOT, "public/index.html")
         os.makedirs(os.path.dirname(out), exist_ok=True)
         open(out, "w").write(doc)
@@ -291,12 +325,22 @@ def build_blog():
     urls = ["/blog/"]
     b = os.path.join(ROOT, "src/blog")
     idx = open(os.path.join(b, "index.body.html")).read()
+    cards = sorted_postcards(idx)
+    first = POSTCARD.search(idx).start()
+    idx = POSTCARD.sub("", idx)
+    idx = idx[:first] + "".join(c for _, c in cards) + idx[first:]
     PAGE_HASH["/blog/"] = hashlib.sha1(idx.encode()).hexdigest()
     open(os.path.join(ROOT, "public/blog/index.html"), "w").write(blog_page(idx, "Blog | Tires for Anything",
         "Plain-English tire how-tos and buying advice for anything that rolls, from wheelbarrows and forklifts to tractors and aircraft.", "/blog/", og_type="website"))
     for slug, title, desc in BLOG:
         body = open(os.path.join(b, slug + ".body.html")).read()
         jl = open(os.path.join(b, slug + ".jsonld")).read()
+        pd = pub_of(slug)
+        m = re.search(r'"datePublished": *"([0-9-]+)"', jl)
+        if m and pd > m.group(1):  # queued post: show its real publish date, not the day it was written
+            jl = re.sub(r'"(datePublished|dateModified)": *"[0-9-]+"', rf'"\1": "{pd}"', jl)
+            body = re.sub(r'<time datetime="[0-9-]+">[^<]*</time>', f'<time datetime="{pd}">{long_date(pd)}</time>', body, count=1)
+        body = tag_blog_li(body)
         img = f"/og/{slug}.png" if os.path.exists(os.path.join(ROOT, "public/og", slug + ".png")) else "/og/default.png"
         open(os.path.join(ROOT, "public/blog", slug + ".html"), "w").write(blog_page(body, title, desc, f"/blog/{slug}", jl, img))
         PAGE_HASH[f"/blog/{slug}"] = hashlib.sha1((body + title + desc).encode()).hexdigest()
@@ -311,6 +355,8 @@ def sitemap(urls):
         hsh = PAGE_HASH.get(u, "")
         if u not in known or known[u][0] != hsh:
             known[u] = [hsh, TODAY]
+        if u.startswith("/blog/") and pub_of(u[6:]) > known[u][1]:
+            known[u][1] = pub_of(u[6:])
     json.dump(known, open(f, "w"), indent=1, sort_keys=True)
     rows = "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{known[u][1]}</lastmod></url>\n" for u in urls)
     open(os.path.join(ROOT, "public/sitemap.xml"), "w").write(
