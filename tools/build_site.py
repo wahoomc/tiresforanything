@@ -133,7 +133,9 @@ def build_site():
     missing = set(PAGES) - set(sections)
     assert not missing, missing
     org = ('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "Organization",
-           "name": "Tires for Anything", "url": SITE + "/", "logo": SITE + "/og/default.png"}) + "</script>\n")
+           "name": "Tires for Anything", "url": SITE + "/", "logo": SITE + "/og/default.png"}) + "</script>\n"
+           + '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "WebSite",
+           "name": "Tires for Anything", "url": SITE + "/"}) + "</script>\n")
     urls = []
     for v, (path, title, desc) in PAGES.items():
         own = sections[v].replace(f'id="v-{v}" data-view="{v}" hidden', f'id="v-{v}" data-view="{v}"', 1)

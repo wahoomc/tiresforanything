@@ -458,6 +458,9 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   // Each view has its own real page. Tool views (decoder, quote, request) also live on every page so in-page links work.
   var PAGES={home:"/",cars:"/passenger-car-tires/",trucks:"/light-truck-suv-tires/",forklift:"/forklift-tires/",aviation:"/aircraft-tires/",motorcycle:"/motorcycle-tires/",farm:"/farm-tractor-tires/",semi:"/semi-truck-tires/",trailer:"/trailer-tires/",construction:"/construction-skid-steer-tires/",lawn:"/lawn-garden-tires/",atv:"/atv-utv-golf-cart-tires/",rv:"/rv-motorhome-tires/",mobility:"/wheelchair-mobility-scooter-tires/",casters:"/caster-wheels/",toys:"/rc-toy-ride-on-tires/",motorsport:"/go-kart-tires/",racing:"/race-car-tires/",bicycles:"/bike-tires/",vintage:"/vintage-antique-tires/",military:"/military-truck-tires/",decoder:"/tire-size-decoder/",quote:"/tire-quotes/",request:"/find-my-tire/",partners:"/for-dealers/",legal:"/terms/",about:"/about/",privacy:"/privacy/",contact:"/contact/",disclosure:"/affiliate-disclosure/"};
   var TOOLS={decoder:1,quote:1,request:1};
+  // Google Analytics events (does nothing if GA isn't loaded). Never send names, emails or notes.
+  var gaQuiet=true;setTimeout(function(){gaQuiet=false;},0); // ignore the example decode that runs on page load
+  function ga(ev,params){try{if(!gaQuiet&&typeof window.gtag==="function")window.gtag("event",ev,params||{});}catch(x){}}
   function pageHref(v){return TOOLS[v]?"#"+v:(PAGES[v]||"/");}
   var PAGE_VIEW=document.body.getAttribute("data-page")||"home";
   // Missing elements (sections that live on other pages) get a throwaway stand-in so nothing breaks.
@@ -831,10 +834,12 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
   function renderDecode(raw,host){
     host.textContent="";
     var r=decode(raw);
+    if(r)ga("size_decoder_success",{tire_size:String(raw).trim().toUpperCase().slice(0,40),category:r.link||"none",size_type:r.kind});
     if(!r){
       var e=document.createElement("div");e.className="err";
       e.textContent="We couldn't read that size. Copy it exactly as it's molded on the sidewall, like 225/60R16, 6.00-6 or 18x7x12-1/8. Ignore extra codes like DOT numbers.";
       var el=document.createElement("p");var ea=document.createElement("a");ea.href="#request";ea.setAttribute("data-rqcat","");ea.setAttribute("data-rqsize",String(raw).trim());ea.textContent="Still stuck? Tell us what you need";el.appendChild(ea);e.appendChild(el);
+      ga("tire_not_found",{search_term:String(raw).trim().slice(0,40),source:"decoder"});
       host.appendChild(e);return;
     }
     var stk=(r.norm&&STOCK_IDX[r.norm])||[],al=(r.norm&&ALT_IDX[r.norm])||[];
@@ -890,7 +895,24 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     }
   }
   var decIn=$id("dec-code"),decOut=$id("dec-out");
-  function goDecode(){renderDecode(decIn.value,decOut);}
+  function goDecode(){
+    renderDecode(decIn.value,decOut);
+    var v=decIn.value.trim();if(!v||decOut.querySelector(".err"))return;
+    // Copy or share a link to this exact result
+    var row=document.createElement("div");row.className="row";row.style.alignItems="center";
+    var b=document.createElement("button");b.type="button";b.className="btn ghost";b.textContent="Copy link to this result";
+    var msg=document.createElement("span");msg.className="note";msg.setAttribute("aria-live","polite");
+    b.addEventListener("click",function(){
+      var url=location.origin+"/tire-size-decoder/?size="+encodeURIComponent(v);
+      var done=function(){msg.textContent="Link copied. Paste it in a text or email.";ga("decoder_share",{tire_size:v.toUpperCase().slice(0,40)});};
+      if(navigator.share){navigator.share({title:"Tire size "+v.toUpperCase(),url:url}).then(done).catch(function(){});}
+      else if(navigator.clipboard){navigator.clipboard.writeText(url).then(done).catch(function(){msg.textContent=url;});}
+      else msg.textContent=url;
+    });
+    row.appendChild(b);row.appendChild(msg);decOut.appendChild(row);
+  }
+  // A shared link like /tire-size-decoder/?size=ST225/75R15 opens with that size decoded.
+  (function(){try{var qs=new URLSearchParams(location.search).get("size");if(qs&&document.getElementById("dec-code")){decIn.value=qs;if(PAGE_VIEW!=="decoder")location.hash="decoder";goDecode();}}catch(x){}})();
   $id("dec-go").addEventListener("click",goDecode);
   decIn.addEventListener("keydown",function(e){if(e.key==="Enter")goDecode();});
   document.querySelectorAll("#v-decoder .chip").forEach(function(b){b.addEventListener("click",function(){decIn.value=b.getAttribute("data-code");goDecode();});});
@@ -1317,6 +1339,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       var ap=document.createElement("p");ap.textContent="Aircraft tires have to match your aircraft's approved parts, so we don't link to general shopping sites. Check your parts catalog, and talk with your mechanic or an aviation supplier.";out.appendChild(ap);
     }
     var st=document.createElement("p");st.className="note";st.textContent="Sending your request...";out.appendChild(st);
+    ga("tire_request_submit",{category:k||"not sure",tire_size:String(S||"").slice(0,40)});
     fetch("/api/request",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({page:k||"not sure",equipment:E,size:S,notes:N,email:M,website:hp.value})})
       .then(function(r){return r.json();}).catch(function(){return {saved:false};})
       .then(function(res){
