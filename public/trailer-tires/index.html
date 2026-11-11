@@ -12,7 +12,6 @@
 [hidden]{display:none!important}
 img{max-width:100%}
 .aff{display:none!important}
-/* Layout: sticky "sidewall" nav over a concrete-toned shop floor; hash views (home, forklift, aviation, decoder, quote, partners); content column ~68rem, size codes always set in mono like molded sidewall stamps. */
 :root{
   --bg:#EEF0EE;        /* shop-floor concrete */
   --surface:#FFFFFF;
@@ -365,6 +364,8 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     </ul>
   </div>
   <div class="wrap stack"><div class="shop" data-shop="trailer"><h3>Shop on Amazon</h3><div class="chips"><a class="shoplink" href="https://www.amazon.com/s?k=ST%20trailer%20tire&amp;tag=tiresforanything-20" target="_blank" rel="sponsored nofollow noopener">ST trailer tires</a><a class="shoplink" href="https://www.amazon.com/s?k=trailer%20tire%20and%20wheel%20assembly&amp;tag=tiresforanything-20" target="_blank" rel="sponsored nofollow noopener">Trailer tire and wheel assemblies</a><a class="shoplink" href="https://www.amazon.com/s?k=trailer%20tire%20pressure%20monitoring%20system&amp;tag=tiresforanything-20" target="_blank" rel="sponsored nofollow noopener">Trailer tire pressure monitor</a><a class="shoplink" href="https://www.amazon.com/s?k=trailer%20tire%20covers&amp;tag=tiresforanything-20" target="_blank" rel="sponsored nofollow noopener">Tire covers</a><a class="shoplink" href="https://www.amazon.com/s?k=wheel%20chocks&amp;tag=tiresforanything-20" target="_blank" rel="sponsored nofollow noopener">Wheel chocks</a></div><p class="note">As an Amazon Associate I earn from qualifying purchases. Links open Amazon search results, so check the size and reviews before you buy.</p></div></div>
+
+  <div class="wrap stack"><div class="callout"><b>Related guides</b><ul class="clean" style="margin-top:8px"><li><a href="/blog/tire-balancing-beads-vs-wheel-weights">Balance beads vs. wheel weights: what to use and when</a></li><li><a href="/blog/tire-wheel-rim-definitions">Tire vs. wheel vs. rim, plus casters and flat-proof tires</a></li></ul></div></div>
 </section>
 
 <section class="view" id="v-decoder" data-view="decoder" hidden>
@@ -1031,6 +1032,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(/^(lawn|mobility|bicycles|motorsport|toys|casters)$/.test(k))return "diy";
     if(k==="atv")return /golf|EZGO|Club Car/i.test(r[2])?"diy":"shop";
     if(k==="semi")return "pro";
+    if(k==="rv")return /R(19|22)\.5$/.test(r[0])?"pro":"shop";
     if(k==="trailer")return /-(8|10|12)$/.test(r[0])?"diy":"shop";
     if(k==="farm")return /^(18\.4-38|520\/85R38)$/.test(r[0])?"pro":"shop";
     if(k==="construction")return /^(19\.5L-24|17\.5-25|20\.5-25|14\.00-24)$/.test(r[0])?"pro":"shop";
@@ -1056,7 +1058,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     return null;
   }
   function finderQuery(k,r){
-    if(k==="toys"||k==="casters")return r[5];
+    if(k==="toys"||k==="casters"||k==="cars"||k==="trucks"||k==="rv"||k==="racing")return r[5];
     if(k==="forklift")return r[0]+" forklift tire";
     if(k==="farm")return r[0]+(/skid/i.test(r[2])&&!/tractor/i.test(r[2])?" tire":" tractor tire");
     if(k==="construction")return r[0]+(/skid/i.test(r[2])?" skid steer tire":/backhoe/i.test(r[2])?" backhoe tire":/loader/i.test(r[2])?" loader tire":/grader/i.test(r[2])?" grader tire":" tire");
@@ -1162,6 +1164,48 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       ["G60-15","about 235/60R15","Muscle cars","Approximate modern size"],
       ["L60-15","about 275/60R15","Big-block muscle car rears","Approximate modern size"]
     ],
+    cars:[
+      ["195/65R15","","Older compact cars","All-season","","195/65R15 all season tire"],
+      ["205/55R16","","Compact sedans and hatchbacks","One of the most common car sizes","","205/55R16 all season tire"],
+      ["215/55R17","","Midsize sedans","All-season or all-weather","","215/55R17 all season tire"],
+      ["215/60R16","","Midsize sedans and minivans","All-season","","215/60R16 all season tire"],
+      ["225/45R17","","Sporty compacts and sedans","Performance all-season","","225/45R17 performance all season tire"],
+      ["225/65R17","","Compact SUVs and crossovers","Very common crossover size","","225/65R17 all season tire"],
+      ["225/60R18","","Compact SUVs and crossovers","Touring all-season","","225/60R18 all season tire"],
+      ["235/65R17","","Midsize crossovers and minivans","All-season","","235/65R17 all season tire"],
+      ["235/55R19","","Midsize SUVs","Touring all-season","","235/55R19 all season tire"],
+      ["245/45R18","","Larger sedans and sport sedans","Performance all-season","","245/45R18 performance all season tire"]
+    ],
+    trucks:[
+      ["265/70R17","","Half-ton pickups and full-size SUVs","Highway or all-terrain","","265/70R17 all terrain tire"],
+      ["LT265/70R17","","Pickups that tow or haul","Load range E for heavy work","","LT265/70R17 load range E tire"],
+      ["275/55R20","","Newer half-ton pickups and large SUVs","Highway or all-terrain","","275/55R20 all terrain tire"],
+      ["275/60R20","","Half-ton pickups","Highway or all-terrain","","275/60R20 all terrain tire"],
+      ["265/65R18","","Midsize pickups and SUVs","All-terrain","","265/65R18 all terrain tire"],
+      ["LT245/75R16","","Older pickups and work trucks","Load range E","","LT245/75R16 load range E tire"],
+      ["LT275/70R18","","Heavy-duty pickups","Load range E","","LT275/70R18 load range E tire"],
+      ["LT275/65R20","","Heavy-duty pickups","Load range E or F","","LT275/65R20 load range E tire"],
+      ["285/70R17","","Off-road SUVs and pickups","About 33 inches tall","","285/70R17 all terrain tire"],
+      ["35x12.50R20","","Lifted pickups","Mud or all-terrain; often needs a lift","","35x12.50R20 mud terrain tire"]
+    ],
+    rv:[
+      ["LT225/75R16","","Smaller Class C motorhomes and camper vans","Load range E","","LT225/75R16 load range E tire"],
+      ["LT245/75R16","","Camper vans and light Class C","Load range E","","LT245/75R16 load range E tire"],
+      ["225/70R19.5","","Larger Class C and some Super C","Commercial tire","","225/70R19.5 tire"],
+      ["245/70R19.5","","Gas Class A motorhomes","Commercial tire","","245/70R19.5 tire"],
+      ["255/70R22.5","","Class A motorhomes","Commercial tire","","255/70R22.5 tire"],
+      ["275/70R22.5","","Diesel pusher Class A","Commercial tire","","275/70R22.5 tire"],
+      ["275/80R22.5","","Large diesel pusher Class A","Commercial tire","","275/80R22.5 tire"]
+    ],
+    racing:[
+      ["205/50R15","","Small autocross and road race cars","Check your class treadwear rule","","205/50R15 200 treadwear tire"],
+      ["225/45R17","","Autocross and track day cars","200 treadwear street tires are popular","","225/45R17 200 treadwear tire"],
+      ["245/40R18","","Track day and time attack cars","Extreme performance summer","","245/40R18 extreme performance summer tire"],
+      ["P275/60R15","","Street and strip drag cars","Drag radial","","275/60R15 drag radial"],
+      ["26x8.5-15","","Bracket and street drag cars","Drag slick, not street legal","-","26x8.5-15 drag slick"],
+      ["28x10.5-15","","Bracket drag cars","Drag slick, not street legal","-","28x10.5-15 drag slick"],
+      ["26x4.5-15","","Drag car front runners","Lightweight front tire","-","26x4.5-15 front runner tire"]
+    ],
     trailer:[
       ["ST225/75R15","","Travel trailers, car haulers, boat trailers","The most common camper size; load range D or E"],
       ["ST205/75R15","","Boat, utility and pop-up trailers","Very common; load range C or D"],
@@ -1247,7 +1291,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       FINDERS[k].forEach(function(r){
         if(q&&r.slice(0,4).join(" ").toLowerCase().indexOf(q)<0)return;n++;
         var tr=document.createElement("tr"),td0=document.createElement("td"),b=document.createElement("button");
-        if(k==="toys"||k==="casters"){b=document.createElement("b");b.textContent=r[0];b.style.fontFamily="var(--mono)";}else{
+        if(k==="toys"||k==="casters"||r[4]==="-"){b=document.createElement("b");b.textContent=r[0];b.style.fontFamily="var(--mono)";}else{
         b.type="button";b.className="chip";b.textContent=r[0];b.title="Decode this size";
         b.addEventListener("click",function(){decIn.value=r[4]||r[0];location.hash="decoder";goDecode();});}
         td0.appendChild(b);tr.appendChild(td0);

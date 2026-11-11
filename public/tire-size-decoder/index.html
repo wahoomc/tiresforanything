@@ -12,7 +12,6 @@
 [hidden]{display:none!important}
 img{max-width:100%}
 .aff{display:none!important}
-/* Layout: sticky "sidewall" nav over a concrete-toned shop floor; hash views (home, forklift, aviation, decoder, quote, partners); content column ~68rem, size codes always set in mono like molded sidewall stamps. */
 :root{
   --bg:#EEF0EE;        /* shop-floor concrete */
   --surface:#FFFFFF;
@@ -273,6 +272,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://tiresforanything.com/"}, {"@type": "ListItem", "position": 2, "name": "Tire Size Decoder", "item": "https://tiresforanything.com/tire-size-decoder/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where is the tire size on the sidewall?", "acceptedAnswer": {"@type": "Answer", "text": "It's usually the biggest raised text after the brand name. On cars and trucks, the original size is also on the label inside the driver's door jamb. On press-on forklift tires, it may be stamped on the steel band."}}, {"@type": "Question", "name": "What does the R in a tire size mean?", "acceptedAnswer": {"@type": "Answer", "text": "R means radial construction. A dash in the same spot usually means bias-ply. Nearly all car and truck tires are radial; many small, farm and industrial tires are bias-ply."}}, {"@type": "Question", "name": "What's the difference between P, LT and ST tires?", "acceptedAnswer": {"@type": "Answer", "text": "P is a passenger tire, LT is a light truck tire built for towing and hauling, and ST is a special trailer tire for trailers only. Don't put ST tires on a vehicle or passenger tires on a trailer."}}, {"@type": "Question", "name": "Can I use a different size than what's on there now?", "acceptedAnswer": {"@type": "Answer", "text": "Only if the wheel size matches exactly and the new size is approved for your vehicle or equipment. Load and speed ratings matter too. A tire shop can confirm what fits."}}, {"@type": "Question", "name": "Why are bike tire sizes so confusing?", "acceptedAnswer": {"@type": "Answer", "text": "Several sizing systems overlap, so a 29 inch, a 700c and a 28 inch tire can share a wheel. The ETRTO number, like 28-622, is the one to trust: the second number is the wheel size in millimeters."}}, {"@type": "Question", "name": "Does a decoded size mean the tire fits my machine?", "acceptedAnswer": {"@type": "Answer", "text": "No. The decoder explains what the numbers mean. Fit also depends on the wheel, load rating, speed rating and your manufacturer's specifications, so always confirm against what's on your equipment now."}}]}</script>
 </head>
 <body data-page="decoder">
 
@@ -337,6 +337,57 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     </div>
     <div class="out" id="dec-out" aria-live="polite"></div>
   </div>
+  <div class="wrap stack">
+    <h2>How to read a tire size</h2>
+    <p>There are only about six ways tire sizes get written. Once you've seen them, you can read the sidewall on almost anything: a car, a semi, a zero-turn, a forklift, the wheelbarrow behind the shed. Find the size in the biggest raised letters on the sidewall (on a press-on forklift tire it may be stamped on the steel band), then match it to one of these.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Looks like</th><th>Example</th><th>Read it as</th><th>Found on</th></tr></thead>
+        <tbody>
+          <tr><td>Width / ratio R wheel</td><td><span class="stamp">225/65R17</span></td><td>225 mm wide, sidewall 65% as tall as wide, radial, 17 in wheel</td><td>Cars, SUVs, trailers, semis, motorcycles</td></tr>
+          <tr><td>Tall x wide R wheel</td><td><span class="stamp">35x12.50R17</span></td><td>35 in tall, 12.5 in wide, radial, 17 in wheel</td><td>Off-road trucks</td></tr>
+          <tr><td>Tall x wide - wheel</td><td><span class="stamp">18x8.50-8</span></td><td>18 in tall, 8.5 in wide, bias ply, 8 in wheel</td><td>Mowers, golf carts, ATVs</td></tr>
+          <tr><td>Wide - wheel</td><td><span class="stamp">6.50-10</span></td><td>6.5 in wide, bias ply, 10 in wheel</td><td>Forklifts, wheelbarrows, aircraft</td></tr>
+          <tr><td>Tall x wide x band</td><td><span class="stamp">21x7x15</span></td><td>21 in tall, 7 in wide, fits a 15 in steel band</td><td>Press-on forklift tires</td></tr>
+          <tr><td>Width - bead seat</td><td><span class="stamp">28-622</span></td><td>28 mm wide, on a 622 mm bead-seat wheel</td><td>Bicycles</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">A dash before the wheel size usually means bias-ply construction; an R means radial. Letters up front tell you the tire's job: P for passenger, LT for light truck, ST for trailers only.</p>
+  </div>
+
+  <div class="wrap stack">
+    <h2>Popular sizes</h2>
+    <p>Tap one to see it decoded, with shopping links.</p>
+    <div class="chips">
+      <a class="chip" href="/tire-size-decoder/?size=225%2F65R17">225/65R17</a>
+      <a class="chip" href="/tire-size-decoder/?size=265%2F70R17">265/70R17</a>
+      <a class="chip" href="/tire-size-decoder/?size=ST225%2F75R15">ST225/75R15</a>
+      <a class="chip" href="/tire-size-decoder/?size=ST205%2F75R15">ST205/75R15</a>
+      <a class="chip" href="/tire-size-decoder/?size=4.80-12">4.80-12</a>
+      <a class="chip" href="/tire-size-decoder/?size=20x8.00-8">20x8.00-8</a>
+      <a class="chip" href="/tire-size-decoder/?size=4.10%2F3.50-4">4.10/3.50-4</a>
+      <a class="chip" href="/tire-size-decoder/?size=18x7-8">18x7-8</a>
+      <a class="chip" href="/tire-size-decoder/?size=21x7x15">21x7x15</a>
+      <a class="chip" href="/tire-size-decoder/?size=11R22.5">11R22.5</a>
+      <a class="chip" href="/tire-size-decoder/?size=700x28c">700x28c</a>
+      <a class="chip" href="/tire-size-decoder/?size=6.00-6">6.00-6</a>
+    </div>
+  </div>
+
+  <div class="wrap stack">
+    <h2>Common questions</h2>
+    <div class="faq">
+      <details><summary>Where is the tire size on the sidewall?</summary><p>It's usually the biggest raised text after the brand name. On cars and trucks, the original size is also on the label inside the driver's door jamb. On press-on forklift tires, it may be stamped on the steel band.</p></details>
+      <details><summary>What does the R in a tire size mean?</summary><p>R means radial construction. A dash in the same spot usually means bias-ply. Nearly all car and truck tires are radial; many small, farm and industrial tires are bias-ply.</p></details>
+      <details><summary>What's the difference between P, LT and ST tires?</summary><p>P is a passenger tire, LT is a light truck tire built for towing and hauling, and ST is a special trailer tire for trailers only. Don't put ST tires on a vehicle or passenger tires on a trailer.</p></details>
+      <details><summary>Can I use a different size than what's on there now?</summary><p>Only if the wheel size matches exactly and the new size is approved for your vehicle or equipment. Load and speed ratings matter too. A tire shop can confirm what fits.</p></details>
+      <details><summary>Why are bike tire sizes so confusing?</summary><p>Several sizing systems overlap, so a 29 inch, a 700c and a 28 inch tire can share a wheel. The ETRTO number, like 28-622, is the one to trust: the second number is the wheel size in millimeters.</p></details>
+      <details><summary>Does a decoded size mean the tire fits my machine?</summary><p>No. The decoder explains what the numbers mean. Fit also depends on the wheel, load rating, speed rating and your manufacturer's specifications, so always confirm against what's on your equipment now.</p></details>
+    </div>
+  </div>
+
+  <div class="wrap stack"><div class="callout"><b>Related guides</b><ul class="clean" style="margin-top:8px"><li><a href="/blog/tire-wheel-rim-definitions">Tire vs. wheel vs. rim, plus casters and flat-proof tires</a></li><li><a href="/blog/tire-balancing-beads-vs-wheel-weights">Balance beads vs. wheel weights: what to use and when</a></li></ul></div></div>
 </section>
 
 <section class="view" id="v-quote" data-view="quote" hidden>
@@ -962,6 +1013,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     if(/^(lawn|mobility|bicycles|motorsport|toys|casters)$/.test(k))return "diy";
     if(k==="atv")return /golf|EZGO|Club Car/i.test(r[2])?"diy":"shop";
     if(k==="semi")return "pro";
+    if(k==="rv")return /R(19|22)\.5$/.test(r[0])?"pro":"shop";
     if(k==="trailer")return /-(8|10|12)$/.test(r[0])?"diy":"shop";
     if(k==="farm")return /^(18\.4-38|520\/85R38)$/.test(r[0])?"pro":"shop";
     if(k==="construction")return /^(19\.5L-24|17\.5-25|20\.5-25|14\.00-24)$/.test(r[0])?"pro":"shop";
@@ -987,7 +1039,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
     return null;
   }
   function finderQuery(k,r){
-    if(k==="toys"||k==="casters")return r[5];
+    if(k==="toys"||k==="casters"||k==="cars"||k==="trucks"||k==="rv"||k==="racing")return r[5];
     if(k==="forklift")return r[0]+" forklift tire";
     if(k==="farm")return r[0]+(/skid/i.test(r[2])&&!/tractor/i.test(r[2])?" tire":" tractor tire");
     if(k==="construction")return r[0]+(/skid/i.test(r[2])?" skid steer tire":/backhoe/i.test(r[2])?" backhoe tire":/loader/i.test(r[2])?" loader tire":/grader/i.test(r[2])?" grader tire":" tire");
@@ -1093,6 +1145,48 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       ["G60-15","about 235/60R15","Muscle cars","Approximate modern size"],
       ["L60-15","about 275/60R15","Big-block muscle car rears","Approximate modern size"]
     ],
+    cars:[
+      ["195/65R15","","Older compact cars","All-season","","195/65R15 all season tire"],
+      ["205/55R16","","Compact sedans and hatchbacks","One of the most common car sizes","","205/55R16 all season tire"],
+      ["215/55R17","","Midsize sedans","All-season or all-weather","","215/55R17 all season tire"],
+      ["215/60R16","","Midsize sedans and minivans","All-season","","215/60R16 all season tire"],
+      ["225/45R17","","Sporty compacts and sedans","Performance all-season","","225/45R17 performance all season tire"],
+      ["225/65R17","","Compact SUVs and crossovers","Very common crossover size","","225/65R17 all season tire"],
+      ["225/60R18","","Compact SUVs and crossovers","Touring all-season","","225/60R18 all season tire"],
+      ["235/65R17","","Midsize crossovers and minivans","All-season","","235/65R17 all season tire"],
+      ["235/55R19","","Midsize SUVs","Touring all-season","","235/55R19 all season tire"],
+      ["245/45R18","","Larger sedans and sport sedans","Performance all-season","","245/45R18 performance all season tire"]
+    ],
+    trucks:[
+      ["265/70R17","","Half-ton pickups and full-size SUVs","Highway or all-terrain","","265/70R17 all terrain tire"],
+      ["LT265/70R17","","Pickups that tow or haul","Load range E for heavy work","","LT265/70R17 load range E tire"],
+      ["275/55R20","","Newer half-ton pickups and large SUVs","Highway or all-terrain","","275/55R20 all terrain tire"],
+      ["275/60R20","","Half-ton pickups","Highway or all-terrain","","275/60R20 all terrain tire"],
+      ["265/65R18","","Midsize pickups and SUVs","All-terrain","","265/65R18 all terrain tire"],
+      ["LT245/75R16","","Older pickups and work trucks","Load range E","","LT245/75R16 load range E tire"],
+      ["LT275/70R18","","Heavy-duty pickups","Load range E","","LT275/70R18 load range E tire"],
+      ["LT275/65R20","","Heavy-duty pickups","Load range E or F","","LT275/65R20 load range E tire"],
+      ["285/70R17","","Off-road SUVs and pickups","About 33 inches tall","","285/70R17 all terrain tire"],
+      ["35x12.50R20","","Lifted pickups","Mud or all-terrain; often needs a lift","","35x12.50R20 mud terrain tire"]
+    ],
+    rv:[
+      ["LT225/75R16","","Smaller Class C motorhomes and camper vans","Load range E","","LT225/75R16 load range E tire"],
+      ["LT245/75R16","","Camper vans and light Class C","Load range E","","LT245/75R16 load range E tire"],
+      ["225/70R19.5","","Larger Class C and some Super C","Commercial tire","","225/70R19.5 tire"],
+      ["245/70R19.5","","Gas Class A motorhomes","Commercial tire","","245/70R19.5 tire"],
+      ["255/70R22.5","","Class A motorhomes","Commercial tire","","255/70R22.5 tire"],
+      ["275/70R22.5","","Diesel pusher Class A","Commercial tire","","275/70R22.5 tire"],
+      ["275/80R22.5","","Large diesel pusher Class A","Commercial tire","","275/80R22.5 tire"]
+    ],
+    racing:[
+      ["205/50R15","","Small autocross and road race cars","Check your class treadwear rule","","205/50R15 200 treadwear tire"],
+      ["225/45R17","","Autocross and track day cars","200 treadwear street tires are popular","","225/45R17 200 treadwear tire"],
+      ["245/40R18","","Track day and time attack cars","Extreme performance summer","","245/40R18 extreme performance summer tire"],
+      ["P275/60R15","","Street and strip drag cars","Drag radial","","275/60R15 drag radial"],
+      ["26x8.5-15","","Bracket and street drag cars","Drag slick, not street legal","-","26x8.5-15 drag slick"],
+      ["28x10.5-15","","Bracket drag cars","Drag slick, not street legal","-","28x10.5-15 drag slick"],
+      ["26x4.5-15","","Drag car front runners","Lightweight front tire","-","26x4.5-15 front runner tire"]
+    ],
     trailer:[
       ["ST225/75R15","","Travel trailers, car haulers, boat trailers","The most common camper size; load range D or E"],
       ["ST205/75R15","","Boat, utility and pop-up trailers","Very common; load range C or D"],
@@ -1178,7 +1272,7 @@ td .shoplink{padding:3px 10px;font-size:.82rem;white-space:nowrap}
       FINDERS[k].forEach(function(r){
         if(q&&r.slice(0,4).join(" ").toLowerCase().indexOf(q)<0)return;n++;
         var tr=document.createElement("tr"),td0=document.createElement("td"),b=document.createElement("button");
-        if(k==="toys"||k==="casters"){b=document.createElement("b");b.textContent=r[0];b.style.fontFamily="var(--mono)";}else{
+        if(k==="toys"||k==="casters"||r[4]==="-"){b=document.createElement("b");b.textContent=r[0];b.style.fontFamily="var(--mono)";}else{
         b.type="button";b.className="chip";b.textContent=r[0];b.title="Decode this size";
         b.addEventListener("click",function(){decIn.value=r[4]||r[0];location.hash="decoder";goDecode();});}
         td0.appendChild(b);tr.appendChild(td0);

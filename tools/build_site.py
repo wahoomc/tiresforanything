@@ -11,12 +11,13 @@ Run:  python3 tools/build_site.py          (then: node tools/prerender.mjs)
 PREVIEW = False keeps every page out of Google (noindex). Flip to False at launch,
 together with public/robots.txt and public/_headers.
 """
-import html, json, os, re
+import datetime, hashlib, html, json, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://tiresforanything.com"
 PREVIEW = False
-TODAY = "2026-10-25"
+TODAY = datetime.date.today().isoformat()
+PAGE_HASH = {}  # path -> hash of the page's own content, for sitemap dates
 
 # view id: (path, browser-tab title, Google description)
 PAGES = {
@@ -24,7 +25,7 @@ PAGES = {
              "Plain-English tire guides, a size decoder and shopping links for anything that rolls: cars, trucks, trailers, mowers, forklifts, tractors, bikes and more."),
     "cars": ("/passenger-car-tires/", "Passenger Car Tires: Sizes, Types and How to Choose",
              "How to read a car tire size, pick all-season, all-weather, winter or performance tires, and shop the right size."),
-    "trucks": ("/light-truck-suv-tires/", "Light Truck and SUV Tires: LT vs P, Load Range and Tread Types",
+    "trucks": ("/light-truck-suv-tires/", "Light Truck and SUV Tires: LT vs. P, Load Range, Tread",
                "Highway, all-terrain and mud-terrain tires for pickups and SUVs, plus LT load ranges and how to read the size."),
     "forklift": ("/forklift-tires/", "Forklift Tires: Press-On, Pneumatic and Solid Sizes",
                  "Find forklift tire sizes, compare press-on cushion, pneumatic and solid pneumatic tires, and get quotes from dealers who install them."),
@@ -43,24 +44,24 @@ PAGES = {
     "lawn": ("/lawn-garden-tires/", "Lawn Mower, Wheelbarrow and Hand Truck Tires",
              "Riding mower, zero-turn, wheelbarrow and hand truck tire sizes, flat-free options, and tires already mounted on a wheel."),
     "atv": ("/atv-utv-golf-cart-tires/", "ATV, UTV and Golf Cart Tires: Sizes and Fitment",
-            "ATV, side-by-side and golf cart tire sizes, lift kit sizing, and wheel and tire sets."),
+            "ATV, UTV and golf cart tire sizes explained, with common sizes, lift kit sizing, and tires or full wheel-and-tire sets you can order online."),
     "rv": ("/rv-motorhome-tires/", "RV and Motorhome Tires: Sizes, Age and Load",
            "Class A, B and C motorhome tire sizes, how old is too old, load and pressure, and where to get them installed."),
     "mobility": ("/wheelchair-mobility-scooter-tires/", "Wheelchair and Mobility Scooter Tires",
-                 "Wheelchair, power chair and mobility scooter tire sizes, solid vs pneumatic, and caster wheels."),
-    "casters": ("/caster-wheels/", "Caster Wheels: Office Chair, Cart, Shelving and Tool Chest Casters",
+                 "Wheelchair, power chair and mobility scooter tire sizes, solid vs. pneumatic vs. foam-filled, caster wheels, and replacements you can order online."),
+    "casters": ("/caster-wheels/", "Caster Wheels for Office Chairs, Carts and Tool Chests",
                 "How to pick replacement casters for office chairs, utility carts, rolling shelves, tool chests and furniture: stem vs plate, load, wheel size and floor type."),
     "toys": ("/rc-toy-ride-on-tires/", "RC Car, RC Plane, Ride-On and Scooter Tires and Wheels",
              "Tire and wheel sizes for RC cars and trucks, RC airplanes, kids' ride-on cars, kick and electric scooters, hoverboards and skateboards."),
     "motorsport": ("/go-kart-tires/", "Go-Kart Tires: Sizes and Compounds",
-                   "Go-kart tire sizes for sprint, cadet and rental karts, and how compound and size affect grip."),
+                   "Go-kart tire sizes for sprint, cadet, yard and rental karts, how compound and size affect grip, and replacement tires you can order online."),
     "racing": ("/race-car-tires/", "Race Car Tires: Autocross, Track Day, Drag and Dirt",
                "Tires for autocross, track days, road racing, drag racing and dirt oval, and how class rules decide what you can run."),
     "bicycles": ("/bike-tires/", "Bike Tire Sizes: Road, Gravel, Mountain and Kids",
                  "Road, gravel, mountain, fat and kids' bike tire sizes, including 700c, 29er, 20 inch and the fraction sizes that don't swap."),
     "vintage": ("/vintage-antique-tires/", "Vintage and Antique Car Tires: Model T to Muscle Cars",
                 "Vintage and antique tire sizes from the Model T to muscle cars, beaded-edge clinchers, and specialty suppliers."),
-    "military": ("/military-truck-tires/", "Military Truck Tires: Humvee, Deuce and a Half and Surplus Sizes",
+    "military": ("/military-truck-tires/", "Military Truck Tires: Humvee, Deuce and a Half, Surplus",
                  "Tire sizes for surplus military trucks like the Humvee and M35, run-flat inserts, and where to find them."),
     "decoder": ("/tire-size-decoder/", "Tire Size Decoder: Read Any Sidewall Size",
                 "Type the size from your sidewall and see what every number means, for cars, trucks, trailers, mowers, forklifts, tractors, bikes and aircraft."),
@@ -71,12 +72,44 @@ PAGES = {
     "partners": ("/for-dealers/", "For Tire Dealers: Get Listed on Tires for Anything",
                  "Tire dealers: get in front of buyers looking for forklift, farm, construction, commercial and specialty tires."),
     "legal": ("/terms/", "Terms and Disclaimers | Tires for Anything", "Terms of use, safety disclaimers and affiliate disclosures for Tires for Anything."),
-    "about": ("/about/", "About Tires for Anything", "Who runs Tires for Anything, how we make money, and how we keep our guides honest."),
-    "privacy": ("/privacy/", "Privacy Policy | Tires for Anything", "What Tires for Anything collects, how quote requests are shared, and your choices."),
+    "about": ("/about/", "About Tires for Anything", "Who runs Tires for Anything, the hands-on tire experience behind the guides, how the site makes money, and how we keep the advice honest."),
+    "privacy": ("/privacy/", "Privacy Policy | Tires for Anything", "What Tires for Anything collects, how analytics and tire requests are handled, and the choices you have about your information."),
     "contact": ("/contact/", "Contact Tires for Anything", "How to reach Tires for Anything about a tire size, a correction, or a dealer listing."),
     "disclosure": ("/affiliate-disclosure/", "Affiliate Disclosure | Tires for Anything", "How Tires for Anything earns commissions from retailer links, and what that does and doesn't change."),
 }
 TOOLS = ("decoder", "quote", "request")
+
+# Blog guides linked from each category page ("Related guides" box). Keep each list to the posts that genuinely help.
+POSTS = {
+    "tire-wheel-rim-definitions": "Tire vs. wheel vs. rim, plus casters and flat-proof tires",
+    "tire-balancing-beads-vs-wheel-weights": "Balance beads vs. wheel weights: what to use and when",
+    "how-to-replace-office-chair-casters": "How to replace office chair casters (and cart casters)",
+}
+RELATED = {
+    "trailer": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
+    "motorcycle": ["tire-balancing-beads-vs-wheel-weights"],
+    "cars": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
+    "trucks": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
+    "rv": ["tire-balancing-beads-vs-wheel-weights"],
+    "semi": ["tire-balancing-beads-vs-wheel-weights"],
+    "atv": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
+    "lawn": ["tire-wheel-rim-definitions", "how-to-replace-office-chair-casters"],
+    "casters": ["how-to-replace-office-chair-casters", "tire-wheel-rim-definitions"],
+    "mobility": ["tire-wheel-rim-definitions", "how-to-replace-office-chair-casters"],
+    "forklift": ["tire-wheel-rim-definitions"],
+    "construction": ["tire-wheel-rim-definitions"],
+    "farm": ["tire-wheel-rim-definitions"],
+    "military": ["tire-wheel-rim-definitions"],
+    "decoder": ["tire-wheel-rim-definitions", "tire-balancing-beads-vs-wheel-weights"],
+}
+
+def related_box(v):
+    slugs = RELATED.get(v)
+    if not slugs:
+        return ""
+    links = "".join(f'<li><a href="/blog/{s}">{html.escape(POSTS[s])}</a></li>' for s in slugs)
+    return ('\n  <div class="wrap stack"><div class="callout"><b>Related guides</b>'
+            f'<ul class="clean" style="margin-top:8px">{links}</ul></div></div>\n')
 
 def path_of(v):
     return PAGES[v][0]
@@ -139,11 +172,25 @@ def build_site():
     urls = []
     for v, (path, title, desc) in PAGES.items():
         own = sections[v].replace(f'id="v-{v}" data-view="{v}" hidden', f'id="v-{v}" data-view="{v}"', 1)
+        page_ld = ""
+        if v == "decoder":
+            # How-to, popular sizes and FAQ live only on the decoder's own page (not in the hidden copy on other pages).
+            guide = open(os.path.join(ROOT, "src/decoder-guide.html")).read()
+            i = own.rfind("</section>")
+            own = own[:i] + guide + own[i:]
+            faqs = re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>", guide)
+            page_ld = ('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "FAQPage",
+                "mainEntity": [{"@type": "Question", "name": html.unescape(q), "acceptedAnswer": {"@type": "Answer", "text": html.unescape(re.sub("<[^>]+>", "", a))}} for q, a in faqs]}) + "</script>\n")
+        rb = related_box(v)
+        if rb:
+            i = own.rfind("</section>")
+            own = own[:i] + rb + own[i:]
+        PAGE_HASH[path] = hashlib.sha1(own.encode()).hexdigest()
         parts = [own] + [sections[t] for t in TOOLS if t != v]
         crumbs = "" if v == "home" else ('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList",
             "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
                                 {"@type": "ListItem", "position": 2, "name": title.split(":")[0].split("|")[0].strip(), "item": SITE + path}]}) + "</script>\n")
-        doc = (head + meta(title, desc, path, extra=(org if v == "home" else crumbs), noindex=(v == "quote")) + "</head>\n"
+        doc = (head + meta(title, desc, path, extra=(org if v == "home" else crumbs + page_ld), noindex=(v == "quote")) + "</head>\n"
                + f'<body data-page="{v}">' + top + "<main>\n\n" + "\n\n".join(parts) + "\n\n</main>" + tail)
         doc = fix_links(doc)
         out = os.path.join(ROOT, "public", path.strip("/"), "index.html") if path != "/" else os.path.join(ROOT, "public/index.html")
@@ -216,11 +263,11 @@ def blog_page(body, title, desc, path, jsonld="", img="/og/default.png", og_type
 """
 
 BLOG = [  # slug, tab title, Google description
-    ("how-to-replace-office-chair-casters", "How to Replace Office Chair Casters (and Pick Cart and Shelf Casters) | Tires for Anything",
-     "Swap office chair casters in minutes, pick wheels that won't scratch hardwood, and choose plate, stem or threaded casters with the right load for carts, shelves and tool chests."),
-    ("tire-balancing-beads-vs-wheel-weights", "Balance Beads vs. Wheel Weights: What to Use and When | Tires for Anything",
+    ("how-to-replace-office-chair-casters", "How to Replace Office Chair Casters (and Cart Casters)",
+     "Swap office chair casters in ten minutes, pick wheels that won't scratch hardwood, and size plate or stem casters for carts, shelves and tool chests."),
+    ("tire-balancing-beads-vs-wheel-weights", "Balance Beads vs. Wheel Weights: What to Use and When",
      "When does tire balancing matter? Balance beads vs. stick-on vs. clip-on wheel weights for motorcycles, cars, trucks, semis, RVs and trailers."),
-    ("tire-wheel-rim-definitions", "Tire vs. Wheel vs. Rim (Plus Casters & Flat-Proof Tires) | Tires for Anything",
+    ("tire-wheel-rim-definitions", "Tire vs. Wheel vs. Rim, Plus Casters and Flat-Proof Tires",
      "What's the difference between a tire, wheel and rim? Plain-English definitions of casters, solid, press-on, foam-filled, liquid-filled and run-flat tires."),
 ]
 
@@ -228,6 +275,7 @@ def build_blog():
     urls = ["/blog/"]
     b = os.path.join(ROOT, "src/blog")
     idx = open(os.path.join(b, "index.body.html")).read()
+    PAGE_HASH["/blog/"] = hashlib.sha1(idx.encode()).hexdigest()
     open(os.path.join(ROOT, "public/blog/index.html"), "w").write(blog_page(idx, "Blog | Tires for Anything",
         "Plain-English tire how-tos and buying advice for anything that rolls, from wheelbarrows and forklifts to tractors and aircraft.", "/blog/", og_type="website"))
     for slug, title, desc in BLOG:
@@ -235,11 +283,20 @@ def build_blog():
         jl = open(os.path.join(b, slug + ".jsonld")).read()
         img = f"/og/{slug}.png" if os.path.exists(os.path.join(ROOT, "public/og", slug + ".png")) else "/og/default.png"
         open(os.path.join(ROOT, "public/blog", slug + ".html"), "w").write(blog_page(body, title, desc, f"/blog/{slug}", jl, img))
+        PAGE_HASH[f"/blog/{slug}"] = hashlib.sha1((body + title + desc).encode()).hexdigest()
         urls.append(f"/blog/{slug}")
     return urls
 
 def sitemap(urls):
-    rows = "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls)
+    # tools/page-dates.json remembers each page's last content change, so dates only move when a page really changes.
+    f = os.path.join(ROOT, "tools/page-dates.json")
+    known = json.load(open(f)) if os.path.exists(f) else {}
+    for u in urls:
+        hsh = PAGE_HASH.get(u, "")
+        if u not in known or known[u][0] != hsh:
+            known[u] = [hsh, TODAY]
+    json.dump(known, open(f, "w"), indent=1, sort_keys=True)
+    rows = "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{known[u][1]}</lastmod></url>\n" for u in urls)
     open(os.path.join(ROOT, "public/sitemap.xml"), "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + rows + "</urlset>\n")
 
