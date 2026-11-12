@@ -22,12 +22,24 @@ TODAY = datetime.date.today().isoformat()
 # hides any post whose date hasn't come yet on tiresforanything.com. The preview shows everything.
 SCHEDULE = {k: v for k, v in json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../src/schedule.json"))).items() if not k.startswith("_")}
 
+for _s, _d in SCHEDULE.items():
+    assert len(_d) == 16 and "08:00" <= _d[11:] <= "23:59", f"schedule.json: {_s} needs a time between 08:00 and 23:59 ({_d})"
+
 def pub_of(slug):
     return SCHEDULE.get(slug, "2000-01-01")
 
 def long_date(d):
     y, m, dd = map(int, d[:10].split("-"))
     return datetime.date(y, m, dd).strftime("%B ") + str(dd) + f", {y}"
+
+def pub_stamp(d):
+    """Schedule value -> (ISO time with Indiana UTC offset, 'November 12, 2026 at 4:47 p.m. ET')."""
+    from zoneinfo import ZoneInfo
+    t = d[11:16] if len(d) > 10 else "12:00"
+    hh, mm = map(int, t.split(":"))
+    dt = datetime.datetime.fromisoformat(d[:10]).replace(hour=hh, minute=mm, tzinfo=ZoneInfo("America/Indiana/Indianapolis"))
+    h12 = hh % 12 or 12
+    return dt.isoformat(), f"{long_date(d)} at {h12}:{mm:02d} {'a.m.' if hh < 12 else 'p.m.'} ET"
 
 POSTCARD = re.compile(r'    <a class="postcard" href="/blog/([a-z0-9-]+)"[^>]*>.*?</a>\n', re.S)
 
@@ -335,11 +347,13 @@ def build_blog():
     for slug, title, desc in BLOG:
         body = open(os.path.join(b, slug + ".body.html")).read()
         jl = open(os.path.join(b, slug + ".jsonld")).read()
-        pd = pub_of(slug)[:10]  # schedule may hold a time (YYYY-MM-DDTHH:MM); pages show the date
-        m = re.search(r'"datePublished": *"([0-9-]+)"', jl)
-        if m and pd > m.group(1):  # queued post: show its real publish date, not the day it was written
-            jl = re.sub(r'"(datePublished|dateModified)": *"[0-9-]+"', rf'"\1": "{pd}"', jl)
-            body = re.sub(r'<time datetime="[0-9-]+">[^<]*</time>', f'<time datetime="{pd}">{long_date(pd)}</time>', body, count=1)
+        iso, shown = pub_stamp(pub_of(slug))  # every post shows the exact time it went live
+        m = re.search(r'"dateModified": *"([^"]+)"', jl)
+        mod = m.group(1) if m and m.group(1)[:10] > iso[:10] else iso
+        jl = re.sub(r'"datePublished": *"[^"]+"', f'"datePublished": "{iso}"', jl)
+        jl = re.sub(r'"dateModified": *"[^"]+"', f'"dateModified": "{mod}"', jl)
+        body = re.sub(r'<span>(?:Updated|Published) <time datetime="[^"]+">[^<]*</time></span>',
+                      f'<span>Published <time datetime="{iso}">{shown}</time></span>', body, count=1)
         body = tag_blog_li(body)
         img = f"/og/{slug}.png" if os.path.exists(os.path.join(ROOT, "public/og", slug + ".png")) else "/og/default.png"
         open(os.path.join(ROOT, "public/blog", slug + ".html"), "w").write(blog_page(body, title, desc, f"/blog/{slug}", jl, img))

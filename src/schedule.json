@@ -1,11 +1,11 @@
 {
- "_note": "Publish date for each blog post (YYYY-MM-DD, or YYYY-MM-DDTHH:MM for a set time, Indiana time). A post stays hidden on tiresforanything.com until its date, then appears on its own. The preview shows everything.",
- "tire-wheel-rim-definitions": "2026-10-25",
- "tire-balancing-beads-vs-wheel-weights": "2026-10-25",
- "how-to-replace-office-chair-casters": "2026-10-25",
- "winter-tires-vs-all-season": "2026-11-12",
+ "_note": "Publish date for each blog post (YYYY-MM-DDTHH:MM, Indiana time; pick a random time of day for each post, never before 08:00). The time shows on the post. A post stays hidden on tiresforanything.com until its date, then appears on its own. The preview shows everything.",
+ "tire-wheel-rim-definitions": "2026-10-25T08:23",
+ "tire-balancing-beads-vs-wheel-weights": "2026-10-25T14:06",
+ "how-to-replace-office-chair-casters": "2026-10-25T19:52",
+ "winter-tires-vs-all-season": "2026-11-12T08:14",
  "how-to-read-tire-size": "2026-11-12T16:47",
  "st-vs-lt-trailer-tires": "2026-11-12T22:38",
  "tire-sealant-vs-plug-vs-patch": "2026-11-19T12:31",
- "tire-date-code": "2026-11-16T06:52"
+ "tire-date-code": "2026-11-16T09:37"
 }
