@@ -27,7 +27,15 @@ export default {
 // Blog posts publish on the dates in src/schedule.json (Indiana time). Until a post's date it is a 404,
 // and its cards, related links and sitemap entry are left out of every page.
 function todayIndiana() {
-  return new Intl.DateTimeFormat("en-CA", { timeZone: "America/Indiana/Indianapolis" }).format(new Date());
+  // "YYYY-MM-DDTHH:MM" in Indiana time. Schedule entries can be a date ("2026-11-16", live from midnight)
+  // or a date and time ("2026-11-12T16:47"); plain string comparison handles both.
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Indiana/Indianapolis",
+      year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+    }).formatToParts(new Date()).map((p) => [p.type, p.value])
+  );
+  return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
 }
 
 async function serveScheduled(request, env, url) {

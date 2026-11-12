@@ -26,7 +26,7 @@ def pub_of(slug):
     return SCHEDULE.get(slug, "2000-01-01")
 
 def long_date(d):
-    y, m, dd = map(int, d.split("-"))
+    y, m, dd = map(int, d[:10].split("-"))
     return datetime.date(y, m, dd).strftime("%B ") + str(dd) + f", {y}"
 
 POSTCARD = re.compile(r'    <a class="postcard" href="/blog/([a-z0-9-]+)"[^>]*>.*?</a>\n', re.S)
@@ -335,7 +335,7 @@ def build_blog():
     for slug, title, desc in BLOG:
         body = open(os.path.join(b, slug + ".body.html")).read()
         jl = open(os.path.join(b, slug + ".jsonld")).read()
-        pd = pub_of(slug)
+        pd = pub_of(slug)[:10]  # schedule may hold a time (YYYY-MM-DDTHH:MM); pages show the date
         m = re.search(r'"datePublished": *"([0-9-]+)"', jl)
         if m and pd > m.group(1):  # queued post: show its real publish date, not the day it was written
             jl = re.sub(r'"(datePublished|dateModified)": *"[0-9-]+"', rf'"\1": "{pd}"', jl)
@@ -355,8 +355,8 @@ def sitemap(urls):
         hsh = PAGE_HASH.get(u, "")
         if u not in known or known[u][0] != hsh:
             known[u] = [hsh, TODAY]
-        if u.startswith("/blog/") and pub_of(u[6:]) > known[u][1]:
-            known[u][1] = pub_of(u[6:])
+        if u.startswith("/blog/") and pub_of(u[6:])[:10] > known[u][1]:
+            known[u][1] = pub_of(u[6:])[:10]
     json.dump(known, open(f, "w"), indent=1, sort_keys=True)
     rows = "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{known[u][1]}</lastmod></url>\n" for u in urls)
     open(os.path.join(ROOT, "public/sitemap.xml"), "w").write(
