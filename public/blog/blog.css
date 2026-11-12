@@ -293,5 +293,6 @@ figcaption{font-size:.86rem;color:var(--muted)}
 @media (max-width:760px){.author{grid-template-columns:1fr}}
 
 /* inline images in posts, e.g. the TPMS warning light */
-.post figure.postimg{margin:18px 0;display:flex;justify-content:center}
+.post figure.postimg{margin:18px auto;display:flex;flex-direction:column;align-items:center;max-width:380px;background:none;border:0;padding:0}
+.post figure.postimg figcaption{font-size:.8rem;opacity:.75;text-align:center}
 .post figure.postimg img{max-width:100%;height:auto;border-radius:12px}
