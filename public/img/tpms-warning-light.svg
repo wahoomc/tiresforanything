@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" width="240" height="200" role="img" aria-labelledby="t">
+  <title id="t">Tire pressure warning light: an amber horseshoe-shaped tire outline with an exclamation point</title>
+  <rect width="240" height="200" rx="18" fill="#141414"/>
+  <g fill="none" stroke="#F5A300" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M66 46 C40 72 38 120 58 150 L182 150 C202 120 200 72 174 46"/>
+    <path d="M70 168 v-18 M94 168 v-18 M120 168 v-18 M146 168 v-18 M170 168 v-18"/>
+  </g>
+  <rect x="112" y="60" width="16" height="56" rx="8" fill="#F5A300"/>
+  <circle cx="120" cy="134" r="9" fill="#F5A300"/>
+</svg>
