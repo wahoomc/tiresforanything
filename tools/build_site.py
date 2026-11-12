@@ -127,6 +127,7 @@ TOOLS = ("decoder", "quote", "request")
 
 # Blog guides linked from each category page ("Related guides" box). Keep each list to the posts that genuinely help.
 POSTS = {
+    "press-on-forklift-tires": "Press-on forklift tires: sizes, types and when to replace",
     "tire-date-code": "How old is my tire? Reading the DOT date code",
     "st-vs-lt-trailer-tires": "Trailer tires: ST vs. LT vs. car tires",
     "winter-tires-vs-all-season": "Winter tires vs. all-season: do you need them?",
@@ -147,7 +148,7 @@ RELATED = {
     "lawn": ["tire-wheel-rim-definitions", "how-to-replace-office-chair-casters", "tire-sealant-vs-plug-vs-patch"],
     "casters": ["how-to-replace-office-chair-casters", "tire-wheel-rim-definitions"],
     "mobility": ["tire-wheel-rim-definitions", "how-to-replace-office-chair-casters", "tire-sealant-vs-plug-vs-patch"],
-    "forklift": ["tire-wheel-rim-definitions"],
+    "forklift": ["press-on-forklift-tires", "tire-wheel-rim-definitions"],
     "construction": ["tire-wheel-rim-definitions"],
     "farm": ["tire-wheel-rim-definitions"],
     "military": ["tire-date-code", "tire-wheel-rim-definitions"],
@@ -315,6 +316,8 @@ def blog_page(body, title, desc, path, jsonld="", img="/og/default.png", og_type
 """
 
 BLOG = [  # slug, tab title, Google description
+    ("press-on-forklift-tires", "Press-On Forklift Tires: Sizes, Types and When to Replace",
+     "How to read press-on forklift tire sizes, pick between rubber, non-marking and polyurethane, spot when they're worn out, and get them replaced on site."),
     ("tire-date-code", "How Old Is My Tire? How to Read the DOT Date Code",
      "Find the four-digit date code on any tire, read it in seconds, and learn how old is too old for cars, trailers, RVs and motorcycles."),
     ("st-vs-lt-trailer-tires", "ST vs. LT vs. Car Tires on a Trailer: What to Use and Why",

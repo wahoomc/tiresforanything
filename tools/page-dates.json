@@ -1,6 +1,6 @@
 {
  "/": [
-  "46ce8c54bb466fa7ee0a523627775e312ab3a5ae",
+  "0a92c7dfedad06c0b41e78031ccf68447170c660",
   "2026-11-12"
  ],
  "/about/": [
@@ -24,7 +24,7 @@
   "2026-11-12"
  ],
  "/blog/": [
-  "44bc8f396378547144e02640df750ec49d166c02",
+  "494438a70271790115e9433755c689060b62630a",
   "2026-11-12"
  ],
  "/blog/how-to-read-tire-size": [
@@ -34,6 +34,10 @@
  "/blog/how-to-replace-office-chair-casters": [
   "b3cf9f5ae136b8278430ef89306b531e80eabdc3",
   "2026-11-12"
+ ],
+ "/blog/press-on-forklift-tires": [
+  "3f2873e35579086602d89cdad682af0fe4d3a8df",
+  "2026-11-20"
  ],
  "/blog/st-vs-lt-trailer-tires": [
   "ef624571a64b0f88e24570917e9e84adc347f7b3",
@@ -80,7 +84,7 @@
   "2026-11-11"
  ],
  "/forklift-tires/": [
-  "12ba5b3044994e8c983111d2628e42fcef626ee7",
+  "9a185eca991e97c74a9463be917feccb8e3eac78",
   "2026-11-12"
  ],
  "/go-kart-tires/": [
