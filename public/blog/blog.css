@@ -296,3 +296,8 @@ figcaption{font-size:.86rem;color:var(--muted)}
 .post figure.postimg{margin:18px auto;display:flex;flex-direction:column;align-items:center;max-width:380px;background:none;border:0;padding:0}
 .post figure.postimg figcaption{font-size:.8rem;opacity:.75;text-align:center}
 .post figure.postimg img{max-width:100%;height:auto;border-radius:12px}
+/* embedded YouTube videos in posts (privacy-enhanced youtube-nocookie embeds) */
+.post figure.postvideo{margin:18px 0;background:none;border:0;padding:0;display:grid;gap:6px}
+.post .vidwrap{position:relative;aspect-ratio:16/9;width:100%;border-radius:12px;overflow:hidden;background:#000}
+.post .vidwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.post figure.postvideo figcaption{font-size:.8rem;opacity:.75}
