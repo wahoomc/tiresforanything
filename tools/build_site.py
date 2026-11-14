@@ -141,14 +141,17 @@ POSTS = {
     "hand-truck-wheelbarrow-tire-replacement": "Wagon, wheelbarrow and hand truck tires: flat-free vs. air",
     "tire-pressure-light-cold-weather": "Why is my tire pressure light on when it's cold?",
     "snowblower-tires-chains": "Snowblower tires and chains: sizes, treads and when to upgrade",
+    "portable-tire-inflator-guide": "How to pick a portable tire inflator",
+    "tire-sidewall-bulge": "Is a sidewall bulge dangerous?",
+    "cdl-pre-trip-tire-inspection": "CDL pre-trip tire inspection: what to check",
 }
 RELATED = {
     "trailer": ["st-vs-lt-trailer-tires", "tire-date-code", "tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
     "motorcycle": ["tire-date-code", "tire-balancing-beads-vs-wheel-weights"],
-    "cars": ["winter-tires-vs-all-season", "tire-pressure-light-cold-weather", "how-to-read-tire-size", "tire-balancing-beads-vs-wheel-weights"],
-    "trucks": ["winter-tires-vs-all-season", "how-to-read-tire-size", "tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions"],
-    "rv": ["tire-date-code", "tire-balancing-beads-vs-wheel-weights"],
-    "semi": ["how-to-read-tire-size", "tire-balancing-beads-vs-wheel-weights"],
+    "cars": ["winter-tires-vs-all-season", "tire-pressure-light-cold-weather", "tire-sidewall-bulge", "how-to-read-tire-size"],
+    "trucks": ["winter-tires-vs-all-season", "tire-sidewall-bulge", "how-to-read-tire-size", "tire-balancing-beads-vs-wheel-weights"],
+    "rv": ["tire-date-code", "portable-tire-inflator-guide", "cdl-pre-trip-tire-inspection", "tire-balancing-beads-vs-wheel-weights"],
+    "semi": ["cdl-pre-trip-tire-inspection", "how-to-read-tire-size", "tire-balancing-beads-vs-wheel-weights"],
     "atv": ["tire-balancing-beads-vs-wheel-weights", "tire-wheel-rim-definitions", "tire-sealant-vs-plug-vs-patch"],
     "lawn": ["hand-truck-wheelbarrow-tire-replacement", "snowblower-tires-chains", "tire-sealant-vs-plug-vs-patch", "tire-wheel-rim-definitions"],
     "casters": ["how-to-replace-office-chair-casters", "tire-wheel-rim-definitions"],
@@ -349,6 +352,12 @@ BLOG = [  # slug, tab title, Google description
      "Cold mornings drop tire pressure about 1 psi per 10°F and trip the TPMS light. What it means, how to fix it in five minutes, and when it's something else."),
     ("snowblower-tires-chains", "Snowblower Tires and Chains: Sizes and Upgrades",
      "Find your snowblower tire size, pick the right tread, and decide if chains are worth it. Common sizes like 13x4.00-6, 15x5.00-6 and 4.80-8 explained."),
+    ("portable-tire-inflator-guide", "How to Pick a Portable Tire Inflator (Buying Guide)",
+     "Cordless, 12V or garage plug-in? What PSI, airflow and duty cycle mean, and which kind of tire inflator fits cars, trucks, trailers, bikes and mowers."),
+    ("tire-sidewall-bulge", "Tire Sidewall Bulge: Is It Safe to Drive On?",
+     "A bubble on your tire's sidewall means the inside is damaged and it can't be repaired. How to tell a bulge from a normal dent, what causes it, and what to do now."),
+    ("cdl-pre-trip-tire-inspection", "CDL Pre-Trip Tire Inspection: What to Check",
+     "The tire part of a CDL pre-trip, in plain English: tread depth (4/32 steer, 2/32 others), inflation, cuts, duals, valve stems and the rule on recaps for bus front tires."),
 ]
 
 def build_blog():

@@ -1,7 +1,7 @@
 {
  "/": [
-  "030becb18d16fa283ace86a9913a0b0ac5506054",
-  "2026-11-13"
+  "d131cf6869ba196ae3659728365d1d6e22a00e9d",
+  "2026-11-14"
  ],
  "/about/": [
   "4594b043bb445e3477b8df1e22ef09875385d351",
@@ -24,8 +24,12 @@
   "2026-11-13"
  ],
  "/blog/": [
-  "0861ada5eaac31afaa08f7e55f1b9b6723c119a3",
-  "2026-11-13"
+  "d65ef0693315e80efd725dc4b0ef8448902adcc6",
+  "2026-11-14"
+ ],
+ "/blog/cdl-pre-trip-tire-inspection": [
+  "7b6a4173624a57b0cd5d24675c0488b57c568032",
+  "2026-12-18"
  ],
  "/blog/cushion-vs-pneumatic-forklift-tires": [
   "63356f60ccd91824f6da84b5042624f58bb51f36",
@@ -46,6 +50,10 @@
  "/blog/kids-bike-tire-sizes": [
   "0afdc2bfa2d1e291cf191e70c6b8899cda2bb57b",
   "2026-11-25"
+ ],
+ "/blog/portable-tire-inflator-guide": [
+  "4950a527cd09de47a003d8ad185f9c704a0d148b",
+  "2026-11-30"
  ],
  "/blog/press-on-forklift-tires": [
   "3f2873e35579086602d89cdad682af0fe4d3a8df",
@@ -74,6 +82,10 @@
  "/blog/tire-sealant-vs-plug-vs-patch": [
   "8789cf7fea711e4c2d35ea93d922de4c66b5456c",
   "2026-11-19"
+ ],
+ "/blog/tire-sidewall-bulge": [
+  "3cc87e3d1c0eda77fb2d14307ed99067f44f4709",
+  "2026-12-11"
  ],
  "/blog/tire-wheel-rim-definitions": [
   "2866bc24a9a4919e4135834e22c623644e91b462",
@@ -116,8 +128,8 @@
   "2026-11-13"
  ],
  "/light-truck-suv-tires/": [
-  "84f2e240ccfdd227495b9c5aad18c597a81e120f",
-  "2026-11-12"
+  "89b4b76b89b6dfe0d9b0240157bbcdb8dce31781",
+  "2026-11-14"
  ],
  "/military-truck-tires/": [
   "3dbd59615f8915cdb648c28772510073ff57dede",
@@ -128,8 +140,8 @@
   "2026-11-12"
  ],
  "/passenger-car-tires/": [
-  "5f331da7a7509ec3c2d16ee1c451262c685f3c68",
-  "2026-11-13"
+  "86f6f1c1562e2a23ae2ef799e908f4ec3bb64977",
+  "2026-11-14"
  ],
  "/privacy/": [
   "f29a238ec443d7e19820e1c56c659ee9fde94f94",
@@ -144,12 +156,12 @@
   "2026-11-11"
  ],
  "/rv-motorhome-tires/": [
-  "a2876569ebddd11bfd65e15dbdaa7ec755dfac66",
-  "2026-11-12"
+  "353b458eafc5e05a650c45233f410664343ecf94",
+  "2026-11-14"
  ],
  "/semi-truck-tires/": [
-  "4afbd9f9e8c3ace0e644facca9e7974c908324a6",
-  "2026-11-12"
+  "2f734fc050143db9075be8c83fe617f7517151bc",
+  "2026-11-14"
  ],
  "/terms/": [
   "1a7d81dcd00d2d53b2d96c7a63fe8ea4da783b3c",
